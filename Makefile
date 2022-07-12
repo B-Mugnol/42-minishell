@@ -3,34 +3,34 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
-#    Updated: 2022/06/21 20:04:16 by bmugnol-         ###   ########.fr        #
+#    Updated: 2022/07/12 21:19:07 by llopes-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-NAME	:=
+NAME	:= minishell
 
 # GENERAL OPTIONS
 # C Compiler
 CC		:=	gcc
 # Compiler flags
-CFLAGS	:=	-Wall -Wextra -Werror
+CFLAGS	:=	-Wall -Wextra -Werror -g 
 # Removal tool
 RM		:=	rm -rf
 
 
 # PROGRAM
 # Headers
-HEADER_DIR	:=	inc
-HEADER		:=	header.h
+HEADER_DIR	:=	inc/
+HEADER		:=	minishell.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src
-SRC			:=	program.c
+SRC			:=	main.c
 
 # Object
 OBJ_DIR		:=	obj
@@ -66,16 +66,16 @@ vpath	%.c		$(SRC_DIR)
 all: $(NAME)
 
 # Compiles OBJ and LIBFT_LIB into the program NAME
-$(NAME): $(LIBFT_LIB) $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_LIB) $(INCLUDE)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(H_INCLUDE) -lreadline
 
 # Compiles SRC into OBJ
-$(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
+$(OBJ): $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< $(H_INCLUDE)
 
 # Header precompiling
 $(C_HEADER): $(C_HEADER_DIR)/%.h.gch: %.h $(HEADER) | $(C_HEADER_DIR)
-	@$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
+	@$(CC) $(CFLAGS) -o $@ $< $(H_INCLUDE)
 
 # Directory making
 $(OBJ_DIR) $(C_HEADER_DIR):

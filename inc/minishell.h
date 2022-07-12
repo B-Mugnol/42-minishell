@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/12 21:46:14 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/12 21:15:24 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
 
-int	main(void)
-{
-	char	*std_in;
-
-	while (1)
-	{
-		printf("luluShell>");
-		std_in = readline(NULL);
-		add_history(std_in);
-	}
-	return (0);
-}
+#endif
