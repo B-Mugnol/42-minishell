@@ -3,26 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+         #
+#    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 <<<<<<< HEAD
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/07/12 21:19:07 by llopes-n         ###   ########.fr        #
 =======
 #    Created: 2022/07/12 17:05:45 by bmugnol-          #+#    #+#              #
 #    Updated: 2022/07/12 17:05:47 by bmugnol-         ###   ########.fr        #
 >>>>>>> 11029203740e04a209e6b7602594e9ac0ed51cc4
+=======
+#    Updated: 2022/06/21 20:04:16 by bmugnol-         ###   ########.fr        #
+>>>>>>> parent of 07d592f... feat: promp,history; change: makefile -lreadline; add: minishell.h
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-NAME	:= minishell
+NAME	:=
 
 # GENERAL OPTIONS
 # C Compiler
 CC		:=	gcc
 # Compiler flags
-CFLAGS	:=	-Wall -Wextra -Werror -g 
+CFLAGS	:=	-Wall -Wextra -Werror
 # Removal tool
 RM		:=	rm -rf
 
@@ -31,13 +35,13 @@ RM		:=	rm -rf
 # Header that includes all headers
 MASTER_HEADER := master.h
 # Headers
-HEADER_DIR	:=	inc/
-HEADER		:=	minishell.h
+HEADER_DIR	:=	inc
+HEADER		:=	header.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src
-SRC			:=	main.c
+SRC			:=	program.c
 
 # Object
 OBJ_DIR		:=	obj
@@ -73,16 +77,16 @@ vpath	%.c		$(SRC_DIR)
 all: $(NAME)
 
 # Compiles OBJ and LIBFT_LIB into the program NAME
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(H_INCLUDE) -lreadline
+$(NAME): $(LIBFT_LIB) $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_LIB) $(INCLUDE)
 
 # Compiles SRC into OBJ
-$(OBJ): $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $< $(H_INCLUDE)
+$(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
 # Header precompiling
 $(C_HEADER): $(C_HEADER_DIR)/%.h.gch: %.h $(HEADER) | $(C_HEADER_DIR)
-	@$(CC) $(CFLAGS) -o $@ $< $(H_INCLUDE)
+	@$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
 
 # Directory making
 $(OBJ_DIR) $(C_HEADER_DIR):
