@@ -5,8 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
+<<<<<<< HEAD
 #    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
 #    Updated: 2022/07/12 21:19:07 by llopes-n         ###   ########.fr        #
+=======
+#    Created: 2022/07/12 17:05:45 by bmugnol-          #+#    #+#              #
+#    Updated: 2022/07/12 17:05:47 by bmugnol-         ###   ########.fr        #
+>>>>>>> 11029203740e04a209e6b7602594e9ac0ed51cc4
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +28,8 @@ RM		:=	rm -rf
 
 
 # PROGRAM
+# Header that includes all headers
+MASTER_HEADER := master.h
 # Headers
 HEADER_DIR	:=	inc/
 HEADER		:=	minishell.h
@@ -38,7 +45,7 @@ OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 # Precompiled header
 C_HEADER_DIR	:=	pch
-C_HEADER		:=	$(HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
+C_HEADER		:=	$(MASTER_HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
 C_INCLUDE		:=	$(addprefix -I, $(C_HEADER_DIR))
 
 
