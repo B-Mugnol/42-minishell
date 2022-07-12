@@ -1,21 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/12 17:05:45 by bmugnol-          #+#    #+#              #
-#    Updated: 2022/07/12 21:20:45 by bmugnol-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Program name
 NAME	:=	minishell
 
 # GENERAL OPTIONS
 # C Compiler
-CC		:=	gcc
+CC		:=	clang
 # Compiler flags
 CFLAGS	:=	-Wall -Wextra -Werror
 # Removal tool
@@ -23,8 +11,6 @@ RM		:=	rm -rf
 
 
 # PROGRAM
-# Header that includes all headers
-MASTER_HEADER := master.h
 # Headers
 HEADER_DIR	:=	inc
 HEADER		:=	minishell.h
@@ -38,14 +24,9 @@ SRC			:=	main.c
 OBJ_DIR		:=	obj
 OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
-# Precompiled header
-C_HEADER_DIR	:=	pch
-C_HEADER		:=	$(MASTER_HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
-C_INCLUDE		:=	$(addprefix -include-pch , $(C_HEADER_DIR))
-
 
 # LIBFT
-LIBFT_DIR		:=	../../Fase_1/libft
+LIBFT_DIR		:=	libft
 
 LIBFT_H_DIR		:=	$(LIBFT_DIR)/inc
 LIBFT_H_INC		:=	-I$(LIBFT_H_DIR)
@@ -54,11 +35,11 @@ LIBFT_LIB		:=	$(LIBFT_DIR)/libft.a
 
 
 # Inclusions:
-INCLUDE		:=	$(C_INCLUDE) $(H_INCLUDE) $(LIBFT_H_INC) -lreadline
+INCLUDE		:=	$(H_INCLUDE) $(LIBFT_H_INC)
+SYS_LIB		:=	-lreadline
 
 # vpath
 vpath	%.h		$(HEADER_DIR)
-vpath	%.h.gch	$(C_HEADER_DIR)
 vpath	%.c		$(SRC_DIR)
 
 # -----------------------RULES------------------------------------------------ #
@@ -69,15 +50,11 @@ all: $(NAME)
 
 # Compiles OBJ and LIBFT_LIB into the program NAME
 $(NAME): $(LIBFT_LIB) $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_LIB) $(INCLUDE)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_LIB) $(INCLUDE) $(SYS_LIB)
 
 # Compiles SRC into OBJ
 $(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
-
-# Header precompiling
-$(C_HEADER): $(C_HEADER_DIR)/%.h.gch: %.h $(HEADER) | $(C_HEADER_DIR)
-	$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
 
 # Directory making
 $(OBJ_DIR) $(C_HEADER_DIR):
@@ -89,18 +66,18 @@ $(LIBFT_LIB):
 
 # Norm: checks code for norm errors
 norm:
-	@$(MAKE) -C $(LIBFT_DIR) norm
 	@norminette | grep "Error" | cat
+	@$(MAKE) -C $(LIBFT_DIR) norm
 
 # Clean: removes objects' and precompiled headers' directories
 clean:
-	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(RM) $(OBJ_DIR) $(C_HEADER_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 # Full clean: same as 'clean', but removes the generated libraries as well
 fclean: clean
-	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 # Remake: full cleans and runs 'all' rule
 re: fclean all
