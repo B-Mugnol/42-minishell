@@ -6,12 +6,12 @@
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/12 17:05:45 by bmugnol-          #+#    #+#              #
-#    Updated: 2022/07/12 17:05:47 by bmugnol-         ###   ########.fr        #
+#    Updated: 2022/07/12 21:20:45 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Program name
-NAME	:=
+NAME	:=	minishell
 
 # GENERAL OPTIONS
 # C Compiler
@@ -27,12 +27,12 @@ RM		:=	rm -rf
 MASTER_HEADER := master.h
 # Headers
 HEADER_DIR	:=	inc
-HEADER		:=	header.h
+HEADER		:=	minishell.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src
-SRC			:=	program.c
+SRC			:=	main.c
 
 # Object
 OBJ_DIR		:=	obj
@@ -41,11 +41,11 @@ OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 # Precompiled header
 C_HEADER_DIR	:=	pch
 C_HEADER		:=	$(MASTER_HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
-C_INCLUDE		:=	$(addprefix -I, $(C_HEADER_DIR))
+C_INCLUDE		:=	$(addprefix -include-pch , $(C_HEADER_DIR))
 
 
 # LIBFT
-LIBFT_DIR		:=	../libft
+LIBFT_DIR		:=	../../Fase_1/libft
 
 LIBFT_H_DIR		:=	$(LIBFT_DIR)/inc
 LIBFT_H_INC		:=	-I$(LIBFT_H_DIR)
@@ -54,7 +54,7 @@ LIBFT_LIB		:=	$(LIBFT_DIR)/libft.a
 
 
 # Inclusions:
-INCLUDE		:=	$(C_INCLUDE) $(LIBFT_H_INC)
+INCLUDE		:=	$(C_INCLUDE) $(H_INCLUDE) $(LIBFT_H_INC) -lreadline
 
 # vpath
 vpath	%.h		$(HEADER_DIR)
@@ -77,7 +77,7 @@ $(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
 
 # Header precompiling
 $(C_HEADER): $(C_HEADER_DIR)/%.h.gch: %.h $(HEADER) | $(C_HEADER_DIR)
-	@$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
+	$(CC) $(CFLAGS) -o $@ $< $(LIBFT_H_INC) $(H_INCLUDE)
 
 # Directory making
 $(OBJ_DIR) $(C_HEADER_DIR):
