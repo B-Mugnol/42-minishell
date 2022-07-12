@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/06 01:35:58 by bmugnol-          #+#    #+#              #
-#    Updated: 2022/06/21 20:04:16 by bmugnol-         ###   ########.fr        #
+#    Created: 2022/07/12 17:05:45 by bmugnol-          #+#    #+#              #
+#    Updated: 2022/07/12 17:05:47 by bmugnol-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ RM		:=	rm -rf
 
 
 # PROGRAM
+# Header that includes all headers
+MASTER_HEADER := master.h
 # Headers
 HEADER_DIR	:=	inc
 HEADER		:=	header.h
@@ -38,7 +40,7 @@ OBJ			:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 # Precompiled header
 C_HEADER_DIR	:=	pch
-C_HEADER		:=	$(HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
+C_HEADER		:=	$(MASTER_HEADER:%.h=$(C_HEADER_DIR)/%.h.gch)
 C_INCLUDE		:=	$(addprefix -I, $(C_HEADER_DIR))
 
 
