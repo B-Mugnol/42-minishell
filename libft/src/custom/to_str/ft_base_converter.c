@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_base_converter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/13 01:51:57 by llopes-n         ###   ########.fr       */
+/*   Created: 2021/11/02 14:05:17 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/13 02:44:23 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_base_converter(unsigned long nbr, char *base)
 {
-	char	*std_in;
-	char	*shell_name;
+	int				base_len;
+	char			*str;
+	unsigned long	aux;
+	size_t			len;
 
-	shell_name = "luluShell>";
-	while (1)
+	aux = nbr;
+	len = 0;
+	base_len = ft_strlen(base);
+	if (nbr == 0)
+		len = 1;
+	while (aux)
 	{
-		std_in = readline(shell_name);
-		add_history(std_in);
+		aux /= base_len;
+		len++;
 	}
-	return (0);
+	str = ft_calloc(len + 1, sizeof(char));
+	if (!str)
+		return (0);
+	while (nbr)
+	{
+		str[--len] = base[nbr % base_len];
+		nbr /= base_len;
+	}
+	return (str);
 }

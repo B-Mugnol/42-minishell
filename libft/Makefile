@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/27 17:20:49 by bmugnol-          #+#    #+#              #
-#    Updated: 2022/07/13 02:18:03 by bmugnol-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 # -----------------------LIBRARY---------------------------------------------- #
 # Generated static library name
 NAME	:=	libft.a
@@ -74,7 +61,7 @@ SRC	+=	ft_substr.c		ft_strjoin.c	ft_strtrim.c	ft_split.c	\
 SRC	+=	ft_putchar_fd.c	ft_putstr_fd.c	ft_putendl_fd.c	ft_putnbr_fd.c
 ###	Custom
 SRC	+=	ft_itoa.c		ft_utoa.c		ft_ptoa.c		ft_xtoa.c	\
-		ft_xto_uppercase_a.c			# To string
+		ft_xto_uppercase_a.c	ft_base_converter.c		# To string
 SRC	+=	get_next_line.c	ft_null_free.c	ft_free_matrix.c			\
 		ft_strmerge.c	ft_atoi_base.c	ft_free_char_matrix.c		\
 		ft_partial_split.c				# Miscellaneous
@@ -95,6 +82,14 @@ OBJ		:=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 vpath	%.h	$(HEADER_DIR)
 vpath	%.c	$(SRC_DIR)
 
+# -----------------------COLORS----------------------------------------------- #
+NONE		=	'\033[0m'
+RED 		=	'\033[1;31m'
+GREEN		=	'\033[32m'
+YELLOW		=	'\033[33m'
+GRAY		=	'\033[2;37m'
+CURSIVE		=	'\033[3m'
+
 # -----------------------RULES------------------------------------------------ #
 .PHONY: all norm clean fclean re
 
@@ -103,19 +98,27 @@ all: $(NAME)
 
 # Lib making based on SRC
 $(NAME): $(OBJ)
-	@$(AR) $(ARFLAGS) $@ $^
+	@ echo $(CURSIVE) $(YELLOW) " - Compressing Objects in $(NAME)..." $(NONE)
+	@ $(AR) $(ARFLAGS) $@ $^
+	@ echo $(CURSIVE) $(GREEN) " - Libft Created" $(NONE)
 
 # Compiling SRC into OBJ
 $(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(C_INCLUDE)
+	@ echo $(CURSIVE) $(YELLOW) " - Making object $<..." $(NONE)
+	@ $(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(C_INCLUDE)
+	@ echo $(CURSIVE) $(GREEN) " - Objects Created" $(NONE)
 
 # Header precompiling
 $(C_HEADER): $(C_HEADER_DIR)/%.h.gch: %.h $(HEADER) | $(C_HEADER_DIR)
-	@$(CC) $(CFLAGS) -o $@ $<
+	@ echo $(CURSIVE) $(YELLOW) " - Pre Compiling $@..." $(NONE)
+	@ $(CC) $(CFLAGS) -o $@ $<
+	@ echo $(CURSIVE) $(GREEN) " - $@ Compiled" $(NONE)
 
 # Directory making
 $(OBJ_DIR) $(C_HEADER_DIR):
-	@mkdir -p $@
+	@ echo $(CURSIVE) $(YELLOW) " - Creating Folder $@..." $(NONE)
+	@ mkdir -p $@
+	@ echo $(CURSIVE) $(GREEN) " $@ Folder Created" $(NONE)
 
 # Norm: checks code for norm errors
 norm:
@@ -123,11 +126,15 @@ norm:
 
 # Clean: removes objects' and precompiled headers' directories
 clean:
-	@rm -rf $(OBJ_DIR) $(C_HEADER_DIR)
+	@ echo $(CURSIVE) $(RED) " - Removing Object files of libft..." $(NONE)
+	@ rm -rf $(OBJ_DIR) $(C_HEADER_DIR)
+	@ echo $(GREEN) " - Objects deleted !" $(NONE)
 
 # Full clean: same as 'clean', but removes the generated libraries as well
 fclean: clean
-	@rm -rf $(NAME)
+	@ echo $(CURSIVE) $(RED) " - removing $(NAME)..." $(NONE)
+	@ rm -rf $(NAME)
+	@ echo $(GREEN) " - $(NAME) deleted !" $(NONE)
 
 # Remake: full cleans and runs 'all' rule
 re: fclean all
