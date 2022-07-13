@@ -1,0 +1,23 @@
+# Ignore all
+*
+
+
+# 	Except these specific files:
+# Headers
+!inc
+!inc/libft.h
+!inc/ft_printf.h
+
+# Source ('ft_' preffix)
+!src
+!src/*
+!src/*/ft_*.c
+!src/*/*
+!src/*/*/ft_*.c
+!src/*/*/get_next_line.c
+
+# Makefile
+!Makefile
+
+# gitignore
+!.gitignore
