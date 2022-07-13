@@ -15,8 +15,5 @@
 # Makefile
 !Makefile
 
-# Libft
-!libft
-
 # gitignore
 !.gitignore
