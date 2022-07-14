@@ -6,7 +6,7 @@ NAME	:=	libft.a
 # C Compiler
 CC		:=	clang
 # Compiler flags
-CFLAGS	:=	-Wall -Wextra -Werror
+CFLAGS	:=	-Wall -Wextra -Werror -g
 #	(Turn on all warning flags and extra warnings, treat warnings as errors)
 
 # -----------------------ARCHIVER--------------------------------------------- #

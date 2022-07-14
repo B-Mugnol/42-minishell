@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/14 03:56:51 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/14 02:48:37 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+t_env	*shlst_new(char *name, char *value)
 {
-	t_env	*env_lst;
-	char	*std_in;
-	char	*shell_name;
-	int		is_new_line;
+	t_env	*node;
 
-	shell_name = "luluShell>";
-	printf("%d\n%s\n", argc, *argv);
-	env_lst = set_env(envp);
-	while (1)
+	node = malloc(sizeof(t_env));
+	node->name = name;
+	node->value = value;
+	node->next = NULL;
+	return (node);
+}
+
+void	shlst_addback(t_env **lst, t_env *new)
+{
+	t_env	*head;
+
+	if (!*lst)
+		*lst = new;
+	else
 	{
-		std_in = readline(shell_name);
-		is_new_line = rl_on_new_line();
-		printf("%d\n", is_new_line);
-		add_history(std_in);
-		rl_replace_line("eu gosto de batata", 1);
+		head = *lst;
+		while ((*lst)->next)
+			*lst = (*lst)->next;
+		(*lst)->next = new;
+		*lst = head;
 	}
-	return (0);
 }

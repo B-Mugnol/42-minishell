@@ -5,7 +5,7 @@ NAME	:=	minishell
 # C Compiler
 CC		:=	clang
 # Compiler flags
-CFLAGS	:=	-Wall -Wextra -Werror
+CFLAGS	:=	-Wall -Wextra -Werror -g
 # Removal tool
 RM		:=	rm -rf
 
@@ -18,7 +18,7 @@ H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src
-SRC			:=	main.c
+SRC			:=	main.c exec.c lst_ft.c
 
 # Object
 OBJ_DIR		:=	obj
