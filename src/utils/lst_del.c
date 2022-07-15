@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/15 04:27:18 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:41:07 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lst.h"
 
 void	lst_delete_node(t_node *node)
 {
@@ -31,16 +31,16 @@ void	lst_delete_var(t_node **lst, char *name)
 	if (!lst || !*lst)
 		return ;
 	to_be_removed = find_var(name, *lst);
-	*head = *lst;
+	head = *lst;
 	if (*lst == to_be_removed)
-		*head = *lst->next;
+		head = (*lst)->next;
 	while (*lst)
 	{
 		if (*lst == to_be_removed)
 		{
 			acc = (*lst)->next;
 			if (previous)
-				*previous->next = acc;
+				previous->next = acc;
 			lst_delete_node(*lst);
 			break ;
 		}
@@ -59,7 +59,7 @@ void	lst_clear(t_node **lst)
 	while (*lst)
 	{
 		acc = (*lst)->next;
-		delete_node(*lst);
+		lst_delete_node(*lst);
 		*lst = acc;
 	}
 	*lst = NULL;
