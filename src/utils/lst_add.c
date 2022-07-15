@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 04:30:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:38:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_node	*lst_new(char *name, char *value)
 	return (node);
 }
 
-void	lst_addback(t_node **lst, t_node *new)
+void	lst_add_back(t_node **lst, t_node *new)
 {
 	t_node	*head;
 
@@ -60,7 +60,7 @@ void	lst_add_var(t_node **lst, t_node *new)
 		lst_delete_node(new);
 		return ;
 	}
-	lst_addfront(lst, new);
+	lst_add_front(lst, new);
 }
 
 t_node	*find_var(char *name, t_node *lst)
