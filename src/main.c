@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 03:36:38 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 05:24:01 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	main(void)
 		std_in = readline(shell_name);
 		add_history(std_in);
 	}
+	lst_clear(&env_lst);
 	return (0);
 }
