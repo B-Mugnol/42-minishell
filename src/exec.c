@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 03:36:38 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:41:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_node	*set_node(void)
 	{
 		name = ft_substr(env, 0, ft_strnchr(env, '='));
 		value = ft_substr(env, ft_strnchr(env, '=') + 1, ft_strlen(env));
-		shlst_addback(&env_lst, shlst_new(name, value));
+		lst_add_back(&env_lst, lst_new(name, value));
 		env = get_next_line(fd);
 	}
 	return (env_lst);
@@ -40,7 +40,7 @@ char	*get_comman(char *usr_in, t_node *env_lst)
 	char	*temp;
 	char	*comman;
 
-	path = find_env("PATH", env_lst);
+	path = find_var("PATH", env_lst);
 	path_comman = ft_split(path->value, ':');
 	while (*path_comman)
 	{
