@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 04:29:21 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:30:09 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*shlst_new(char *name, char *value)
+t_node	*lst_new(char *name, char *value)
 {
 	t_node	*node;
 
@@ -23,7 +23,7 @@ t_node	*shlst_new(char *name, char *value)
 	return (node);
 }
 
-void	shlst_addback(t_node **lst, t_node *new)
+void	lst_addback(t_node **lst, t_node *new)
 {
 	t_node	*head;
 
@@ -39,7 +39,7 @@ void	shlst_addback(t_node **lst, t_node *new)
 	}
 }
 
-void	shlst_add_front(t_node **lst, t_node *new)
+void	lst_add_front(t_node **lst, t_node *new)
 {
 	if (!*lst)
 		*lst = new;
@@ -47,7 +47,7 @@ void	shlst_add_front(t_node **lst, t_node *new)
 	*lst = new;
 }
 
-void	shlst_add_var(t_node **lst, t_node *new)
+void	lst_add_var(t_node **lst, t_node *new)
 {
 	t_node	*old;
 
@@ -60,7 +60,7 @@ void	shlst_add_var(t_node **lst, t_node *new)
 		lst_delete_node(new);
 		return ;
 	}
-	shlst_addfront(lst, new);
+	lst_addfront(lst, new);
 }
 
 t_node	*find_var(char *name, t_node *lst)
