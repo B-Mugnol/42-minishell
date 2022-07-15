@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_ft.c                                           :+:      :+:    :+:   */
+/*   lst_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 00:22:43 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:39:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lst.h"
 
-t_env	*shlst_new(char *name, char *value)
+t_node	*lst_new(char *name, char *value)
 {
-	t_env	*node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_env));
+	node = malloc(sizeof(t_node));
 	node->name = name;
 	node->value = value;
 	node->next = NULL;
 	return (node);
 }
 
-void	shlst_addback(t_env **lst, t_env *new)
+void	lst_add_back(t_node **lst, t_node *new)
 {
-	t_env	*head;
+	t_node	*head;
 
 	if (!*lst)
 		*lst = new;
@@ -39,13 +39,37 @@ void	shlst_addback(t_env **lst, t_env *new)
 	}
 }
 
-t_env	*find_env(char *name, t_env *env_lst)
+void	lst_add_front(t_node **lst, t_node *new)
 {
-	while (env_lst)
+	if (!*lst)
+		*lst = new;
+	new->next = *lst;
+	*lst = new;
+}
+
+void	lst_add_var(t_node **lst, t_node *new)
+{
+	t_node	*old;
+
+	if (!*lst)
+		*lst = new;
+	old = find_var(new->name, *lst);
+	if (old)
 	{
-		if (ft_strncmp(name, env_lst->name, ft_strlen(name) + 1) == 0)
-			return (env_lst);
-		env_lst = env_lst->next;
+		old->value = new->value;
+		lst_delete_node(new);
+		return ;
+	}
+	lst_add_front(lst, new);
+}
+
+t_node	*find_var(char *name, t_node *lst)
+{
+	while (lst)
+	{
+		if (ft_strncmp(name, lst->name, ft_strlen(name) + 1) == 0)
+			return (lst);
+		lst = lst->next;
 	}
 	return (NULL);
 }

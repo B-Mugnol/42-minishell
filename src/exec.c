@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 01:05:14 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 05:23:44 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*set_env(void)
+t_node	*set_node(void)
 {
-	t_env	*env_lst;
+	t_node	*env_lst;
 	char	*env;
 	char	*name;
 	char	*value;
@@ -27,20 +27,21 @@ t_env	*set_env(void)
 	{
 		name = ft_substr(env, 0, ft_strnchr(env, '='));
 		value = ft_substr(env, ft_strnchr(env, '=') + 1, ft_strlen(env));
-		shlst_addback(&env_lst, shlst_new(name, value));
+		lst_add_back(&env_lst, lst_new(name, value));
+		free(env);
 		env = get_next_line(fd);
 	}
 	return (env_lst);
 }
 
-char	*get_comman(char *usr_in, t_env *env_lst)
+char	*get_comman(char *usr_in, t_node *env_lst)
 {
-	t_env	*path;
+	t_node	*path;
 	char	**path_comman;
 	char	*temp;
 	char	*comman;
 
-	path = find_env("PATH", env_lst);
+	path = find_var("PATH", env_lst);
 	path_comman = ft_split(path->value, ':');
 	while (*path_comman)
 	{
