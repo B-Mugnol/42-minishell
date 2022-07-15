@@ -64,7 +64,7 @@ SRC	+=	ft_itoa.c		ft_utoa.c		ft_ptoa.c		ft_xtoa.c	\
 		ft_xto_uppercase_a.c	ft_base_converter.c		# To string
 SRC	+=	get_next_line.c	ft_null_free.c	ft_free_matrix.c			\
 		ft_strmerge.c	ft_atoi_base.c	ft_free_char_matrix.c		\
-		ft_partial_split.c				# Miscellaneous
+		ft_partial_split.c ft_strnchr.c				# Miscellaneous
 ###	Linked list
 SRC	+=	ft_lstnew.c			ft_lstsize.c		ft_lstlast.c		\
 		ft_lstadd_front.c	ft_lstadd_back.c	ft_lstdelone.c		\

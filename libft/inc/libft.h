@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:45:45 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/04/13 23:14:43 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:06:03 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char		*ft_xtoa(unsigned int n);
 char		*ft_xto_uppercase_a(unsigned int n);
 char		*ft_ptoa(void *p);
 // Miscellaneous:
+size_t		ft_strnchr(char *str, char c);
 char		*ft_strmerge(char *s1, char *s2);
 char		*get_next_line(int fd);
 int			ft_atoi_base(char *str, char *base);

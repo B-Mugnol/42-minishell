@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/14 03:56:17 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 01:03:11 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
+# include <fcntl.h>
+
+typedef struct s_glo
+{
+	char	*cmd;
+	char	**args;
+}	t_glo;
 
 typedef struct s_env
 {
@@ -34,5 +41,7 @@ typedef enum e_bool
 
 t_env	*shlst_new(char *name, char *value);
 void	shlst_addback(t_env **lst, t_env *new);
-t_env	*set_env(char **env);
+t_env	*set_env(void);
+t_env	*find_env(char *name, t_env *env_lst);
+char	*get_comman(char *comman, t_env *env_lst);
 #endif

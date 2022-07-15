@@ -17,7 +17,7 @@ HEADER		:=	minishell.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
-SRC_DIR		:=	src
+SRC_DIR		:=	src src/utils
 SRC			:=	main.c exec.c lst_ft.c
 
 # Object
