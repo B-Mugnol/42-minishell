@@ -6,15 +6,15 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 04:32:27 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/15 04:49:13 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 05:19:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LST_H
 # define LST_H
 
-#include <stdlib.h>	// free, malloc
-#include "libft.h"	// ft_strncmp, ft_strlen
+# include <stdlib.h>	// free, malloc
+# include "libft.h"	// ft_strncmp, ft_strlen
 
 typedef struct s_node
 {
@@ -34,6 +34,5 @@ t_node	*find_var(char *name, t_node *lst);
 void	lst_clear(t_node **lst);
 void	lst_delete_node(t_node *node);
 void	lst_delete_var(t_node **lst, char *name);
-
 
 #endif
