@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_ft.c                                           :+:      :+:    :+:   */
+/*   ft_strnchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/14 02:48:37 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/07/14 22:02:35 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/14 22:02:51 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_env	*shlst_new(char *name, char *value)
+size_t	ft_strnchr(char *str, char c)
 {
-	t_env	*node;
+	size_t	inx;
 
-	node = malloc(sizeof(t_env));
-	node->name = name;
-	node->value = value;
-	node->next = NULL;
-	return (node);
-}
-
-void	shlst_addback(t_env **lst, t_env *new)
-{
-	t_env	*head;
-
-	if (!*lst)
-		*lst = new;
-	else
+	inx = 0;
+	if (!str)
+		return (0);
+	while (*str)
 	{
-		head = *lst;
-		while ((*lst)->next)
-			*lst = (*lst)->next;
-		(*lst)->next = new;
-		*lst = head;
+		if (*str == c)
+			return (inx);
+		str++;
+		inx++;
 	}
+	return (0);
 }
