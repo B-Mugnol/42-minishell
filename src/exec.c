@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 01:05:14 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 03:36:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*set_env(void)
+t_node	*set_node(void)
 {
-	t_env	*env_lst;
+	t_node	*env_lst;
 	char	*env;
 	char	*name;
 	char	*value;
@@ -33,9 +33,9 @@ t_env	*set_env(void)
 	return (env_lst);
 }
 
-char	*get_comman(char *usr_in, t_env *env_lst)
+char	*get_comman(char *usr_in, t_node *env_lst)
 {
-	t_env	*path;
+	t_node	*path;
 	char	**path_comman;
 	char	*temp;
 	char	*comman;

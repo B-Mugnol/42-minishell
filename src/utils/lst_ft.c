@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   lst_ft.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 00:22:43 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 03:36:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*shlst_new(char *name, char *value)
+t_node	*shlst_new(char *name, char *value)
 {
-	t_env	*node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_env));
+	node = malloc(sizeof(t_node));
 	node->name = name;
 	node->value = value;
 	node->next = NULL;
 	return (node);
 }
 
-void	shlst_addback(t_env **lst, t_env *new)
+void	shlst_addback(t_node **lst, t_node *new)
 {
-	t_env	*head;
+	t_node	*head;
 
 	if (!*lst)
 		*lst = new;
@@ -39,7 +39,7 @@ void	shlst_addback(t_env **lst, t_env *new)
 	}
 }
 
-t_env	*find_env(char *name, t_env *env_lst)
+t_node	*find_env(char *name, t_node *env_lst)
 {
 	while (env_lst)
 	{

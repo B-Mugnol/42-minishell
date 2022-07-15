@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 01:03:11 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/15 03:36:49 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct s_glo
 	char	**args;
 }	t_glo;
 
-typedef struct s_env
+typedef struct s_node
 {
 	char			*name;
 	char			*value;
-	struct s_env	*next;
-}	t_env;
+	struct s_node	*next;
+}	t_node;
 
 typedef enum e_bool
 {
@@ -39,9 +39,9 @@ typedef enum e_bool
 	FALSE
 }	t_bool;
 
-t_env	*shlst_new(char *name, char *value);
-void	shlst_addback(t_env **lst, t_env *new);
-t_env	*set_env(void);
-t_env	*find_env(char *name, t_env *env_lst);
-char	*get_comman(char *comman, t_env *env_lst);
+t_node	*shlst_new(char *name, char *value);
+void	shlst_addback(t_node **lst, t_node *new);
+t_node	*set_node(void);
+t_node	*find_env(char *name, t_node *env_lst);
+char	*get_comman(char *comman, t_node *env_lst);
 #endif
