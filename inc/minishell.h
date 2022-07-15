@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 03:36:49 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/15 04:05:12 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ typedef enum e_bool
 t_node	*shlst_new(char *name, char *value);
 void	shlst_addback(t_node **lst, t_node *new);
 t_node	*set_node(void);
-t_node	*find_env(char *name, t_node *env_lst);
+t_node	*find_var(char *name, t_node *lst);
 char	*get_comman(char *comman, t_node *env_lst);
 #endif
