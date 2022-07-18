@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/18 16:03:20 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/18 19:46:16 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum e_bool
 	FALSE
 }	t_bool;
 
-char	*get_comman(char *comman, t_node *env_lst);
+void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman);
 t_node	*set_node(void);
 
 // builtins.c

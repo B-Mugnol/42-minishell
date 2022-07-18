@@ -69,6 +69,9 @@ norm:
 	@norminette | grep "Error" | cat
 	@$(MAKE) -C $(LIBFT_DIR) norm
 
+val:
+	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
+
 # Clean: removes objects' and precompiled headers' directories
 clean:
 	@$(RM) $(OBJ_DIR) $(C_HEADER_DIR)
