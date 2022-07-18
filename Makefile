@@ -18,7 +18,7 @@ H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src src/utils
-SRC			:=	main.c exec.c lst_add.c lst_del.c
+SRC			:=	main.c builtins.c exec.c lst_add.c lst_del.c
 
 # Object
 OBJ_DIR		:=	obj

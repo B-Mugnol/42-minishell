@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 04:44:11 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:03:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,9 @@ typedef enum e_bool
 
 char	*get_comman(char *comman, t_node *env_lst);
 t_node	*set_node(void);
+
+// builtins.c
+void	ft_env(t_node *env_lst);
+void	ft_pwd(void);
 
 #endif
