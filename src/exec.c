@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/15 05:23:44 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/18 19:45:59 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,29 @@ t_node	*set_node(void)
 	return (env_lst);
 }
 
-char	*get_comman(char *usr_in, t_node *env_lst)
+void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman)
 {
 	t_node	*path;
 	char	**path_comman;
 	char	*temp;
-	char	*comman;
+	int		inx;
 
 	path = find_var("PATH", env_lst);
+	comman->cmd = NULL;
 	path_comman = ft_split(path->value, ':');
-	while (*path_comman)
+	inx = 0;
+	while (path_comman[inx])
 	{
-		temp = ft_strjoin(*path_comman, "/");
-		comman = ft_strjoin(temp, usr_in);
+		temp = ft_strjoin(path_comman[inx], "/");
+		comman->cmd = ft_strjoin(temp, usr_in);
 		free(temp);
-		if (access(comman, F_OK) == 0)
-			return (comman);
-		free(comman);
-		path_comman++;
+		if (access(comman->cmd, F_OK) == 0)
+		{
+			ft_free_char_matrix(&path_comman);
+			return ;
+		}
+		free(comman->cmd);
+		inx++;
 	}
-	return (NULL);
+	ft_free_char_matrix(&path_comman);
 }
