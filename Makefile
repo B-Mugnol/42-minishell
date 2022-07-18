@@ -38,12 +38,36 @@ LIBFT_LIB		:=	$(LIBFT_DIR)/libft.a
 INCLUDE		:=	$(H_INCLUDE) $(LIBFT_H_INC)
 SYS_LIB		:=	-lreadline
 
+# Suppressions:
+SUPP_FILE	:=	readline.supp
+define SUPP_TEXT
+{
+   <Readline>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:readline
+   ...
+}
+
+{
+   <Readline/AddHistory>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:xmalloc
+   fun:add_history
+   ...
+}
+endef
+export SUPP_TEXT
+
 # vpath
 vpath	%.h		$(HEADER_DIR)
 vpath	%.c		$(SRC_DIR)
 
 # -----------------------RULES------------------------------------------------ #
-.PHONY: all norm clean fclean re
+.PHONY: all norm vg clean fclean re
 
 # Creates NAME
 all: $(NAME)
@@ -64,17 +88,23 @@ $(OBJ_DIR) $(C_HEADER_DIR):
 $(LIBFT_LIB):
 	$(MAKE) -C $(LIBFT_DIR)
 
+# Run program using valgrind
+vg: $(SUPP_FILE)
+	@$(MAKE)
+	valgrind --suppressions=$< --leak-check=full --show-leak-kinds=all ./$(NAME)
+
+# Create suppresion file
+$(SUPP_FILE):
+	@echo "$$SUPP_TEXT" > $@
+
 # Norm: checks code for norm errors
 norm:
 	@norminette | grep "Error" | cat
 	@$(MAKE) -C $(LIBFT_DIR) norm
 
-val:
-	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
-
 # Clean: removes objects' and precompiled headers' directories
 clean:
-	@$(RM) $(OBJ_DIR) $(C_HEADER_DIR)
+	@$(RM) $(OBJ_DIR) $(C_HEADER_DIR) $(SUPP_FILE)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 # Full clean: same as 'clean', but removes the generated libraries as well

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/18 19:59:58 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/18 20:38:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 	t_node	*env_lst;
 	char	*std_in;
 	char	*shell_name;
-	int		inx;	
+	int		inx;
 
 	inx = 0;
 	shell_name = "luluShell>";
@@ -33,6 +33,7 @@ int	main(void)
 		free(std_in);
 		inx++;
 	}
+	rl_clear_history();
 	lst_clear(&env_lst);
 	return (0);
 }
