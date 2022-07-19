@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/18 19:45:59 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:19:35 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman)
 	int		inx;
 
 	path = find_var("PATH", env_lst);
-	comman->cmd = NULL;
 	path_comman = ft_split(path->value, ':');
 	inx = 0;
 	while (path_comman[inx])
@@ -56,6 +55,7 @@ void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman)
 			return ;
 		}
 		free(comman->cmd);
+		comman->cmd = NULL;
 		inx++;
 	}
 	ft_free_char_matrix(&path_comman);
