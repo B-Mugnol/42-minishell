@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/18 16:07:48 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/19 03:57:04 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	ft_env(t_node *env_lst)
 		return ;
 	while (env_lst)
 	{
-		printf("%s=%s", env_lst->name, env_lst->value);
+		ft_putstr_fd(env_lst->name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(env_lst->value, 1);
 		env_lst = env_lst->next;
 		if (env_lst)
-			printf("\n");
+			ft_putchar_fd('\n', 1);
 	}
 }
 
@@ -32,6 +34,6 @@ void	ft_pwd(void)
 	char	*path;
 
 	path = getcwd(NULL, 0);
-	printf("%s\n", path);
+	ft_putendl_fd(path, 1);
 	free(path);
 }
