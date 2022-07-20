@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/18 20:38:26 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/19 22:49:28 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	main(void)
 	inx = 0;
 	shell_name = "luluShell>";
 	env_lst = set_node();
-	get_comman("ls", env_lst, &comman);
+	get_comman("envp", env_lst, &comman);
 	printf("%s\n", comman.cmd);
-	free(comman.cmd);
+	if (comman.cmd)
+		free(comman.cmd);
 	while (inx <= 4)
 	{
 		std_in = readline(shell_name);
+		hash_search(std_in, env_lst);
 		add_history(std_in);
 		free(std_in);
 		inx++;
