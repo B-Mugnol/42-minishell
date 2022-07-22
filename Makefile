@@ -17,8 +17,9 @@ HEADER		:=	minishell.h lst.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
-SRC_DIR		:=	src src/utils
-SRC			:=	main.c builtins.c exec.c lst_add.c lst_del.c
+SRC_DIR		:=	src	src/utils src/parsing
+SRC			:=	main.c builtins.c exec.c signal.c
+SRC			+=	lst_add.c lst_del.c
 
 # Object
 OBJ_DIR		:=	obj
@@ -91,7 +92,8 @@ $(LIBFT_LIB):
 # Run program using valgrind
 vg: $(SUPP_FILE)
 	@$(MAKE)
-	valgrind --suppressions=$< --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --suppressions=$< --leak-check=full --show-leak-kinds=all \
+	--track-origins=yes ./$(NAME)
 
 # Create suppresion file
 $(SUPP_FILE):
