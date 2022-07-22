@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/19 22:52:21 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:18:01 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,9 @@ t_bool	hash_search(const char *key, t_node *env);
 // builtins.c
 void	ft_env(t_node *env_lst);
 void	ft_pwd(void);
+void	ft_unset(t_node **var_lst, t_node **env_lst, char *var_name);
+
+// signal.c
+void	sig_setup(void);
 
 #endif
