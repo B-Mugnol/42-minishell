@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/22 00:34:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/22 21:01:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*expand_tilde(char *str, char *tilde_pointer)
 {
 	char	*exp;
 
-	exp = ft_strmerge(ft_substr(str, 0, tilde_pointer - str), ft_strdup(getenv("HOME")));
+	exp = ft_strmerge(ft_substr(str, 0, tilde_pointer - str),
+			ft_strdup(getenv("HOME")));
 	exp = ft_strmerge(exp, ft_strdup(tilde_pointer + 1));
 	return (exp);
 }

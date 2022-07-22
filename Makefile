@@ -92,8 +92,7 @@ $(LIBFT_LIB):
 # Run program using valgrind
 vg: $(SUPP_FILE)
 	@$(MAKE)
-	valgrind --suppressions=$< --leak-check=full --show-leak-kinds=all \
-	--track-origins=yes ./$(NAME)
+	valgrind --suppressions=$< --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 # Create suppresion file
 $(SUPP_FILE):
