@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/22 04:05:06 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:18:01 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include "libft.h"
 # include <fcntl.h>
 # include "lst.h"
+
+typedef struct s_buildin
+{
+	char	*name;
+	void	(*func)(void *);
+}	t_buildin;
 
 typedef struct s_glo
 {
@@ -35,6 +41,7 @@ typedef enum e_bool
 
 void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman);
 t_node	*set_node(void);
+t_bool	hash_search(const char *key, t_node *env);
 
 // builtins.c
 void	ft_env(t_node *env_lst);
