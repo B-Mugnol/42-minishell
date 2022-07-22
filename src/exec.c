@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/19 20:19:35 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/22 19:24:24 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_node	*set_node(void)
 	while (env)
 	{
 		name = ft_substr(env, 0, ft_strnchr(env, '='));
-		value = ft_substr(env, ft_strnchr(env, '=') + 1, ft_strlen(env));
+		value = ft_substr(env, ft_strnchr(env, '=') + 2,
+				ft_strlen(env) - (ft_strnchr(env, '=') + 2) - 2);
 		lst_add_back(&env_lst, lst_new(name, value));
 		free(env);
 		env = get_next_line(fd);

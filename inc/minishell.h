@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/19 22:52:21 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/21 23:55:39 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft.h"
 # include <fcntl.h>
+# include <termios.h>	// getattr, setattr...
+# include "libft.h"
 # include "lst.h"
 
 typedef struct s_buildin
 {
 	char	*name;
-	void	(*func)(void *);
+	void	(*func)();
 }	t_buildin;
 
 typedef struct s_glo
