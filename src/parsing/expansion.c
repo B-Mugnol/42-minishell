@@ -1,0 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/07/22 00:34:03 by bmugnol-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+char	*expand_tilde(char *str, char *tilde_pointer)
+{
+	char	*exp;
+
+	exp = ft_strmerge(ft_substr(str, 0, tilde_pointer - str), ft_strdup(getenv("HOME")));
+	exp = ft_strmerge(exp, ft_strdup(tilde_pointer + 1));
+	return (exp);
+}
+
+char	*expand_var(char *str, char *exp_start, char *var_name, t_node *var_lst)
+{
+	t_node	*var;
+	char	*var_value;
+	char	*exp;
+
+	var_value = NULL;
+	var = find_var(var_name, var_lst);
+	if (var)
+		var_value = ft_strdup(var->value);
+	if (var_value == NULL)
+		var_value = ft_strdup("");
+	exp = ft_strmerge(ft_substr(str, 0, exp_start - str), var_value);
+	exp = ft_strmerge(exp, ft_strdup(exp_start + ft_strlen(var_name)) + 1);
+	return (exp);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/19 22:47:15 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:18:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ void	ft_pwd(void)
 	path = getcwd(NULL, 0);
 	ft_putendl_fd(path, 1);
 	free(path);
+}
+
+void	ft_unset(t_node **var_lst, t_node **env_lst, char *var_name)
+{
+	if (!var_name || !*var_name)
+		return ;
+	lst_delete_var(var_lst, var_name);
+	lst_delete_var(env_lst, var_name);
 }
