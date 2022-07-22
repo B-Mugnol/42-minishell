@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/18 19:46:16 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/22 04:03:46 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_node	*set_node(void);
 // builtins.c
 void	ft_env(t_node *env_lst);
 void	ft_pwd(void);
+void	ft_unset(t_node **var_lst, t_node **env_lst, char *var_name);
 
 #endif
