@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/23 03:35:40 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/23 03:42:36 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,44 @@ void	ft_unset(t_node **var_lst, t_node **env_lst, char *var_name)
 		return ;
 	lst_delete_var(var_lst, var_name);
 	lst_delete_var(env_lst, var_name);
+}
+
+void	ft_cd(t_node **env_lst, char *path)
+{
+	int		status;
+	char	*pwd;
+
+	status = chdir(path);
+	if (status == -1)
+	{
+		perror(NULL);
+		return ;
+	}
+	pwd = getcwd(NULL, 0);
+	lst_add_var(env_lst, lst_new(ft_strdup("PWD"), pwd));
+}
+
+void	ft_export(t_node **var_lst, t_node **env_lst, t_node *export)
+{
+	t_node	*var;
+
+	while (export)
+	{
+		var = find_var(export->name, *var_lst);
+		if (ft_strncmp(export->name, "?", ft_strlen("?")) == 0)
+			;
+		else if (export->value != NULL)
+		{
+			lst_add_var(var_lst, lst_new(ft_strdup(export->name),
+					ft_strdup(export->value)));
+			lst_add_var(env_lst, lst_new(ft_strdup(export->name),
+					ft_strdup(export->value)));
+		}
+		else if (var != NULL)
+		{
+			lst_add_var(env_lst,
+				lst_new(ft_strdup(var->name), ft_strdup(var->value)));
+		}
+		export = export->next;
+	}
 }
