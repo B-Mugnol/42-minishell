@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/23 00:35:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/23 03:43:28 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 int	main(void)
 {
-	t_glo	comman;
 	t_node	*env_lst;
 	t_node	*var_lst;
 	char	*std_in;
 	char	*shell_name;
 
 	shell_name = "luluShell>";
-	env_lst = set_node();
 	var_lst = set_node();
 	set_exit_status(&var_lst, EXIT_SUCCESS);
 	ft_env(var_lst);
-	get_comman("envp", env_lst, &comman);
-	printf("%s\n", comman.cmd);
-	if (comman.cmd)
-		free(comman.cmd);
 	sig_setup();
 	while (1)
 	{
