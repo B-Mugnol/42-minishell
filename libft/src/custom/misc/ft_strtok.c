@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/23 02:13:32 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/07/22 21:56:34 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/22 22:48:25 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strtok(char *buffer, const char *delimiter)
 {
-	t_node	*env_lst;
-	t_glo	global;
-	char	*std_in;
-	char	*shell_name;
+	static char	*str;
+	size_t		inx;
 
-	shell_name = "luluShell>";
-	env_lst = set_node();
-	sig_setup();
-	while (1)
+	if (buffer)
+		str = buffer;
+	while (str[inx])
 	{
-		std_in = readline(shell_name);
-		if (std_in == NULL)
+		if (ft_strrchr(delimiter, str[inx]))
 		{
-			ft_putchar_fd('\n', 1);
-			break ;
+			str[inx] = '\0';
+			buffer = str;
+			str += inx + 1;
+			return (buffer);
 		}
-		hash_search(std_in, env_lst);
-		add_history(std_in);
-		free(std_in);
+		inx++;
 	}
-	rl_clear_history();
-	lst_clear(&env_lst);
-	return (0);
+	return (NULL);
 }
