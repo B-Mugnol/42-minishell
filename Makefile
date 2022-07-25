@@ -12,8 +12,8 @@ RM		:=	rm -rf
 
 # PROGRAM
 # Headers
-HEADER_DIR	:=	inc src/utils
-HEADER		:=	minishell.h lst.h
+HEADER_DIR	:=	src/utils inc 
+HEADER		:=	lst.h minishell.h 
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
