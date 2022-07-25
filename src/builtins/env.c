@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 21:56:34 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/26 00:08:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strtok(char *buffer, const char *delimiter)
+void	ft_env(t_var *env_lst)
 {
-	static char	*str;
-	size_t		inx;
-
-	if (buffer)
-		str = buffer;
-	inx = 0;
-	while (str[inx])
+	if (!env_lst || !find_var("PATH", env_lst))
+		return ;
+	while (env_lst)
 	{
-		if (ft_strrchr(delimiter, str[inx]))
-		{
-			str[inx] = '\0';
-			buffer = str;
-			str += inx + 1;
-			return (buffer);
-		}
-		inx++;
+		ft_putstr_fd(env_lst->name, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(env_lst->value, 1);
+		env_lst = env_lst->next;
+		if (env_lst)
+			ft_putchar_fd('\n', 1);
 	}
-	return (NULL);
 }

@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 21:56:34 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/26 00:08:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strtok(char *buffer, const char *delimiter)
+void	ft_cd(t_var **env_lst, char *path)
 {
-	static char	*str;
-	size_t		inx;
+	int		status;
+	char	*pwd;
 
-	if (buffer)
-		str = buffer;
-	inx = 0;
-	while (str[inx])
+	status = chdir(path);
+	if (status == -1)
 	{
-		if (ft_strrchr(delimiter, str[inx]))
-		{
-			str[inx] = '\0';
-			buffer = str;
-			str += inx + 1;
-			return (buffer);
-		}
-		inx++;
+		perror(NULL);
+		return ;
 	}
-	return (NULL);
+	pwd = getcwd(NULL, 0);
+	lst_add_var(env_lst, lst_new(ft_strdup("PWD"), pwd));
 }

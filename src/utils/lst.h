@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 04:32:27 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 23:28:43 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/26 00:03:53 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>	// free, malloc
 # include "libft.h"		// ft_strncmp, ft_strlen
-# include "minishell.h"
 
 typedef enum e_token
 {

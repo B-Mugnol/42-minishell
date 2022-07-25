@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/25 23:43:19 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/26 00:02:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 /*READLINE--GETENV*/
+# include "lst.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -20,7 +21,6 @@
 # include <fcntl.h>
 # include <signal.h>
 # include "libft.h"
-# include "lst.h"
 
 typedef struct s_buildin
 {
