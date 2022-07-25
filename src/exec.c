@@ -6,15 +6,15 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/23 01:16:27 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/25 23:42:57 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*set_node(void)
+t_var	*set_node(void)
 {
-	t_node	*env_lst;
+	t_var	*env_lst;
 	char	*env;
 	char	*name;
 	char	*value;
@@ -35,9 +35,9 @@ t_node	*set_node(void)
 	return (env_lst);
 }
 
-void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman)
+void	get_comman(char *usr_in, t_var *env_lst, t_glo *comman)
 {
-	t_node	*path;
+	t_var	*path;
 	char	**path_cmd;
 	char	*temp;
 	int		inx;
@@ -62,7 +62,7 @@ void	get_comman(char *usr_in, t_node *env_lst, t_glo *comman)
 	ft_free_char_matrix(&path_cmd);
 }
 
-void	child(int fd_in, int fd_out, t_glo *comman)
+void	exec(int fd_in, int fd_out, t_glo *comman)
 {
 	dup2(fd_out, STDOUT_FILENO);
 	dup2(fd_in, STDIN_FILENO);

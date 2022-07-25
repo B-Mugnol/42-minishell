@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/07/25 22:30:53 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(t_var **env_lst, char *path)
+void	tokenizer(char *usr_in)
 {
-	int		status;
-	char	*pwd;
+	t_parse	*node;
 
-	status = chdir(path);
-	if (status == -1)
+	while (usr_in)
 	{
-		perror(NULL);
-		return ;
+		if (usr_in == '|')
+		{
+			lst_new()
+		}
 	}
-	pwd = getcwd(NULL, 0);
-	lst_add_var(env_lst, lst_new(ft_strdup("PWD"), pwd));
 }

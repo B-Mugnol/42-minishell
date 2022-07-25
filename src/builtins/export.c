@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:49:41 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 19:50:44 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/07/25 23:57:17 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export(t_node **var_lst, t_node **env_lst, t_node *export)
+void	ft_export(t_var **var_lst, t_var **env_lst, t_var *export)
 {
-	t_node	*var;
+	t_var	*var;
 
 	while (export)
 	{

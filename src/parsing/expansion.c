@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/23 03:42:52 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/25 22:37:31 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*expand_tilde(char *str, char *tilde_pointer)
 	return (exp);
 }
 
-char	*expand_var(char *str, char *exp_start, char *var_name, t_node *var_lst)
+char	*expand_var(char *str, char *exp_start, char *var_name, t_var*var_lst)
 {
-	t_node	*var;
+	t_var	*var;
 	char	*var_value;
 	char	*exp;
 

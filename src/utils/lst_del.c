@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lst_del.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/15 04:41:07 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/25 23:29:17 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lst.h"
 
-void	lst_delete_node(t_node *node)
+void	lst_delete_node(t_var *node)
 {
 	if (!node)
 		return ;
@@ -21,12 +21,12 @@ void	lst_delete_node(t_node *node)
 	free(node);
 }
 
-void	lst_delete_var(t_node **lst, char *name)
+void	lst_delete_var(t_var **lst, char *name)
 {
-	t_node	*to_be_removed;
-	t_node	*head;
-	t_node	*acc;
-	t_node	*previous;
+	t_var	*to_be_removed;
+	t_var	*head;
+	t_var	*acc;
+	t_var	*previous;
 
 	if (!lst || !*lst)
 		return ;
@@ -50,9 +50,9 @@ void	lst_delete_var(t_node **lst, char *name)
 	*lst = head;
 }
 
-void	lst_clear(t_node **lst)
+void	lst_clear(t_var **lst)
 {
-	t_node	*acc;
+	t_var	*acc;
 
 	if (!lst || !*lst)
 		return ;

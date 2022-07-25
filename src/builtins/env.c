@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 19:50:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_node *env_lst)
+void	ft_env(t_var *env_lst)
 {
 	if (!env_lst || !find_var("PATH", env_lst))
 		return ;
