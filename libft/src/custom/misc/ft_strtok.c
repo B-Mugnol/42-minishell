@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtok.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 21:56:34 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/22 22:48:25 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/26 00:08:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*ft_strtok(char *buffer, const char *delimiter)
 
 	if (buffer)
 		str = buffer;
+	inx = 0;
 	while (str[inx])
 	{
 		if (ft_strrchr(delimiter, str[inx]))
