@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/26 00:02:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:25:50 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	get_comman(char *usr_in, t_var *env_lst, t_glo *comman);
 t_var	*set_node(void);
 t_bool	hash_search(const char *key, t_var *env);
 void	exec(int fd_in, int fd_out, t_glo *comman);
+void	tokenizer(char *usr_in);
 
 void	set_exit_status(t_var **var_lst, int exit_status);
 

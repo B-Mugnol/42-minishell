@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/25 22:30:53 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:25:19 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	tokenizer(char *usr_in)
 {
 	t_parse	*node;
+	int		inx;
 
-	while (usr_in)
+	inx = 0;
+	while (usr_in[inx])
 	{
-		if (usr_in == '|')
+		if (usr_in[inx] == '|')
 		{
-			lst_new()
+			usr_in += inx;
+			inx = 0;
 		}
+		inx++;
 	}
 }
