@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/27 05:47:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:12:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(void)
 		add_history(std_in);
 		input_lst = tokenizer(std_in);
 		print_lst(input_lst);
+		ft_lstclear(&input_lst, delete_parse);
 		free(std_in);
 	}
-	ft_lstclear(&input_lst, delete_parse);
 	rl_clear_history();
 	lst_clear(&env_lst);
 	lst_clear(&var_lst);

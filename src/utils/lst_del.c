@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/27 06:13:04 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:28:36 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	delete_parse(void *parsed_node)
 	if (!parsed_node)
 		return ;
 	free(((t_parse *)(parsed_node))->str);
+	free(parsed_node);
 }
