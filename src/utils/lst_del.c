@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_del.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 23:29:17 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/27 06:13:04 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ void	lst_clear(t_var **lst)
 		*lst = acc;
 	}
 	*lst = NULL;
+}
+
+void	delete_parse(void *parsed_node)
+{
+	if (!parsed_node)
+		return ;
+	free(((t_parse *)(parsed_node))->str);
 }

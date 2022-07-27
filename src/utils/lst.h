@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 04:32:27 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/26 21:20:37 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/07/27 04:44:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_parse
 {
 	t_token			type;
 	char			*str;
-	struct s_parse	*next;
 }	t_parse;
 
 typedef struct s_var
@@ -52,5 +51,6 @@ t_var	*find_var(char *name, t_var *lst);
 void	lst_clear(t_var **lst);
 void	lst_delete_node(t_var *node);
 void	lst_delete_var(t_var **lst, char *name);
+void	delete_parse(void *parsed_node);
 
 #endif
