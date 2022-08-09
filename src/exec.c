@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/25 23:42:57 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:17:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_var	*set_node(void)
 		name = ft_substr(env, 0, ft_strnchr(env, '='));
 		value = ft_substr(env, ft_strnchr(env, '=') + 2,
 				ft_strlen(env) - (ft_strnchr(env, '=') + 2) - 2);
-		lst_add_back(&env_lst, lst_new(name, value));
+		varlst_add_back(&env_lst, varlst_new(name, value));
 		free(env);
 		env = get_next_line(fd);
 	}
@@ -42,7 +42,7 @@ void	get_comman(char *usr_in, t_var *env_lst, t_glo *comman)
 	char	*temp;
 	int		inx;
 
-	path = find_var("PATH", env_lst);
+	path = varlst_find_var("PATH", env_lst);
 	path_cmd = ft_split(path->value, ':');
 	inx = 0;
 	while (path_cmd[inx])

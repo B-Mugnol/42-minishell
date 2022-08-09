@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 22:37:31 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:17:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*expand_var(char *str, char *exp_start, char *var_name, t_var*var_lst)
 	char	*exp;
 
 	var_value = NULL;
-	var = find_var(var_name, var_lst);
+	var = varlst_find_var(var_name, var_lst);
 	if (var)
 		var_value = ft_strdup(var->value);
 	if (var_value == NULL)

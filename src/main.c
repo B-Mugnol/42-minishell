@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/27 18:12:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:17:14 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	main(void)
 		free(std_in);
 	}
 	rl_clear_history();
-	lst_clear(&env_lst);
-	lst_clear(&var_lst);
+	varlst_clear(&env_lst);
+	varlst_clear(&var_lst);
 	return (0);
 }
 
 void	set_exit_status(t_var**var_lst, int exit_status)
 {
-	lst_add_var(var_lst, lst_new(ft_strdup("?"), ft_itoa(exit_status)));
+	varlst_add_var(var_lst, varlst_new(ft_strdup("?"), ft_itoa(exit_status)));
 }
 
 void	print_lst(t_list *tk_lst)
