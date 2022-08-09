@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 04:32:27 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/27 04:44:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:11:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 
 # include <stdlib.h>	// free, malloc
 # include "libft.h"		// ft_strncmp, ft_strlen
-
-typedef enum e_token
-{
-	PIPE = -1,
-	LESS = -2,
-	MORE = -3,
-	DOLLAR = -4,
-	PARAM = -5,
-	CMD = -6,
-	WORD = -7
-}	t_token;
 
 typedef struct s_parse
 {
