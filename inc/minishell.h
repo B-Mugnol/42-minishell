@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/27 18:01:55 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:18:54 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,23 @@ typedef struct s_glo
 	char	**args;
 	int		pipe[2];
 }	t_glo;
+
+typedef enum e_token
+{
+	PIPE = -1,
+	LESS = -2,
+	MORE = -3,
+	DOLLAR = -4,
+	PARAM = -5,
+	CMD = -6,
+	WORD = -7
+}	t_token;
+
+typedef struct s_parse
+{
+	t_token			type;
+	char			*str;
+}	t_parse;
 
 typedef enum e_bool
 {

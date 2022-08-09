@@ -16,12 +16,6 @@
 # include <stdlib.h>	// free, malloc
 # include "libft.h"		// ft_strncmp, ft_strlen
 
-typedef struct s_parse
-{
-	t_token			type;
-	char			*str;
-}	t_parse;
-
 typedef struct s_var
 {
 	char			*name;
