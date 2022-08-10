@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:16:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ft_cd(t_var **env_lst, char *path)
 		return ;
 	}
 	pwd = getcwd(NULL, 0);
-	lst_add_var(env_lst, lst_new(ft_strdup("PWD"), pwd));
+	varlst_add_var(env_lst, varlst_new(ft_strdup("PWD"), pwd));
 }

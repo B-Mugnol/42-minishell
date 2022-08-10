@@ -12,14 +12,14 @@ RM		:=	rm -rf
 
 # PROGRAM
 # Headers
-HEADER_DIR	:=	inc src/utils
-HEADER		:=	minishell.h lst.h
+HEADER_DIR	:=	inc src/varlst
+HEADER		:=	minishell.h varlst.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
-SRC_DIR		:=	src src/builtins src/utils src/parsing
+SRC_DIR		:=	src src/builtins src/varlst src/parsing
 SRC			:=	main.c exec.c signal.c hash_builds.c tokenizer.c
-SRC			+=	lst_add.c lst_del.c
+SRC			+=	varlst_add.c varlst_del.c
 SRC			+=	cd.c env.c export.c pwd.c unset.c
 
 # Object

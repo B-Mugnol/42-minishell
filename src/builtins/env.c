@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/26 00:04:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:17:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_env(t_var *env_lst)
 {
-	if (!env_lst || !find_var("PATH", env_lst))
+	if (!env_lst || !varlst_find_var("PATH", env_lst))
 		return ;
 	while (env_lst)
 	{

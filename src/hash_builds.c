@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_builds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/07/25 23:42:47 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:00:11 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 t_bool	hash_search(const char *key, t_var *env)
 {
-	t_buildin	builds[2];
+	t_builtin	builds[2];
 	size_t		size;
 	size_t		inx;
 
-	builds[0] = (t_buildin){"pwd", (void *)ft_pwd};
-	builds[1] = (t_buildin){"env", (void *)ft_env};
-	size = sizeof(builds) / sizeof(t_buildin);
+	builds[0] = (t_builtin){"pwd", (void *)ft_pwd};
+	builds[1] = (t_builtin){"env", (void *)ft_env};
+	size = sizeof(builds) / sizeof(t_builtin);
 	inx = 0;
 	while (inx < size)
 	{

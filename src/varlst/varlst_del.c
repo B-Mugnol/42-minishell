@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_del.c                                          :+:      :+:    :+:   */
+/*   varlst_del.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/25 23:29:17 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:01:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lst.h"
+#include "varlst.h"
+#include "minishell.h"
 
-void	lst_delete_node(t_var *node)
+void	varlst_delete_node(t_var *node)
 {
 	if (!node)
 		return ;
@@ -21,7 +22,7 @@ void	lst_delete_node(t_var *node)
 	free(node);
 }
 
-void	lst_delete_var(t_var **lst, char *name)
+void	varlst_delete_var(t_var **lst, char *name)
 {
 	t_var	*to_be_removed;
 	t_var	*head;
@@ -30,7 +31,7 @@ void	lst_delete_var(t_var **lst, char *name)
 
 	if (!lst || !*lst)
 		return ;
-	to_be_removed = find_var(name, *lst);
+	to_be_removed = varlst_find_var(name, *lst);
 	head = *lst;
 	if (*lst == to_be_removed)
 		head = (*lst)->next;
@@ -41,7 +42,7 @@ void	lst_delete_var(t_var **lst, char *name)
 			acc = (*lst)->next;
 			if (previous)
 				previous->next = acc;
-			lst_delete_node(*lst);
+			varlst_delete_node(*lst);
 			break ;
 		}
 		previous = *lst;
@@ -50,7 +51,7 @@ void	lst_delete_var(t_var **lst, char *name)
 	*lst = head;
 }
 
-void	lst_clear(t_var **lst)
+void	varlst_clear(t_var **lst)
 {
 	t_var	*acc;
 
@@ -59,8 +60,16 @@ void	lst_clear(t_var **lst)
 	while (*lst)
 	{
 		acc = (*lst)->next;
-		lst_delete_node(*lst);
+		varlst_delete_node(*lst);
 		*lst = acc;
 	}
 	*lst = NULL;
+}
+
+void	delete_parse(void *parsed_node)
+{
+	if (!parsed_node)
+		return ;
+	free(((t_parse *)(parsed_node))->str);
+	free(parsed_node);
 }
