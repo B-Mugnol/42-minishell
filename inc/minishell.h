@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/09 20:18:54 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:01:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <signal.h>
 # include "libft.h"
 
-typedef struct s_buildin
+typedef struct s_builtin
 {
 	char	*name;
 	void	(*func)();
-}	t_buildin;
+}	t_builtin;
 
 typedef struct s_glo
 {
