@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/09 20:17:14 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:41:46 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(void)
 {
 	t_var	*env_lst;
 	t_var	*var_lst;
-	t_list	*input_lst;
 	char	*std_in;
 	char	*shell_name;
 
@@ -36,9 +35,7 @@ int	main(void)
 			break ;
 		}
 		add_history(std_in);
-		input_lst = tokenizer(std_in);
-		print_lst(input_lst);
-		ft_lstclear(&input_lst, delete_parse);
+		parsing(std_in);
 		free(std_in);
 	}
 	rl_clear_history();
