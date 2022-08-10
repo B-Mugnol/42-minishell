@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 /*READLINE--GETENV*/
-# include "lst.h"
+# include "varlst.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
