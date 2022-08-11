@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 02:19:11 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:54:58 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_glo
 
 typedef enum e_bool
 {
-	TRUE,
-	FALSE
+	FALSE,
+	TRUE
 }	t_bool;
 
 void	get_comman(char *usr_in, t_var *env_lst, t_glo *comman);
