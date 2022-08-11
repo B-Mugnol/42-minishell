@@ -42,7 +42,7 @@ SRC_DIR		+=	src/string_bsd	src/custom/misc		src/custom/to_str
 # Source files
 ####<ctype.h>
 SRC	:=	ft_isalpha.c	ft_isalnum.c	ft_isascii.c	ft_isdigit.c\
-		ft_isprint.c	ft_toupper.c	ft_tolower.c
+		ft_isprint.c	ft_isspace.c	ft_toupper.c	ft_tolower.c
 ###	<stdlib.h>
 SRC	+=	ft_atoi.c		ft_atoll.c		ft_calloc.c
 ###	<strings.h>
