@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_lst_del.c                                     :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 00:23:28 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/12 20:09:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/08/12 20:04:16 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type_lst.h"
+#include "builtin.h"
 
-void	type_lst_delete_node(t_type *node)
+void	ft_cd(t_var **env_lst, char *path)
 {
-	if (!node)
-		return ;
-	free(node->str);
-	free(node);
-}
+	int		status;
+	char	*pwd;
 
-void	type_lst_clear(t_type **lst)
-{
-	t_type	*acc;
-
-	if (!lst || !*lst)
-		return ;
-	while (*lst)
+	status = chdir(path);
+	if (status == -1)
 	{
-		acc = (*lst)->next;
-		type_lst_delete_node(*lst);
-		*lst = acc;
+		perror(NULL);
+		return ;
 	}
-	*lst = NULL;
+	pwd = getcwd(NULL, 0);
+	var_lst_add_var(env_lst, var_lst_new(ft_strdup("PWD"), pwd));
 }

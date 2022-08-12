@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 22:19:06 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:09:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
 
-t_bool	is_valid_var_char(char c);
 void	cmd_recognizer(t_type *token_lst, t_var *var_lst);
 
 void	parsing(char *std_in, t_var *var_lst)
@@ -23,7 +23,7 @@ void	parsing(char *std_in, t_var *var_lst)
 	cmd_recognizer(token_lst, var_lst);
 	// if (token_lst->next == NULL && token_lst->type == ATTR)
 		// atribui
-	typelst_clear(&token_lst);
+	type_lst_clear(&token_lst);
 }
 
 void	cmd_recognizer(t_type *token_lst, t_var *var_lst)
@@ -52,7 +52,8 @@ void	recognize_assignment(t_type *token_lst)
 				quit_quote(start, &end_inx);
 			end_inx++;
 		}
-		typelst_add_front(typelst_new(ft_substr(start, 0, end_inx)));
+		type_lst_add_front(&sub_lst,
+			type_lst_new(ft_substr(start, 0, end_inx), ASSIGN));
 		inx = start - token_lst->str + end_inx;
 	}
 }
@@ -77,17 +78,11 @@ char	*find_var_assignment(char *str)
 				inx++;
 			start = str + inx;
 			while (inx != equal_inx)
-				if (!is_valid_var_char(str[inx++]))
+				if (!is_valid_varname_char(str[inx++]))
 					return (NULL);
 			return (start);
 		}
 		inx++;
 	}
-}
-
-t_bool	is_valid_var_char(char c)
-{
-	if (ft_isalnum(c) || c == '_')
-		return (TRUE);
-	return (FALSE);
+	return (NULL);
 }
