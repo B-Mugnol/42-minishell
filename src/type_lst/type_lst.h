@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:06:46 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 00:36:47 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 02:49:38 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef enum e_token
 	DOLLAR = -4,
 	PARAM = -5,
 	CMD = -6,
-	WORD = -7
+	WORD = -7,
+	ATTR = -8
 }	t_token;
 
 typedef struct s_type
@@ -36,4 +37,5 @@ void	typelst_add_back(t_type **lst, t_type *new);
 void	typelst_add_front(t_type **lst, t_type *new);
 void	typelst_delete_node(t_type *node);
 void	typelst_clear(t_type **lst);
+
 #endif
