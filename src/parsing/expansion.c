@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:21:21 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:04:30 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*expand_var(char *str, char *exp_start, char *var_name, t_var *var_lst)
 	char	*exp;
 
 	var_value = NULL;
-	var = varlst_find_var(var_name, var_lst);
+	var = var_lst_find_var(var_name, var_lst);
 	if (var)
 		var_value = ft_strdup(var->value);
 	if (var_value == NULL)

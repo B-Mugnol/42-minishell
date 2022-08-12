@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/09 21:01:15 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:04:47 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "varlst.h"
 
-t_var	*varlst_new(char *name, char *value)
+t_var	*var_lst_new(char *name, char *value)
 {
 	t_var	*node;
 
@@ -23,7 +23,7 @@ t_var	*varlst_new(char *name, char *value)
 	return (node);
 }
 
-void	varlst_add_back(t_var **lst, t_var *new)
+void	var_lst_add_back(t_var **lst, t_var *new)
 {
 	t_var	*head;
 
@@ -39,7 +39,7 @@ void	varlst_add_back(t_var **lst, t_var *new)
 	}
 }
 
-void	varlst_add_front(t_var **lst, t_var *new)
+void	var_lst_add_front(t_var **lst, t_var *new)
 {
 	if (!*lst)
 		*lst = new;
@@ -47,24 +47,24 @@ void	varlst_add_front(t_var **lst, t_var *new)
 	*lst = new;
 }
 
-void	varlst_add_var(t_var **lst, t_var *new)
+void	var_lst_add_var(t_var **lst, t_var *new)
 {
 	t_var	*old;
 
 	if (!*lst)
 		*lst = new;
-	old = varlst_find_var(new->name, *lst);
+	old = var_lst_find_var(new->name, *lst);
 	if (old)
 	{
 		free(old->value);
 		old->value = ft_strdup(new->value);
-		varlst_delete_node(new);
+		var_lst_delete_node(new);
 		return ;
 	}
-	varlst_add_front(lst, new);
+	var_lst_add_front(lst, new);
 }
 
-t_var	*varlst_find_var(char *name, t_var *lst)
+t_var	*var_lst_find_var(char *name, t_var *lst)
 {
 	while (lst)
 	{
