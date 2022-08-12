@@ -6,11 +6,12 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:14:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:21:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
 
 char	*expand_tilde(char *str, char *tilde_pointer)
 {
@@ -61,19 +62,4 @@ void	expand_usr_in(char	**usr_in, t_var *var_lst)
 		else
 			inx++;
 	}
-}
-
-char	*get_var_name(char *assignment_str)
-{
-	size_t	inx;
-	char	*var_name;
-
-	inx = 0;
-	if (assignment_str[inx] == '?')
-		return (ft_strdup("?"));
-	while (assignment_str[inx]
-		&& (ft_isalnum(assignment_str[inx]) || assignment_str[inx] == '_'))
-		inx++;
-	var_name = ft_substr(assignment_str, 0, inx);
-	return (var_name);
 }
