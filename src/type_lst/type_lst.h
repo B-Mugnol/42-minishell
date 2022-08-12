@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:06:46 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 21:37:44 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:23:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum e_token
 	PARAM = -5,
 	CMD = -6,
 	WORD = -7,
-	ATTR = -8
+	ASSIGN = -8
 }	t_token;
 
 typedef struct s_type
