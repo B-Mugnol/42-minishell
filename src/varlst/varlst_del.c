@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 21:01:15 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:58:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,4 @@ void	varlst_clear(t_var **lst)
 		*lst = acc;
 	}
 	*lst = NULL;
-}
-
-void	delete_parse(void *parsed_node)
-{
-	if (!parsed_node)
-		return ;
-	free(((t_parse *)(parsed_node))->str);
-	free(parsed_node);
 }

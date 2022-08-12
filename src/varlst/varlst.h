@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 04:32:27 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:24:05 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:58:42 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ t_var	*varlst_find_var(char *name, t_var *lst);
 void	varlst_clear(t_var **lst);
 void	varlst_delete_node(t_var *node);
 void	varlst_delete_var(t_var **lst, char *name);
-void	delete_parse(void *parsed_node);
 
 #endif
