@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/11 02:40:19 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 02:45:07 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	expand_usr_in(char	**usr_in, t_var *var_lst)
 			free(var_name);
 			*usr_in = aux;
 		}
-		else 
+		else
 			inx++;
 	}
 }
