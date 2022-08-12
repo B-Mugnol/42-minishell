@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 02:45:07 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 02:45:54 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*expand_var(char *str, char *exp_start, char *var_name, t_var *var_lst)
 	if (var_value == NULL)
 		var_value = ft_strdup("");
 	exp = ft_strmerge(ft_substr(str, 0, exp_start - str), var_value);
-	exp = ft_strmerge(exp, ft_strdup(exp_start + ft_strlen(var_name)  + 1));
+	exp = ft_strmerge(exp, ft_strdup(exp_start + ft_strlen(var_name) + 1));
 	return (exp);
 }
 
