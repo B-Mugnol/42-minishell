@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 02:41:09 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:04:38 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 	shell_name = "luluShell>";
 	env_lst = set_node();
 	var_lst = set_node();
-	varlst_add_back(&var_lst, varlst_new(ft_strdup("var"), ft_strdup("batata")));
+	var_lst_add_back(&var_lst, var_lst_new(ft_strdup("var"), ft_strdup("batata")));
 	set_exit_status(&var_lst, EXIT_SUCCESS);
 	sig_setup();
 	while (1)
@@ -40,14 +40,14 @@ int	main(void)
 		free(std_in);
 	}
 	rl_clear_history();
-	varlst_clear(&env_lst);
-	varlst_clear(&var_lst);
+	var_lst_clear(&env_lst);
+	var_lst_clear(&var_lst);
 	return (0);
 }
 
 void	set_exit_status(t_var **var_lst, int exit_status)
 {
-	varlst_add_var(var_lst, varlst_new(ft_strdup("?"), ft_itoa(exit_status)));
+	var_lst_add_var(var_lst, var_lst_new(ft_strdup("?"), ft_itoa(exit_status)));
 }
 
 // void	print_lst(t_list *tk_lst)

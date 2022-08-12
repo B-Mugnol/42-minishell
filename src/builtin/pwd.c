@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_lst_del.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/11 00:23:28 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/12 20:09:29 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:44 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/08/12 19:36:39 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type_lst.h"
+#include "builtin.h"
 
-void	type_lst_delete_node(t_type *node)
+void	ft_pwd(void)
 {
-	if (!node)
-		return ;
-	free(node->str);
-	free(node);
-}
+	char	*path;
 
-void	type_lst_clear(t_type **lst)
-{
-	t_type	*acc;
-
-	if (!lst || !*lst)
-		return ;
-	while (*lst)
-	{
-		acc = (*lst)->next;
-		type_lst_delete_node(*lst);
-		*lst = acc;
-	}
-	*lst = NULL;
+	path = getcwd(NULL, 0);
+	ft_putendl_fd(path, 1);
+	free(path);
 }

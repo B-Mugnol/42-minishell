@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:17:03 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/08/12 19:31:25 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/08/12 19:32:01 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-void	ft_env(t_var *env_lst)
+typedef struct s_builtin
 {
-	if (!env_lst || !varlst_find_var("PATH", env_lst))
-		return ;
-	while (env_lst)
-	{
-		ft_putstr_fd(env_lst->name, 1);
-		ft_putstr_fd("=", 1);
-		ft_putstr_fd(env_lst->value, 1);
-		env_lst = env_lst->next;
-		if (env_lst)
-			ft_putchar_fd('\n', 1);
-	}
-}
+	char	*name;
+	void	(*func)();
+}	t_builtin;
+
+typedef struct s_glo
+{
+	char	*cmd;
+	char	**args;
+	int		pipe[2];
+}	t_glo;
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
+
+#endif
