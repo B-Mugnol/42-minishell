@@ -12,8 +12,10 @@ RM		:=	rm -rf
 
 # PROGRAM
 # Headers
-HEADER_DIR	:=	inc src/builtin src/parsing src/type_lst src/var_lst
-HEADER		:=	minishell.h builtin.h parsing.h type_lst.h var_lst.h
+HEADER_DIR	:=	inc
+HEADER_DIR	+=	src/builtin src/parsing src/type_lst src/var_lst
+HEADER		:=	minishell.h struct.h
+HEADER		+=	builtin.h parsing.h type_lst.h var_lst.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
