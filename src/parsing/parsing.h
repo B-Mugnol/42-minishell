@@ -6,16 +6,16 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:27:22 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:01:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "minishell.h"
-#include "varlst.h"
-#include "type_lst.h"
+# include "minishell.h"
+# include "varlst.h"
+# include "type_lst.h"
 
 // tokenizer.c
 t_type	*tokenizer(char *usr_in);
