@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:16:38 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/08/12 19:32:51 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/08/12 19:36:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef BUILTIN_H
+# define BUILTIN_H
+
 #include "minishell.h"
 
-void	ft_cd(t_var **env_lst, char *path)
-{
-	int		status;
-	char	*pwd;
+void	ft_cd(t_var **env_lst, char *path);
+void	ft_env(t_var *env_lst);
+void	ft_export(t_var **var_lst, t_var **env_lst, t_var *export);
+void	ft_pwd(void);
+void	ft_unset(t_var **var_lst, t_var **env_lst, char *var_name);
 
-	status = chdir(path);
-	if (status == -1)
-	{
-		perror(NULL);
-		return ;
-	}
-	pwd = getcwd(NULL, 0);
-	varlst_add_var(env_lst, varlst_new(ft_strdup("PWD"), pwd));
-}
+#endif

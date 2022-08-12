@@ -6,11 +6,11 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:17:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 19:36:25 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
 void	ft_export(t_var **var_lst, t_var **env_lst, t_var *export)
 {

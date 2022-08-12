@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:49:46 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/09 20:17:31 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/08/12 19:36:18 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtin.h"
 
-void	ft_unset(t_var **var_lst, t_var **env_lst, char *var_name)
+void	ft_cd(t_var **env_lst, char *path)
 {
-	if (!var_name || !*var_name)
+	int		status;
+	char	*pwd;
+
+	status = chdir(path);
+	if (status == -1)
+	{
+		perror(NULL);
 		return ;
-	varlst_delete_var(var_lst, var_name);
-	varlst_delete_var(env_lst, var_name);
+	}
+	pwd = getcwd(NULL, 0);
+	varlst_add_var(env_lst, varlst_new(ft_strdup("PWD"), pwd));
 }
