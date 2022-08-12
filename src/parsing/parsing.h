@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 20:01:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:11:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 
 # include "minishell.h"
-# include "varlst.h"
+# include "var_lst.h"
 # include "type_lst.h"
 
 // tokenizer.c

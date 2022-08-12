@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/12 19:34:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:11:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "struct.h"
-# include "varlst.h"
+# include "var_lst.h"
 # include "type_lst.h"
 # include "parsing.h"
 # include "builtin.h"

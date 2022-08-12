@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type_lst_del.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:23:28 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 00:38:23 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:09:29 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "type_lst.h"
 
-void	typelst_delete_node(t_type *node)
+void	type_lst_delete_node(t_type *node)
 {
 	if (!node)
 		return ;
@@ -20,7 +20,7 @@ void	typelst_delete_node(t_type *node)
 	free(node);
 }
 
-void	typelst_clear(t_type **lst)
+void	type_lst_clear(t_type **lst)
 {
 	t_type	*acc;
 
@@ -29,7 +29,7 @@ void	typelst_clear(t_type **lst)
 	while (*lst)
 	{
 		acc = (*lst)->next;
-		typelst_delete_node(*lst);
+		type_lst_delete_node(*lst);
 		*lst = acc;
 	}
 	*lst = NULL;

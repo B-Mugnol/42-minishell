@@ -12,15 +12,15 @@ RM		:=	rm -rf
 
 # PROGRAM
 # Headers
-HEADER_DIR	:=	inc src/builtin src/parsing src/type_lst src/varlst
-HEADER		:=	minishell.h builtin.h parsing.h type_lst.h varlst.h
+HEADER_DIR	:=	inc src/builtin src/parsing src/type_lst src/var_lst
+HEADER		:=	minishell.h builtin.h parsing.h type_lst.h var_lst.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
-SRC_DIR		:=	src src/builtin src/varlst src/parsing src/type_lst
+SRC_DIR		:=	src src/builtin src/parsing src/type_lst src/var_lst
 SRC			:=	main.c exec.c signal.c hash_builds.c
 SRC			+=	expansion.c tokenizer.c parsing.c parsing_utils.c
-SRC			+=	varlst_add.c varlst_del.c
+SRC			+=	var_lst_add.c var_lst_del.c
 SRC			+=	type_lst_add.c type_lst_del.c
 SRC			+=	cd.c env.c export.c pwd.c unset.c
 

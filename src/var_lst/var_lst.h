@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   varlst.h                                           :+:      :+:    :+:   */
+/*   var_lst.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VARLST_H
-# define VARLST_H
+#ifndef VAR_LST_H
+# define VAR_LST_H
 
 # include <stdlib.h>	// free, malloc
 # include "libft.h"		// ft_strncmp, ft_strlen

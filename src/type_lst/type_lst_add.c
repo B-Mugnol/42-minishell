@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   type_lst_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:05:24 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/11 00:36:36 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:09:14 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "type_lst.h"
 
-t_type	*typelst_new(char *str_in, t_token type)
+t_type	*type_lst_new(char *str_in, t_token type)
 {
 	t_type	*node;
 
@@ -23,7 +23,7 @@ t_type	*typelst_new(char *str_in, t_token type)
 	return (node);
 }
 
-void	typelst_add_back(t_type **lst, t_type *new)
+void	type_lst_add_back(t_type **lst, t_type *new)
 {
 	t_type	*head;
 
@@ -39,7 +39,7 @@ void	typelst_add_back(t_type **lst, t_type *new)
 	}
 }
 
-void	typelst_add_front(t_type **lst, t_type *new)
+void	type_lst_add_front(t_type **lst, t_type *new)
 {
 	if (!*lst)
 		*lst = new;

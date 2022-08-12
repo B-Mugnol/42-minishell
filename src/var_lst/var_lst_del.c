@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   varlst_del.c                                       :+:      :+:    :+:   */
+/*   var_lst_del.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 20:04:55 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/12 20:11:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "varlst.h"
+#include "var_lst.h"
 #include "minishell.h"
 
 void	var_lst_delete_node(t_var *node)
