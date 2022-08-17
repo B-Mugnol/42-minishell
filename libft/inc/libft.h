@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 17:45:45 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/11 20:07:48 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:30:11 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int			ft_atoi_base(char *str, char *base);
 void		ft_null_free(void **p);
 void		ft_free_matrix(void ***p, size_t line_count);
 void		ft_free_char_matrix(char ***m);
-char		**ft_partial_split(char const *s, char delimiter, char stopper);
+char		**ft_word_split(char const *str, int (*is_delimiter)(char));
 char		*ft_strtok(char *buffer, const char *delimiter);
 
 #endif
