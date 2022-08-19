@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 07:09:44 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:39:10 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_builtin	*init_builds(void)
 
 	builds = malloc(sizeof(t_builtin) * 7);
 	builds[0] = (t_builtin){"cd", (void *)ft_cd};
-	builds[1] = (t_builtin){"echo"};
+	builds[1] = (t_builtin){"echo", NULL};
 	builds[2] = (t_builtin){"env", (void *)ft_env};
-	builds[3] = (t_builtin){"exit"};
+	builds[3] = (t_builtin){"exit", NULL};
 	builds[4] = (t_builtin){"export", (void *)ft_export};
 	builds[5] = (t_builtin){"pwd", (void *)ft_pwd};
 	builds[6] = (t_builtin){"unset", (void *)ft_unset};
@@ -47,6 +47,7 @@ char	*search_valid_hash(char *build)
 	int		inx;
 
 	builds_lst = ft_word_split("env pwd echo", ft_isspace);
+	inx = 0;
 	while (builds_lst[inx])
 	{
 		if (ft_strncmp(build, builds_lst[inx], ft_strlen(builds_lst[inx]) == 0))

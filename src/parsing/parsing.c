@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 07:10:53 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:40:23 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cmd_recognizer(t_type *token_lst, t_var *var_lst)
 	expand_usr_in(&token_lst->str, var_lst);
 }
 
-char	*recognize_builds(t_type *token_lst, t_var *var_lst)
+char	*recognize_builds(t_type *token_lst)
 {
 	char		**words;
 	char		*build;
