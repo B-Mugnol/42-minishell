@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 04:00:30 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/07/23 01:00:21 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:17:52 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <signal.h>
 
 static void	signal_handler(int signal);
 
@@ -28,6 +29,7 @@ static void	signal_handler(int signal)
 {
 	if (signal != SIGINT)
 		return ;
+	set_exit_status(130);
 	ft_putchar_fd('\n', 1);
 	rl_replace_line("", 1);
 	rl_on_new_line();

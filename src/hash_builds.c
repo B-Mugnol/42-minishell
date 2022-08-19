@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_builds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 07:09:44 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:38:50 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_builtin	*init_builds(void)
 
 	builds = malloc(sizeof(t_builtin) * 7);
 	builds[0] = (t_builtin){"cd", (void *)ft_cd};
-	builds[1] = (t_builtin){"echo"};
+	builds[1] = (t_builtin){"echo", NULL};
 	builds[2] = (t_builtin){"env", (void *)ft_env};
-	builds[3] = (t_builtin){"exit"};
+	builds[3] = (t_builtin){"exit", NULL};
 	builds[4] = (t_builtin){"export", (void *)ft_export};
 	builds[5] = (t_builtin){"pwd", (void *)ft_pwd};
 	builds[6] = (t_builtin){"unset", (void *)ft_unset};
@@ -46,6 +46,7 @@ char	*search_valid_hash(char *build)
 	char	**builds_lst;
 	int		inx;
 
+	inx = 0;
 	builds_lst = ft_word_split("env pwd echo", ft_isspace);
 	while (builds_lst[inx])
 	{

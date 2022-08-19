@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 23:18:21 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:31:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ char	*expand_tilde(char *str, char *tilde_pointer)
 	return (exp);
 }
 
-char	*expand_var(char *str, char *exp_start, char *var_name, t_var *var_lst)
+char	*expand_var(char *str, char *exp_start, char *var_name)
 {
 	t_var	*var;
 	char	*var_value;
 	char	*exp;
 
 	var_value = NULL;
-	var = var_lst_find_var(var_name, var_lst);
+	var = var_lst_find_var(var_name, *g_env);
 	if (var)
 		var_value = ft_strdup(var->value);
 	if (var_value == NULL)
@@ -40,7 +40,7 @@ char	*expand_var(char *str, char *exp_start, char *var_name, t_var *var_lst)
 	return (exp);
 }
 
-void	expand_usr_in(char	**usr_in, t_var *var_lst)
+void	expand_usr_in(char **usr_in)
 {
 	char	*var_name;
 	char	*aux;
@@ -54,7 +54,7 @@ void	expand_usr_in(char	**usr_in, t_var *var_lst)
 		if ((*usr_in)[inx] == '$')
 		{
 			var_name = get_var_name(*usr_in + inx + 1);
-			aux = expand_var(*usr_in, *usr_in + inx, var_name, var_lst);
+			aux = expand_var(*usr_in, *usr_in + inx, var_name);
 			free(*usr_in);
 			free(var_name);
 			*usr_in = aux;
