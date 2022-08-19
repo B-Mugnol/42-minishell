@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 20:04:16 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:31:46 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	ft_cd(t_var **env_lst, char *path)
+void	ft_cd(char *path)
 {
 	int		status;
 	char	*pwd;
@@ -24,5 +24,5 @@ void	ft_cd(t_var **env_lst, char *path)
 		return ;
 	}
 	pwd = getcwd(NULL, 0);
-	var_lst_add_var(env_lst, var_lst_new(ft_strdup("PWD"), pwd));
+	var_lst_add_var(g_env, var_lst_new(ft_strdup("PWD"), pwd));
 }

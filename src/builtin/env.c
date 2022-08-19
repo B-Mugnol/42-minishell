@@ -6,26 +6,26 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/19 20:27:41 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:32:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	ft_env(t_var *env_lst)
+void	ft_env(void)
 {
-	if (!env_lst || !var_lst_find_var("PATH", env_lst))
+	if (!(*g_env) || !var_lst_find_var("PATH", (*g_env)))
 		return ;
-	while (env_lst)
+	while ((*g_env))
 	{
-		if (ft_strncmp(env_lst->name, "?", 2) != 0)
+		if (ft_strncmp((*g_env)->name, "?", 2) != 0)
 		{
-			ft_putstr_fd(env_lst->name, 1);
+			ft_putstr_fd((*g_env)->name, 1);
 			ft_putstr_fd("=", 1);
-			ft_putstr_fd(env_lst->value, 1);
+			ft_putstr_fd((*g_env)->value, 1);
 		}
-		env_lst = env_lst->next;
-		if (env_lst)
+		(*g_env) = (*g_env)->next;
+		if ((*g_env))
 			ft_putchar_fd('\n', 1);
 	}
 }

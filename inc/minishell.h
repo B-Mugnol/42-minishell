@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 07:09:56 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/19 21:48:08 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
-# include <signal.h>
 
-void		get_comman(char *usr_in, t_var *env_lst, t_glo *comman);
+extern t_var	**g_env;
+
+void		get_comman(char *usr_in, t_glo *comman);
 void		exec(int fd_in, int fd_out, t_glo *comman);
-void		set_exit_status(t_var **var_lst, int exit_status);
-t_var		*set_node(void);
+void		set_exit_status(int exit_status);
+t_var		**set_node(void);
 
 // signal.c
 void		sig_setup(void);
