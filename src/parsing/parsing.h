@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/19 21:16:46 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:24:19 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ char	*find_var_assignment(char *str);
 void	expand_usr_in(char **usr_in);
 
 // parsing_utils.c
-char	*get_var_name(char *post_dollar_str);
 void	quit_quote(char *str, size_t *inx);
-t_bool	is_valid_varname_char(char c);
 void	replace_token(char *str, char token, char new_value);
+
+// var_utils.c
+t_bool	is_valid_varname(char *str);
+t_bool	is_valid_varname_char(char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:15:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/12 19:20:11 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:15:11 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,4 @@ char	*get_var_name(char *post_dollar_str)
 		inx++;
 	var_name = ft_substr(post_dollar_str, 0, inx);
 	return (var_name);
-}
-
-t_bool	is_valid_varname_char(char c)
-{
-	if (ft_isalnum(c) || c == '_')
-		return (TRUE);
-	return (FALSE);
 }
