@@ -6,37 +6,38 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 21:40:23 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/08/24 08:10:06 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
-void	cmd_recognizer(t_type *token_lst, t_var *var_lst);
+void	cmd_recognizer(t_type *token_lst);
 
-void	parsing(char *std_in, t_var *var_lst)
+void	parsing(char *std_in)
 {
 	t_type	*token_lst;
 
 	token_lst = tokenizer(std_in);
-	cmd_recognizer(token_lst, var_lst);
+	cmd_recognizer(token_lst);
 	type_lst_clear(&token_lst);
 }
 
-void	cmd_recognizer(t_type *token_lst, t_var *var_lst)
+void	cmd_recognizer(t_type *token_lst)
 {
-	expand_usr_in(&token_lst->str, var_lst);
+	expand_usr_in(&token_lst->str);
 }
 
-char	*recognize_builds(t_type *token_lst)
+int	recognize_builds(t_type *token_lst)
 {
 	char		**words;
-	char		*build;
+	int			build_inx;
 	int			inx;
 	t_builtin	*builds;
 
 	inx = 0;
+	build_inx = 7;
 	words = ft_word_split(token_lst->str, ft_isspace);
 	builds = init_builds();
 	if (!words)
@@ -44,14 +45,14 @@ char	*recognize_builds(t_type *token_lst)
 	while (words[inx])
 	{
 		if (token_lst->next == NULL)
-			build = hash_search(words[inx], builds);
+			build_inx = hash_search(words[inx], builds);
 		else
-			build = search_valid_hash(words[inx]);
-		if (build)
-			return (build);
+			build_inx = search_valid_hash(words[inx], builds);
+		if (build_inx != 7)
+			return (build_inx);
 		inx++;
 	}
-	return (NULL);
+	return (build_inx);
 }
 
 char	*find_var_assignment(char *str)
