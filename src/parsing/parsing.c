@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 21:30:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/26 01:38:19 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	parsing(char *std_in)
 
 void	cmd_recognizer(t_type *token_lst)
 {
-	expand_usr_in(&token_lst->str);
+	find_var_and_expand(&token_lst->str, FALSE);
 }
 
 char	*recognize_builds(t_type *token_lst)

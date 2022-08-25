@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/22 16:24:19 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/25 20:39:23 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,19 @@ void	parsing(char *std_in);
 char	*find_var_assignment(char *str);
 
 // expansion.c
-void	expand_usr_in(char **usr_in);
+void	find_var_and_expand(char **usr_in, t_bool is_assignment);
+char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub);
 
 // parsing_utils.c
 void	quit_quote(char *str, size_t *inx);
-void	replace_token(char *str, char token, char new_value);
+t_bool	is_word_start(char *str, size_t index);
+t_bool	is_within_quotes(char *str, size_t index);
+char	*remove_quotes_from_word(char *str, size_t word_end);
 
 // var_utils.c
 t_bool	is_valid_varname(char *str);
 t_bool	is_valid_varname_char(char c);
+char	*get_var_name(char *str);
+t_var	*get_var_from_assignment(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/22 18:42:58 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/26 01:37:05 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 t_var	*get_var_from_assignment(char *str)
 {
-	t_var	*var;
 	char	*name;
 	char	*value;
 
 	value = ft_strchr(str, '=');
 	if (!value)
-		return (var_lst_new(ft_strdup(str), NULL));
-	name = ft_substr(str, 0, value - str - 1);
-	value = ft_substr(value + 1, 0, ft_strlen(value + 1));
-	find_var_and_expand(&value);
+		return (var_lst_new(
+				remove_quotes_from_word(str, ft_strlen(str)), NULL));
+	name = remove_quotes_from_word(str, value - str - 1);
+	value = remove_quotes_from_word(value + 1, ft_strlen(value + 1));
+	find_var_and_expand(&value, TRUE);
 	return (var_lst_new(name, value));
 }
 
-char	*get_var_name_to_expand(char *str)
+char	*get_var_name(char *str)
 {
 	size_t	inx;
 
@@ -43,13 +43,21 @@ char	*get_var_name_to_expand(char *str)
 
 t_bool	is_valid_varname(char *str)
 {
+	size_t	inx;
+
 	if (!str)
 		return (FALSE);
-	while (*str && *str != '=')
+	inx = 0;
+	while (str[inx] && str[inx] != '=')
 	{
-		if (!is_valid_varname_char(*str))
+		if ((str[inx] == '\'' || str[inx] == '"'))
+		{
+			if (is_within_quotes(str, inx))
+				return (FALSE);
+		}
+		else if (!is_valid_varname_char(str[inx]))
 			return (FALSE);
-		str++;
+		inx++;
 	}
 	return (TRUE);
 }

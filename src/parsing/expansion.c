@@ -6,20 +6,23 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/19 21:31:15 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:47:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
+static t_bool	is_expansible_tilde(char *str, size_t tilde_index,
+					t_bool is_assignment);
+
 char	*expand_tilde(char *str, char *tilde_pointer)
 {
 	char	*exp;
 
-	exp = ft_strmerge(ft_substr(str, 0, tilde_pointer - str),
-			ft_strdup(getenv("HOME")));
-	exp = ft_strmerge(exp, ft_strdup(tilde_pointer + 1));
+	exp = substitute(str, tilde_pointer - str,
+			tilde_pointer - str + 1, getenv("HOME"));
+	free(str);
 	return (exp);
 }
 
@@ -30,36 +33,84 @@ char	*expand_var(char *str, char *exp_start, char *var_name)
 	char	*exp;
 
 	var_value = NULL;
+	if (!var_name)
+		return (str);
 	var = var_lst_find_var(var_name, *g_env);
-	if (var)
+	if (var && var->value)
 		var_value = ft_strdup(var->value);
-	if (var_value == NULL)
+	else
 		var_value = ft_strdup("");
-	exp = ft_strmerge(ft_substr(str, 0, exp_start - str), var_value);
-	exp = ft_strmerge(exp, ft_strdup(exp_start + ft_strlen(var_name) + 1));
+	exp = substitute(str, exp_start - str,
+			exp_start - str + ft_strlen(var_name) + 1, var_value);
+	free(var_value);
+	free(str);
 	return (exp);
 }
 
-void	expand_usr_in(char **usr_in)
+void	find_var_and_expand(char **str, t_bool is_assignment)
 {
 	char	*var_name;
-	char	*aux;
 	size_t	inx;
 
 	inx = 0;
-	while ((*usr_in)[inx])
+	while ((*str)[inx])
 	{
-		if ((*usr_in)[inx] == '\'')
-			quit_quote(*usr_in + inx, &inx);
-		if ((*usr_in)[inx] == '$')
+		if ((*str)[inx] == '\'')
+			quit_quote(*str + inx, &inx);
+		if ((*str)[inx] == '~' && !is_within_quotes(*str, inx)
+			&& is_expansible_tilde(*str, inx, is_assignment))
+			*str = expand_tilde(*str, *str + inx);
+		if ((*str)[inx] == '$')
 		{
-			var_name = get_var_name(*usr_in + inx + 1);
-			aux = expand_var(*usr_in, *usr_in + inx, var_name);
-			free(*usr_in);
+			var_name = get_var_name(*str + inx + 1);
+			*str = expand_var(*str, *str + inx, var_name);
+			if (!var_name)
+				inx++;
 			free(var_name);
-			*usr_in = aux;
 		}
 		else
 			inx++;
 	}
+}
+
+char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub)
+{
+	size_t	i;
+	char	*joined;
+	char	*start_p;
+	char	*end_p;
+
+	if (!str || !sub)
+		return (NULL);
+	start_p = str + sub_start;
+	end_p = str + sub_end;
+	joined = malloc(ft_strlen(str) - (end_p - start_p) + ft_strlen(sub) + 1);
+	if (!joined)
+		return (NULL);
+	i = 0;
+	while (*str && str != start_p)
+		joined[i++] = *(str++);
+	while (*sub)
+		joined[i++] = *(sub++);
+	str = end_p;
+	while (*str)
+		joined[i++] = *(str++);
+	joined[i] = '\0';
+	return (joined);
+}
+
+static t_bool	is_expansible_tilde(char *str, size_t tilde_index,
+	t_bool is_assignment)
+{
+	// t_var	logname;
+
+	if (!(is_word_start(str, tilde_index)
+			|| (is_assignment && str[tilde_index - 1] == ':')))
+		return (FALSE);
+	if (ft_isspace(str[tilde_index + 1]) || (is_assignment
+			&& (str[tilde_index + 1] == ':' || str[tilde_index + 1] == '/')))
+		return (TRUE);
+	// LOGNAME
+	// HOME
+	return (FALSE);
 }

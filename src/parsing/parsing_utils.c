@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:15:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/22 16:15:11 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/26 01:39:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,89 @@ void	quit_quote(char *str, size_t *inx)
 	}
 }
 
-void	replace_token(char *str, char token, char new_value)
+t_bool	is_word_start(char *str, size_t index)
 {
-	size_t	s_quote_count;
-	size_t	d_quote_count;
-
-	if (!str)
-		return ;
-	s_quote_count = 0;
-	d_quote_count = 0;
-	while (*str)
-	{
-		if (*str == '\"' && s_quote_count % 2 == 0)
-			d_quote_count++;
-		if (*str == '\'' && d_quote_count % 2 == 0)
-			s_quote_count++;
-		if ((s_quote_count % 2 == 1 || d_quote_count % 2 == 1) && *str == token)
-			*str = new_value;
-		str++;
-	}
+	if (index == 0 || ft_isspace(str[index - 1]))
+		return (TRUE);
+	return (FALSE);
 }
 
-char	*get_var_name(char *post_dollar_str)
+t_bool	is_within_quotes(char *str, size_t index)
 {
-	size_t	inx;
-	char	*var_name;
+	size_t	simple_quote_count;
+	size_t	double_quote_count;
+	size_t	i;
 
-	inx = 0;
-	if (post_dollar_str[inx] == '?')
-		return (ft_strdup("?"));
-	while (post_dollar_str[inx]
-		&& (ft_isalnum(post_dollar_str[inx]) || post_dollar_str[inx] == '_'))
-		inx++;
-	var_name = ft_substr(post_dollar_str, 0, inx);
-	return (var_name);
+	simple_quote_count = 0;
+	double_quote_count = 0;
+	i = 0;
+	while (str[i] && i < index)
+	{
+		if (str[i] == '"' && simple_quote_count % 2 == 0)
+			double_quote_count++;
+		if (str[i] == '\'' && double_quote_count % 2 == 0)
+			simple_quote_count++;
+		i++;
+	}
+	if (simple_quote_count % 2 == 1 || double_quote_count % 2 == 1)
+		return (TRUE);
+	return (FALSE);
+}
+
+static size_t	count_removable_quotes_in_word(char *str, size_t word_end)
+{
+	size_t	removable_quote_count;
+	size_t	simple_quote_count;
+	size_t	double_quote_count;
+	size_t	index;
+
+	index = 0;
+	removable_quote_count = 0;
+	simple_quote_count = 0;
+	double_quote_count = 0;
+	while (str[index] && index < word_end)
+	{
+		if (str[index] == '"' && simple_quote_count % 2 == 0)
+		{
+			double_quote_count++;
+			removable_quote_count++;
+		}
+		if (str[index] == '\'' && double_quote_count % 2 == 0)
+		{
+			simple_quote_count++;
+			removable_quote_count++;
+		}
+		index++;
+	}
+	return (removable_quote_count);
+}
+
+char	*remove_quotes_from_word(char *str, size_t word_end)
+{
+	size_t	aux;
+	size_t	index;
+	size_t	simple_quote_count;
+	size_t	double_quote_count;
+	char	*res;
+
+	index = 0;
+	aux = 0;
+	simple_quote_count = 0;
+	double_quote_count = 0;
+	res = malloc((ft_strlen(str) + 1
+			- count_removable_quotes_in_word(str, word_end)));
+	while (str[index] && index < word_end)
+	{
+		if (str[index] == '"' && simple_quote_count % 2 == 0)
+			double_quote_count++;
+		else if (str[index] == '\'' && double_quote_count % 2 == 0)
+			simple_quote_count++;
+		else
+		{
+			res[aux] = str[index];
+			aux++;
+		}
+		index++;
+	}
+	return (res);
 }
