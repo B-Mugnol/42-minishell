@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/26 01:36:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/08/26 01:42:24 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	ft_export(char *usr_in)
 	{
 		// export sem argumentos
 	}
-	// return -1 se não for um export válido
-	update_environment(NULL);
+	update_environment(vars);
 }
 
 static t_var	*get_export_var(char *export_str)
