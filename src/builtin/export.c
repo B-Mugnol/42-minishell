@@ -24,7 +24,20 @@ void	ft_export(char *usr_in)
 	vars = get_export_var(usr_in);
 	if (!vars)
 	{
-		// export sem argumentos
+		iterator = *g_env;
+		while (iterator)
+		{
+			if (ft_strncmp(iterator->name, "?", 2) != 0)
+			{
+				ft_putstr_fd("declare -x ", 1);
+				ft_putstr_fd(iterator->name, 1);
+				ft_putstr_fd("=", 1);
+				ft_putstr_fd(iterator->value, 1);
+			}
+			iterator = iterator->next;
+			if (iterator)
+				ft_putchar_fd('\n', 1);
+		}
 	}
 	update_environment(vars);
 }
