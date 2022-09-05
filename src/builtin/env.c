@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/19 21:32:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:41:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	ft_env(void)
 {
-	if (!(*g_env) || !var_lst_find_var("PATH", (*g_env)))
+	t_var	*iterator;
+
+	iterator = *g_env;
+	if (!iterator || !var_lst_find_var("PATH", iterator))
 		return ;
-	while ((*g_env))
+	while (iterator)
 	{
-		if (ft_strncmp((*g_env)->name, "?", 2) != 0)
+		if (ft_strncmp(iterator->name, "?", 2) != 0)
 		{
-			ft_putstr_fd((*g_env)->name, 1);
+			ft_putstr_fd(iterator->name, 1);
 			ft_putstr_fd("=", 1);
-			ft_putstr_fd((*g_env)->value, 1);
+			ft_putstr_fd(iterator->value, 1);
 		}
-		(*g_env) = (*g_env)->next;
-		if ((*g_env))
+		iterator = iterator->next;
+		if (iterator)
 			ft_putchar_fd('\n', 1);
 	}
 }
