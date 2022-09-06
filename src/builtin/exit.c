@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/06 22:28:51 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/08/24 23:22:52 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_var	**g_env;
-
-int	main(void)
+void	exit_build(void)
 {
-	char	*std_in;
-	char	*shell_name;
-	t_shell	st_shell;
+	int	exit_status;
 
-	shell_name = "luluShell>";
-	init();
-	while (1)
-	{
-		std_in = readline(shell_name);
-		if (std_in == NULL)
-		{
-			ft_putchar_fd('\n', 1);
-			break ;
-		}
-		add_history(std_in);
-		parsing(std_in, &st_shell);
-		free(std_in);
-	}
+	*g_env = var_lst_find_var("?", *(g_env));
+	exit_status = ft_atoi((*g_env)->value);
 	rl_clear_history();
 	var_lst_clear(g_env);
-	return (0);
+	exit(exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/25 20:39:23 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:54:43 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "type_lst.h"
 
 // tokenizer.c
-t_type	*tokenizer(char *usr_in);
+t_type	*tokenizer(char *usr_in, t_shell *s_shell);
 
 // parsing.c
-void	parsing(char *std_in);
+void	parsing(char *std_in, t_shell *st_shell);
 char	*find_var_assignment(char *str);
 
 // expansion.c
