@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:06:46 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/12 22:58:29 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/05 19:42:48 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	type_lst_add_back(t_type **lst, t_type *new);
 void	type_lst_add_front(t_type **lst, t_type *new);
 void	type_lst_delete_node(t_type *node);
 void	type_lst_clear(t_type **lst);
+int		type_lst_size(t_type *lst);
 
 #endif
