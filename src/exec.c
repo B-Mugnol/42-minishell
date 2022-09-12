@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/19 21:38:00 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/06 21:03:48 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_var	**set_node(void)
 	return (env_lst);
 }
 
-void	get_comman(char *usr_in, t_glo *comman)
+void	get_comman(char *usr_in, t_shell *comman)
 {
 	t_var	*path;
 	char	**path_cmd;
@@ -63,7 +63,7 @@ void	get_comman(char *usr_in, t_glo *comman)
 	ft_free_char_matrix(&path_cmd);
 }
 
-void	exec(int fd_in, int fd_out, t_glo *comman)
+void	exec(int fd_in, int fd_out, t_shell *comman)
 {
 	dup2(fd_out, STDOUT_FILENO);
 	dup2(fd_in, STDIN_FILENO);
