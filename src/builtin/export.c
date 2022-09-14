@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/12 18:44:06 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/14 20:17:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	ft_export(char *usr_in)
 			{
 				ft_putstr_fd("declare -x ", 1);
 				ft_putstr_fd(iterator->name, 1);
-				ft_putstr_fd("=", 1);
+				ft_putstr_fd("=\"", 1);
 				ft_putstr_fd(iterator->value, 1);
+				ft_putendl_fd("\"", 1);
 			}
 			iterator = iterator->next;
-			if (iterator && ft_strncmp(iterator->name, "?", 2) != 0)
-				ft_putchar_fd('\n', 1);
 		}
 	}
 	update_environment(vars);
