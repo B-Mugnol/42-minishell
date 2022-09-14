@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/06 22:46:02 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/14 23:25:07 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,21 @@ t_bool	builds(t_type *token_lst, t_shell *st_shell)
 	char		*tmp;
 	t_builtin	*builds;
 
-	tmp = token_lst->str;
-	token_lst->str = remove_quotes_from_word(tmp, ft_strlen(token_lst->str));
-	free(tmp);
+	tmp = remove_quotes_from_word(token_lst->str, ft_strlen(token_lst->str));
 	builds = init_builds();
-	build_inx = recognize_builds(token_lst->str, builds);
+	build_inx = recognize_builds(tmp, builds);
 	if (build_inx != 7)
 	{
 		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
 		{
 			free(builds);
+			free(tmp);
 			return (FALSE);
 		}
 		else
 			exec_builds(builds, build_inx, token_lst->str);
 	}
+	free(tmp);
 	free(builds);
 	return (TRUE);
 }
