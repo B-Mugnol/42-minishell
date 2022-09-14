@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_lst_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:05:24 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/05 19:42:22 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/14 22:53:05 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	type_lst_add_front(t_type **lst, t_type *new)
 {
 	if (!*lst)
 		*lst = new;
-	new->next = *lst;
-	*lst = new;
+	else
+	{
+		new->next = *lst;
+		*lst = new;
+	}
 }
 
 int	type_lst_size(t_type *lst)
