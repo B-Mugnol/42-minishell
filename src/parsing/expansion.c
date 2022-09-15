@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 00:09:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/15 03:26:02 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,8 @@ static t_bool	is_expansible_tilde(char *str, size_t tilde_index,
 	if (!(is_word_start(str, tilde_index)
 			|| (is_assignment && str[tilde_index - 1] == ':')))
 		return (FALSE);
-	if (ft_isspace(str[tilde_index + 1]) || str[tilde_index + 1] == '\0' ||
-		(is_assignment
-			&& (str[tilde_index + 1] == ':' || str[tilde_index + 1] == '/')))
+	if (ft_isspace(str[tilde_index + 1]) || str[tilde_index + 1] == '\0'
+		|| str[tilde_index + 1] == ':' || str[tilde_index + 1] == '/')
 		return (TRUE);
 	return (FALSE);
 }
