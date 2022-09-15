@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:32:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/05 18:57:50 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/15 03:35:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 # define BUILDS_COUNT 7
 
-void	ft_cd(char *path);
+void	ft_cd(char *usr_in);
 void	ft_env(void);
 void	ft_export(char *usr_in);
 void	ft_pwd(void);
-void	ft_unset(char *var_name);
+void	ft_unset(char *usr_in);
 void	exit_build(void);
 
 #endif
