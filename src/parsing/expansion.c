@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/22 20:47:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/15 03:26:02 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,10 @@
 
 static t_bool	is_expansible_tilde(char *str, size_t tilde_index,
 					t_bool is_assignment);
-
-char	*expand_tilde(char *str, char *tilde_pointer)
-{
-	char	*exp;
-
-	exp = substitute(str, tilde_pointer - str,
-			tilde_pointer - str + 1, getenv("HOME"));
-	free(str);
-	return (exp);
-}
-
-char	*expand_var(char *str, char *exp_start, char *var_name)
-{
-	t_var	*var;
-	char	*var_value;
-	char	*exp;
-
-	var_value = NULL;
-	if (!var_name)
-		return (str);
-	var = var_lst_find_var(var_name, *g_env);
-	if (var && var->value)
-		var_value = ft_strdup(var->value);
-	else
-		var_value = ft_strdup("");
-	exp = substitute(str, exp_start - str,
-			exp_start - str + ft_strlen(var_name) + 1, var_value);
-	free(var_value);
-	free(str);
-	return (exp);
-}
+static char		*expand_tilde(char *str, char *tilde_pointer);
+static char		*expand_var(char *str, char *exp_start, char *var_name);
+static char		*substitute(char *str, size_t sub_start, size_t sub_end,
+					char *sub);
 
 void	find_var_and_expand(char **str, t_bool is_assignment)
 {
@@ -73,7 +46,38 @@ void	find_var_and_expand(char **str, t_bool is_assignment)
 	}
 }
 
-char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub)
+static char	*expand_tilde(char *str, char *tilde_pointer)
+{
+	char	*exp;
+
+	exp = substitute(str, tilde_pointer - str,
+			tilde_pointer - str + 1, getenv("HOME"));
+	free(str);
+	return (exp);
+}
+
+static char	*expand_var(char *str, char *exp_start, char *var_name)
+{
+	t_var	*var;
+	char	*var_value;
+	char	*exp;
+
+	var_value = NULL;
+	if (!var_name)
+		return (str);
+	var = var_lst_find_var(var_name, *g_env);
+	if (var && var->value)
+		var_value = ft_strdup(var->value);
+	else
+		var_value = ft_strdup("");
+	exp = substitute(str, exp_start - str,
+			exp_start - str + ft_strlen(var_name) + 1, var_value);
+	free(var_value);
+	free(str);
+	return (exp);
+}
+
+static char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub)
 {
 	size_t	i;
 	char	*joined;
@@ -102,15 +106,11 @@ char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub)
 static t_bool	is_expansible_tilde(char *str, size_t tilde_index,
 	t_bool is_assignment)
 {
-	// t_var	logname;
-
 	if (!(is_word_start(str, tilde_index)
 			|| (is_assignment && str[tilde_index - 1] == ':')))
 		return (FALSE);
-	if (ft_isspace(str[tilde_index + 1]) || (is_assignment
-			&& (str[tilde_index + 1] == ':' || str[tilde_index + 1] == '/')))
+	if (ft_isspace(str[tilde_index + 1]) || str[tilde_index + 1] == '\0'
+		|| str[tilde_index + 1] == ':' || str[tilde_index + 1] == '/')
 		return (TRUE);
-	// LOGNAME
-	// HOME
 	return (FALSE);
 }

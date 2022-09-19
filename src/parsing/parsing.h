@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/06 19:54:43 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/15 00:10:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	*find_var_assignment(char *str);
 
 // expansion.c
 void	find_var_and_expand(char **usr_in, t_bool is_assignment);
-char	*substitute(char *str, size_t sub_start, size_t sub_end, char *sub);
 
 // parsing_utils.c
 void	quit_quote(char *str, size_t *inx);

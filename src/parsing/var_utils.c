@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/08/26 01:37:05 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/14 23:39:13 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ t_var	*get_var_from_assignment(char *str)
 {
 	char	*name;
 	char	*value;
+	char	*unquoted;
 
-	value = ft_strchr(str, '=');
+	unquoted = remove_quotes_from_word(str, ft_strlen(str));
+	value = ft_strchr(unquoted, '=');
 	if (!value)
-		return (var_lst_new(
-				remove_quotes_from_word(str, ft_strlen(str)), NULL));
-	name = remove_quotes_from_word(str, value - str - 1);
-	value = remove_quotes_from_word(value + 1, ft_strlen(value + 1));
+		return (var_lst_new(ft_strdup(unquoted), NULL));
+	name = ft_substr(unquoted, 0, value - unquoted);
+	value = ft_substr(value, 1, ft_strlen(value + 1));
 	find_var_and_expand(&value, TRUE);
 	return (var_lst_new(name, value));
 }

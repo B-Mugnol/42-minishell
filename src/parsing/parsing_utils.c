@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:15:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/05 18:46:19 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/15 03:40:25 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ char	*remove_quotes_from_word(char *str, size_t word_end)
 	aux = 0;
 	simple_quote_count = 0;
 	double_quote_count = 0;
-	res = malloc((ft_strlen(str) + 1
-				- count_removable_quotes_in_word(str, word_end)));
+	res = ft_calloc(ft_strlen(str) + 1
+			- count_removable_quotes_in_word(str, word_end), sizeof(char));
 	while (str[index] && index < word_end)
 	{
 		if (str[index] == '"' && simple_quote_count % 2 == 0)

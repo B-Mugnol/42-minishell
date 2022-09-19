@@ -6,66 +6,57 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/14 20:17:22 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/14 23:34:25 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-static t_var	*get_export_var(char *export_str);
+static t_var	*get_export_var(char **export_words);
 static void		update_environment(t_var *export);
 static void		invalid_name_error(char *var_name);
+static void		print_declarations(void);
 
 void	ft_export(char *usr_in)
 {
+	char	**words;
 	t_var	*vars;
-	t_var	*iterator;
 
-	vars = get_export_var(usr_in);
+	words = ft_word_split(usr_in, ft_isspace);
+	if (!words)
+		return (set_exit_status(EXIT_FAILURE));
+	vars = NULL;
+	if (words[0] && words[1] == NULL)
+		print_declarations();
+	else
+		vars = get_export_var(words);
+	ft_free_char_matrix(&words);
 	if (!vars)
-	{
-		iterator = *g_env;
-		while (iterator)
-		{
-			if (ft_strncmp(iterator->name, "?", 2) != 0)
-			{
-				ft_putstr_fd("declare -x ", 1);
-				ft_putstr_fd(iterator->name, 1);
-				ft_putstr_fd("=\"", 1);
-				ft_putstr_fd(iterator->value, 1);
-				ft_putendl_fd("\"", 1);
-			}
-			iterator = iterator->next;
-		}
-	}
+		return ;
 	update_environment(vars);
+	var_lst_clear(&vars);
 }
 
-static t_var	*get_export_var(char *export_str)
+static t_var	*get_export_var(char **export_words)
 {
-	char	**words;
 	size_t	inx;
 	t_var	*export_vars_lst;
 	t_var	*new_var;
 
-	words = ft_word_split(export_str, ft_isspace);
-	if (!words)
-		return (NULL);
 	export_vars_lst = NULL;
 	inx = 1;
-	while (words[inx])
+	while (export_words[inx])
 	{
-		new_var = get_var_from_assignment(words[inx]);
+		new_var = get_var_from_assignment(export_words[inx]);
 		if (!is_valid_varname(new_var->name))
 		{
-			invalid_name_error(words[inx]);
+			invalid_name_error(export_words[inx]);
 			var_lst_delete_node(new_var);
 		}
 		else
 			var_lst_add_front(&export_vars_lst, new_var);
 		inx++;
 	}
-	ft_free_char_matrix(&words);
 	return (export_vars_lst);
 }
 
@@ -92,8 +83,32 @@ static void	update_environment(t_var *export)
 
 static void	invalid_name_error(char *var_name)
 {
+	char	*unquoted;
+
+	unquoted = remove_quotes_from_word(var_name, ft_strlen(var_name));
 	set_exit_status(EXIT_FAILURE);
 	ft_putstr_fd("export: `", 2);
-	ft_putstr_fd(var_name, 2);
-	ft_putstr_fd("': not a valid identifier", 2);
+	ft_putstr_fd(unquoted, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
+	free(unquoted);
+}
+
+static void	print_declarations(void)
+{
+	t_var	*iterator;
+
+	iterator = *g_env;
+	while (iterator)
+	{
+		if (ft_strncmp(iterator->name, "?", 2) != 0)
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(iterator->name, 1);
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(iterator->value, 1);
+			ft_putendl_fd("\"", 1);
+		}
+		iterator = iterator->next;
+	}
+	return ;
 }
