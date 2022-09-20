@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/06 21:03:48 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:50:21 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,26 @@ t_var	**set_node(void)
 	return (env_lst);
 }
 
-void	get_comman(char *usr_in, t_shell *comman)
+void	fork_exec(t_shell *st_shell, t_type *token_lst)
 {
-	t_var	*path;
-	char	**path_cmd;
-	char	*temp;
-	int		inx;
+	int	pid;
 
-	path = var_lst_find_var("PATH", *g_env);
-	path_cmd = ft_split(path->value, ':');
-	inx = 0;
-	while (path_cmd[inx])
-	{
-		temp = ft_strjoin(path_cmd[inx], "/");
-		comman->cmd = ft_strjoin(temp, usr_in);
-		free(temp);
-		if (access(comman->cmd, F_OK) == 0)
-		{
-			ft_free_char_matrix(&path_cmd);
-			return ;
-		}
-		free(comman->cmd);
-		comman->cmd = NULL;
-		inx++;
-	}
-	ft_free_char_matrix(&path_cmd);
+	if (recognizer_cmd(token_lst, st_shell) == FALSE)
+		return (set_exit_status(127));
+	pid = fork();
+	if (pid == 0)
+		exec(st_shell);
+	if (st_shell->lst_inx == st_shell->lst_size)
+		close_pipes(st_shell);
+	waitpid(pid, NULL, 0);
+	ft_free_char_matrix(&st_shell->args);
+	free(st_shell->cmd);
 }
 
-void	exec(int fd_in, int fd_out, t_shell *comman)
+void	exec(t_shell *st_shell)
 {
-	dup2(fd_out, STDOUT_FILENO);
-	dup2(fd_in, STDIN_FILENO);
-	execve(comman->cmd, comman->args, NULL);
+	dup2(st_shell->infile, STDIN_FILENO);
+	dup2(st_shell->outfile, STDOUT_FILENO);
+	close_fds(st_shell);
+	execve(st_shell->cmd, st_shell->args, NULL);
 }

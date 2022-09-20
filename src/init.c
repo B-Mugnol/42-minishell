@@ -6,13 +6,13 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:25:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/15 02:45:49 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:12:50 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init(t_shell *st_shell)
+void	init(void)
 {
 	g_env = set_node();
 	set_exit_status(EXIT_SUCCESS);

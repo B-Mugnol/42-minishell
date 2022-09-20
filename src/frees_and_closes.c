@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 19:32:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 03:35:35 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/09/20 22:48:06 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	close_fds(t_shell *st_shell)
+{
+	close(st_shell->pipe[STDIN_FILENO]);
+	close(st_shell->pipe[STDOUT_FILENO]);
+}
 
-# define BUILDS_COUNT 7
-
-void	ft_cd(char *usr_in);
-void	ft_env(void);
-void	ft_export(char *usr_in);
-void	ft_pwd(void);
-void	ft_unset(char *usr_in);
-void	exit_build(void);
-
-#endif
+void	close_pipes(t_shell *st_shell)
+{
+	close(st_shell->pipe[0]);
+	close(st_shell->pipe[1]);
+}

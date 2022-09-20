@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_builds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/06 21:32:25 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/15 04:07:10 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	hash_search(const char *key, t_builtin *builds)
 	inx = 0;
 	while (inx < 7)
 	{
-		if (ft_strncmp(builds[inx].name, key, ft_strlen(builds[inx].name)) == 0)
+		if (ft_strncmp(
+				builds[inx].name, key, ft_strlen(builds[inx].name) + 1) == 0)
 			return (inx);
 		inx++;
 	}

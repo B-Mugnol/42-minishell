@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/14 22:11:22 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:26:43 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 	t_shell	st_shell;
 
 	shell_name = "luluShell>";
-	init(&st_shell);
+	init();
 	while (1)
 	{
 		std_in = readline(shell_name);
@@ -36,5 +36,6 @@ int	main(void)
 	}
 	rl_clear_history();
 	var_lst_clear(g_env);
+	free(g_env);
 	return (0);
 }

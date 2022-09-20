@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/06 22:46:02 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:37:23 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	recognize_builds(char *usr_in, t_builtin *builds)
 {
-	char		**words;
-	int			build_inx;
-	int			inx;
+	char	**words;
+	char	*temp;
+	int		build_inx;
+	int		inx;
 
 	inx = 0;
 	words = ft_word_split(usr_in, ft_isspace);
@@ -24,12 +25,14 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 		return (7);
 	while (words[inx])
 	{
-		build_inx = hash_search(words[inx], builds);
+		temp = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
+		build_inx = hash_search(temp, builds);
 		if (build_inx != 7)
 		{
 			ft_free_char_matrix(&words);
 			return (build_inx);
 		}
+		free(temp);
 		inx++;
 	}
 	ft_free_char_matrix(&words);
@@ -44,27 +47,21 @@ void	exec_builds(t_builtin *builds, int build_inx, char *usr_input)
 		builds[build_inx].func(usr_input);
 }
 
-t_bool	builds(t_type *token_lst, t_shell *st_shell)
+t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 {
 	int			build_inx;
-	char		*tmp;
 	t_builtin	*builds;
 
-	tmp = token_lst->str;
-	token_lst->str = remove_quotes_from_word(tmp, ft_strlen(token_lst->str));
-	free(tmp);
 	builds = init_builds();
 	build_inx = recognize_builds(token_lst->str, builds);
 	if (build_inx != 7)
 	{
 		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
-		{
 			free(builds);
-			return (FALSE);
-		}
 		else
 			exec_builds(builds, build_inx, token_lst->str);
+		return (TRUE);
 	}
 	free(builds);
-	return (TRUE);
+	return (FALSE);
 }
