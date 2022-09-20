@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 23:37:23 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 00:13:00 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 
 void	exec_builds(t_builtin *builds, int build_inx, char *usr_input)
 {
-	if (build_inx == 1 || build_inx == 2 || build_inx == 4)
+	if (build_inx == 1 || build_inx == 2)
 		builds[build_inx].func();
 	else
 		builds[build_inx].func(usr_input);
