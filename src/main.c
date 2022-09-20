@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 23:15:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 00:12:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(void)
 	rl_clear_history();
 	exit_code = get_exit_code();
 	var_lst_clear(g_env);
+	free(g_env);
 	return (exit_code);
 }
 

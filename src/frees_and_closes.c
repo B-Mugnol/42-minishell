@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 19:31:25 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 02:19:21 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/09/20 22:48:06 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "minishell.h"
 
-typedef struct s_builtin
+void	close_fds(t_shell *st_shell)
 {
-	char	*name;
-	void	(*func)();
-}	t_builtin;
+	close(st_shell->pipe[STDIN_FILENO]);
+	close(st_shell->pipe[STDOUT_FILENO]);
+}
 
-typedef struct s_shell
+void	close_pipes(t_shell *st_shell)
 {
-	char	*cmd;
-	char	**args;
-	int		pipe[2];
-	int		lst_inx;
-	int		infile;
-	int		outfile;
-	int		lst_size;
-}	t_shell;
-
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
-
-#endif
+	close(st_shell->pipe[0]);
+	close(st_shell->pipe[1]);
+}
