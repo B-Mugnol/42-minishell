@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/15 04:06:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:25:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 
 void	exec_builds(t_builtin *builds, int build_inx, char *usr_input)
 {
-	if (build_inx == 1 || build_inx == 2 || build_inx == 4)
+	if (build_inx == 1 || build_inx == 2)
 		builds[build_inx].func();
 	else
 		builds[build_inx].func(usr_input);

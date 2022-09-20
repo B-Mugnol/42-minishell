@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/15 04:07:10 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:26:32 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_builtin	*init_builds(void)
 	builds[1] = (t_builtin){"env", (void *)ft_env};
 	builds[2] = (t_builtin){"pwd", (void *)ft_pwd};
 	builds[3] = (t_builtin){"cd", (void *)ft_cd};
-	builds[4] = (t_builtin){"exit", (void *)exit_build};
+	builds[4] = (t_builtin){"exit", (void *)ft_exit};
 	builds[5] = (t_builtin){"export", (void *)ft_export};
 	builds[6] = (t_builtin){"unset", (void *)ft_unset};
 	return (builds);
