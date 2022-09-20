@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/15 04:06:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:37:23 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_builds(t_builtin *builds, int build_inx, char *usr_input)
 		builds[build_inx].func(usr_input);
 }
 
-t_bool	builds(t_type *token_lst, t_shell *st_shell)
+t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 {
 	int			build_inx;
 	t_builtin	*builds;
@@ -57,13 +57,11 @@ t_bool	builds(t_type *token_lst, t_shell *st_shell)
 	if (build_inx != 7)
 	{
 		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
-		{
 			free(builds);
-			return (FALSE);
-		}
 		else
 			exec_builds(builds, build_inx, token_lst->str);
+		return (TRUE);
 	}
 	free(builds);
-	return (TRUE);
+	return (FALSE);
 }
