@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 21:04:24 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:15:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(void)
 		std_in = readline(shell_name);
 		if (std_in == NULL)
 		{
-			ft_putchar_fd('\n', 1);
+			ft_putendl_fd("exit", 1);
 			break ;
 		}
 		add_history(std_in);
