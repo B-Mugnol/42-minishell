@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:53:56 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:31:31 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ char	**set_cmds_paths(void)
 	return (ft_split(paths, ':'));
 }
 
-t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
+t_bool	check_paths(t_shell *st_shell)
 {
 	char	**cmds_paths;
 	char	*tmp;
 	int		inx;
 
-	st_shell->args = ft_word_split(token_lst->str, ft_isspace);
 	cmds_paths = set_cmds_paths();
 	inx = 0;
 	while (cmds_paths[inx])
@@ -36,7 +35,7 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 		tmp = ft_strjoin(cmds_paths[inx], "/");
 		st_shell->cmd = ft_strjoin(tmp, st_shell->args[0]);
 		free(tmp);
-		if (access(st_shell->cmd, F_OK) == 0)
+		if (access(st_shell->cmd, X_OK) == 0)
 		{
 			ft_free_char_matrix(&cmds_paths);
 			return (TRUE);
@@ -44,11 +43,32 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 		free(st_shell->cmd);
 		inx++;
 	}
-	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
-	ft_putendl_fd(": command not found", STDERR_FILENO);
-	ft_free_char_matrix(&st_shell->args);
-	ft_free_char_matrix(&cmds_paths);
+	cmd_error(st_shell, &cmds_paths);
 	return (FALSE);
+}
+
+t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
+{
+	st_shell->args = ft_word_split(token_lst->str, ft_isspace);
+	if (**st_shell->args == '/' || **st_shell->args == '.')
+	{
+		if (access(st_shell->args[0], F_OK) != 0)
+		{
+			free_args_error(st_shell, ": No such file or directory");
+			return (FALSE);
+		}
+		if (access(st_shell->args[0], X_OK) == 0)
+		{
+			st_shell->cmd = ft_strdup(st_shell->args[0]);
+			return (TRUE);
+		}
+		else
+		{
+			free_args_error(st_shell, ": Permission denied");
+			return (FALSE);
+		}
+	}
+	return (check_paths(st_shell));
 }
 
 void	set_in_out(t_shell *st_shell)
@@ -70,21 +90,4 @@ void	set_in_out(t_shell *st_shell)
 		else
 			st_shell->infile = st_shell->pipe[STDIN_FILENO];
 	}
-}
-
-t_bool	can_access(char *archive)
-{
-	char	*path;
-	char	*tmp;
-
-	if (access(archive, X_OK))
-		return (TRUE);
-	path = getcwd(NULL, 0);
-	tmp = ft_strjoin(path, "/");
-	free(path);
-	path = ft_strjoin(tmp, archive);
-	if (access(path, X_OK))
-		return (TRUE);
-	free(path);
-	return (FALSE);
 }
