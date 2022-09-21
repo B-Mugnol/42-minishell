@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 18:49:00 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:49:44 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,16 @@ void	set_in_out(t_shell *st_shell)
 t_bool	can_access(char *archive)
 {
 	char	*path;
+	char	*tmp;
 
+	if (access(archive, X_OK))
+		return (TRUE);
 	path = getcwd(NULL, 0);
-	
+	tmp = ft_strjoin(path, "/");
+	free(path);
+	path = ft_strjoin(tmp, archive);
+	if (access(path, X_OK))
+		return (TRUE);
+	else
+		return (FALSE);
 }
