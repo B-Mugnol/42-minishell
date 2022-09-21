@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 20:39:54 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:17:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,4 @@ void	var_lst_add_var(t_var **lst, t_var *new)
 		return ;
 	}
 	var_lst_add_front(lst, new);
-}
-
-t_var	*var_lst_find_var(char *name, t_var *lst)
-{
-	while (lst)
-	{
-		if (ft_strncmp(name, lst->name, ft_strlen(name) + 1) == 0)
-			return (lst);
-		lst = lst->next;
-	}
-	return (NULL);
 }
