@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 21:26:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:59:56 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_env(void)
 
 	iterator = *g_env;
 	if (!iterator || !var_lst_find_var("PATH", iterator))
+	{
+		set_exit_status(127);
 		return (ft_putendl_fd("env: No such file or directory", 2));
+	}
 	while (iterator)
 	{
 		if (ft_strncmp(iterator->name, "?", 2) != 0)
@@ -29,4 +32,5 @@ void	ft_env(void)
 		}
 		iterator = iterator->next;
 	}
+	set_exit_status(EXIT_SUCCESS);
 }
