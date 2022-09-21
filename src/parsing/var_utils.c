@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 20:05:33 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:42:13 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_bool	is_valid_varname(char *str)
 {
 	size_t	inx;
 
-	if (!str)
+	if (!str || !*str)
 		return (FALSE);
 	inx = 0;
 	while (str[inx] && str[inx] != '=')
