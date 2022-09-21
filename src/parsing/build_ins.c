@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 00:13:00 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:32:20 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 	return (build_inx);
 }
 
-void	exec_builds(t_builtin *builds, int build_inx, char *usr_input)
+void	exec_builds(t_builtin *builds, int build_inx, t_type *token_lst)
 {
 	if (build_inx == 1 || build_inx == 2)
 		builds[build_inx].func();
+	else if (build_inx == 4)
+		builds[build_inx].func(token_lst->str, token_lst, builds);
 	else
-		builds[build_inx].func(usr_input);
+		builds[build_inx].func(token_lst->str);
 }
 
 t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
@@ -59,7 +61,7 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
 			free(builds);
 		else
-			exec_builds(builds, build_inx, token_lst->str);
+			exec_builds(builds, build_inx, token_lst);
 		return (TRUE);
 	}
 	free(builds);
