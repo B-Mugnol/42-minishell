@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:49:44 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:53:56 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ t_bool	can_access(char *archive)
 	path = ft_strjoin(tmp, archive);
 	if (access(path, X_OK))
 		return (TRUE);
-	else
-		return (FALSE);
+	free(path);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:32:20 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:52:47 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 	{
 		temp = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
 		build_inx = hash_search(temp, builds);
+		free(temp);
 		if (build_inx != 7)
 		{
 			ft_free_char_matrix(&words);
 			return (build_inx);
 		}
-		free(temp);
 		inx++;
 	}
 	ft_free_char_matrix(&words);
