@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 03:17:39 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:22:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_cd(char *usr_in)
 	if (words[1])
 		unquoted_path = remove_quotes_from_word(words[1], ft_strlen(words[1]));
 	change_directory(unquoted_path);
+	free(unquoted_path);
 	ft_free_char_matrix(&words);
 	return (set_exit_status(EXIT_SUCCESS));
 }

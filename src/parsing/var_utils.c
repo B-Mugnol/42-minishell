@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/14 23:39:13 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:42:13 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_var	*get_var_from_assignment(char *str)
 	name = ft_substr(unquoted, 0, value - unquoted);
 	value = ft_substr(value, 1, ft_strlen(value + 1));
 	find_var_and_expand(&value, TRUE);
+	free(unquoted);
 	return (var_lst_new(name, value));
 }
 
@@ -46,7 +47,7 @@ t_bool	is_valid_varname(char *str)
 {
 	size_t	inx;
 
-	if (!str)
+	if (!str || !*str)
 		return (FALSE);
 	inx = 0;
 	while (str[inx] && str[inx] != '=')
