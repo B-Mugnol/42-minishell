@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_lst_add.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 00:22:17 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:39:54 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	var_lst_add_var(t_var **lst, t_var *new)
 	t_var	*old;
 
 	if (!*lst)
+	{
 		*lst = new;
+		return ;
+	}
 	old = var_lst_find_var(new->name, *lst);
 	if (old)
 	{
