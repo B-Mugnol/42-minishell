@@ -84,11 +84,11 @@ $(NAME): $(LIBFT_LIB) $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_LIB) $(INCLUDE) $(SYS_LIB)
 
 # Compiles SRC into OBJ
-$(OBJ): $(OBJ_DIR)/%.o: %.c $(C_HEADER) | $(OBJ_DIR)
+$(OBJ): $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE)
 
 # Directory making
-$(OBJ_DIR) $(C_HEADER_DIR):
+$(OBJ_DIR):
 	@mkdir -p $@
 
 # Libft compiling
@@ -111,7 +111,7 @@ norm:
 
 # Clean: removes objects' and precompiled headers' directories
 clean:
-	@$(RM) $(OBJ_DIR) $(C_HEADER_DIR) $(SUPP_FILE)
+	@$(RM) $(OBJ_DIR) $(SUPP_FILE)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 # Full clean: same as 'clean', but removes the generated libraries as well
