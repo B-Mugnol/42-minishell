@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 23:13:54 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 18:49:00 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,12 @@ void	set_in_out(t_shell *st_shell)
 		else
 			st_shell->infile = st_shell->pipe[STDIN_FILENO];
 	}
+}
+
+t_bool	can_access(char *archive)
+{
+	char	*path;
+
+	path = getcwd(NULL, 0);
+	
 }
