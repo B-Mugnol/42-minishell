@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   var_lst_get.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 19:32:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 19:39:19 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/09/21 22:15:56 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/09/21 22:18:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "var_lst.h"
 
-# include "minishell.h"
+size_t	var_lst_size(t_var *lst)
+{
+	size_t	count;
 
-# define BUILDS_COUNT 7
-# define BUILTIN_MISUSE_CODE 2
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
+}
 
-void	ft_env(void);
-void	ft_pwd(void);
-void	ft_cd(char *usr_in);
-void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds);
-void	ft_export(char *usr_in);
-void	ft_unset(char *usr_in);
-
-#endif
+t_var	*var_lst_find_var(char *name, t_var *lst)
+{
+	while (lst)
+	{
+		if (ft_strncmp(name, lst->name, ft_strlen(name) + 1) == 0)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}

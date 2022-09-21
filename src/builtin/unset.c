@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:46 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 04:05:42 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:02:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	ft_unset(char *usr_in)
 	char	*var_name;
 	size_t	inx;
 
+	set_exit_status(EXIT_SUCCESS);
 	words = ft_word_split(usr_in, ft_isspace);
 	if (!words)
 		return (set_exit_status(EXIT_FAILURE));
 	if (words[0] && words[1] == NULL)
-	{
-		ft_free_char_matrix(&words);
-		return (set_exit_status(EXIT_SUCCESS));
-	}
+		return (ft_free_char_matrix(&words));
 	inx = 1;
 	while (words[inx])
 	{

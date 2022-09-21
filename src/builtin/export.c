@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/14 23:34:25 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:04:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_export(char *usr_in)
 	char	**words;
 	t_var	*vars;
 
+	set_exit_status(EXIT_SUCCESS);
 	words = ft_word_split(usr_in, ft_isspace);
 	if (!words)
 		return (set_exit_status(EXIT_FAILURE));
@@ -110,5 +111,5 @@ static void	print_declarations(void)
 		}
 		iterator = iterator->next;
 	}
-	return ;
+	set_exit_status(EXIT_SUCCESS);
 }

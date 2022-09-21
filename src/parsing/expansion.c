@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/15 03:26:02 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/21 18:53:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,16 @@ void	find_var_and_expand(char **str, t_bool is_assignment)
 static char	*expand_tilde(char *str, char *tilde_pointer)
 {
 	char	*exp;
+	char	*path;
+	t_var	*home_folder;
 
+	home_folder = var_lst_find_var("HOME", *g_env);
+	if (home_folder)
+		path = home_folder->value;
+	else
+		path = getenv("HOME");
 	exp = substitute(str, tilde_pointer - str,
-			tilde_pointer - str + 1, getenv("HOME"));
+			tilde_pointer - str + 1, path);
 	free(str);
 	return (exp);
 }

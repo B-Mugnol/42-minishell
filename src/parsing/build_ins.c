@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:52:47 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:42:18 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 	build_inx = recognize_builds(token_lst->str, builds);
 	if (build_inx != 7)
 	{
-		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
-			free(builds);
-		else
+		if (valid_hash(build_inx, st_shell->lst_size) == TRUE)
 			exec_builds(builds, build_inx, token_lst);
+		free(builds);
 		return (TRUE);
 	}
 	free(builds);
