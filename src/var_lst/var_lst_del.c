@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_lst_del.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 03:43:57 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/20 23:26:56 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:37:55 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	var_lst_delete_var(t_var **lst, char *name)
 {
 	t_var	*to_be_removed;
 	t_var	*head;
-	t_var	*acc;
 	t_var	*previous;
 
 	if (!lst || !*lst)
@@ -35,13 +34,13 @@ void	var_lst_delete_var(t_var **lst, char *name)
 	head = *lst;
 	if (*lst == to_be_removed)
 		head = (*lst)->next;
+	previous = NULL;
 	while (*lst)
 	{
 		if (*lst == to_be_removed)
 		{
-			acc = (*lst)->next;
 			if (previous)
-				previous->next = acc;
+				previous->next = (*lst)->next;
 			var_lst_delete_node(*lst);
 			break ;
 		}
