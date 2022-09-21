@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:32:20 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:10:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 	{
 		temp = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
 		build_inx = hash_search(temp, builds);
+		free(temp);
 		if (build_inx != 7)
 		{
 			ft_free_char_matrix(&words);
 			return (build_inx);
 		}
-		free(temp);
 		inx++;
 	}
 	ft_free_char_matrix(&words);
@@ -58,10 +58,9 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 	build_inx = recognize_builds(token_lst->str, builds);
 	if (build_inx != 7)
 	{
-		if (valid_hash(build_inx, st_shell->lst_size) == FALSE)
-			free(builds);
-		else
+		if (valid_hash(build_inx, st_shell->lst_size) == TRUE)
 			exec_builds(builds, build_inx, token_lst);
+		free(builds);
 		return (TRUE);
 	}
 	free(builds);
