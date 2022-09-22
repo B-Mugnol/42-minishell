@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/22 23:39:09 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/23 00:12:12 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_cd(char *usr_in)
 	char	**words;
 	char	*unquoted_path;
 
+	set_exit_status(EXIT_SUCCESS);
 	words = ft_word_split(usr_in, ft_isspace);
 	if (!is_valid_input(words))
 	{
@@ -32,7 +33,7 @@ void	ft_cd(char *usr_in)
 	change_directory(unquoted_path);
 	free(unquoted_path);
 	ft_free_char_matrix(&words);
-	return (set_exit_status(EXIT_SUCCESS));
+	return ;
 }
 
 static void	change_directory(char *path)
