@@ -25,7 +25,7 @@ SRC			+=	expansion.c tokenizer.c parsing.c parsing_utils.c var_utils.c
 SRC 		+=	build_ins.c commands.c
 SRC			+=	var_lst_add.c var_lst_del.c var_lst_get.c
 SRC			+=	type_lst_add.c type_lst_del.c
-SRC			+=	cd.c env.c export.c pwd.c unset.c exit.c
+SRC			+=	cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 # Object
 OBJ_DIR		:=	obj

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 21:26:32 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:28:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_builtin	*init_builds(void)
 	t_builtin	*builds;
 
 	builds = malloc(sizeof(t_builtin) * 7);
-	builds[0] = (t_builtin){"echo", NULL};
+	builds[0] = (t_builtin){"echo", (void *)ft_echo};
 	builds[1] = (t_builtin){"env", (void *)ft_env};
 	builds[2] = (t_builtin){"pwd", (void *)ft_pwd};
 	builds[3] = (t_builtin){"cd", (void *)ft_cd};
