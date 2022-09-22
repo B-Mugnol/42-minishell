@@ -6,16 +6,17 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 23:58:58 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/23 00:40:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_digit_str(const char *str);
-static int	exit_error(char *arg, char *err_msg);
-static void	exit_handler(char **params, t_type *token_lst, t_builtin *builds);
-static void	clear_lists(t_type *token_lst, t_builtin *builds);
+static t_bool		is_considered_digit_str(const char *str);
+static void			exit_error(char *arg, char *err_msg);
+static void			exit_handler(char **params, t_type *token_lst,
+						t_builtin *builds);
+static long double	ft_atold(const char *s);
 
 void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds)
 {
@@ -41,7 +42,7 @@ static void	exit_handler(char **params, t_type *token_lst, t_builtin *builds)
 
 	if (!params[1])
 		exit_status = ft_atoi(var_lst_find_var("?", *g_env)->value);
-	else if (!is_digit_str(params[1]))
+	else if (!is_considered_digit_str(params[1]))
 	{
 		exit_error(params[1], "numeric argument required");
 		exit_status = BUILTIN_MISUSE_CODE;
@@ -49,39 +50,37 @@ static void	exit_handler(char **params, t_type *token_lst, t_builtin *builds)
 	else if (params[2])
 	{
 		ft_free_char_matrix(&params);
-		return (set_exit_status(exit_error(NULL, "too many arguments")));
+		exit_error(NULL, "too many arguments");
+		return (set_exit_status(EXIT_FAILURE));
 	}
 	else
 		exit_status = ft_atoi(params[1]);
 	ft_free_char_matrix(&params);
 	rl_clear_history();
-	clear_lists(token_lst, builds);
-	return (exit(exit_status));
-}
-
-static void	clear_lists(t_type *token_lst, t_builtin *builds)
-{
 	type_lst_clear(&token_lst);
 	free(builds);
 	var_lst_clear(g_env);
 	free(g_env);
+	return (exit(exit_status));
 }
 
-static int	is_digit_str(const char *str)
+static t_bool	is_considered_digit_str(const char *str)
 {
 	if (!str || !*str || ((*str != '-' && *str != '+') && !ft_isdigit(*str)))
-		return (0);
+		return (FALSE);
+	if (ft_atold(str) != (long double)(ft_atoll(str)))
+		return (FALSE);
 	str++;
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return (0);
+			return (FALSE);
 		str++;
 	}
-	return (1);
+	return (TRUE);
 }
 
-static int	exit_error(char *arg, char *err_msg)
+static void	exit_error(char *arg, char *err_msg)
 {
 	char	*unquoted;
 
@@ -89,12 +88,33 @@ static int	exit_error(char *arg, char *err_msg)
 	if (!arg)
 	{
 		ft_putendl_fd(err_msg, 2);
-		return (EXIT_FAILURE);
+		return ;
 	}
 	unquoted = remove_quotes_from_word(arg, ft_strlen(arg));
 	ft_putstr_fd(unquoted, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(err_msg, 2);
 	free(unquoted);
-	return (EXIT_FAILURE);
+	return ;
+}
+
+static long double	ft_atold(const char *s)
+{
+	long double	num;
+	long double	sign;
+
+	num = 0;
+	sign = 1;
+	while (*s == 32 || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == 45)
+		sign = -1;
+	if (*s == 43 || *s == 45)
+		s++;
+	while (*s >= 48 && *s <= 57)
+	{
+		num = 10 * num + *s - 48;
+		s++;
+	}
+	return (num * sign);
 }
