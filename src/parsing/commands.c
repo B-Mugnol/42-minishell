@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 22:31:31 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:19:18 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	remove_args_quote(char **args);
 
 char	**set_cmds_paths(void)
 {
@@ -50,6 +52,7 @@ t_bool	check_paths(t_shell *st_shell)
 t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 {
 	st_shell->args = ft_word_split(token_lst->str, ft_isspace);
+	remove_args_quote(st_shell->args);
 	if (**st_shell->args == '/' || **st_shell->args == '.')
 	{
 		if (access(st_shell->args[0], F_OK) != 0)
@@ -89,5 +92,22 @@ void	set_in_out(t_shell *st_shell)
 		}
 		else
 			st_shell->infile = st_shell->pipe[STDIN_FILENO];
+	}
+}
+
+static void	remove_args_quote(char **args)
+{
+	size_t	inx;
+	char	*unquoted;
+
+	if (!args)
+		return ;
+	inx = 0;
+	while (args[inx])
+	{
+		unquoted = remove_quotes_from_word(args[inx], ft_strlen(args[inx]));
+		free(args[inx]);
+		args[inx] = unquoted;
+		inx++;
 	}
 }
