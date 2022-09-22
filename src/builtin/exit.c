@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 19:48:52 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:58:58 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	clear_lists(t_type *token_lst, t_builtin *builds)
 
 static int	is_digit_str(const char *str)
 {
-	if (!str || !*str || (*str != '-' && !ft_isdigit(*str)))
+	if (!str || !*str || ((*str != '-' && *str != '+') && !ft_isdigit(*str)))
 		return (0);
 	str++;
 	while (*str)
