@@ -6,12 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 20:18:12 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:48:10 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define LULUSHELL "luluShell> "
 
 # include "struct.h"
 # include "var_lst.h"
@@ -24,6 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <dirent.h>
 
 extern t_var	**g_env;
 
@@ -39,5 +41,8 @@ void	sig_setup(void);
 // frees_and_closes.c
 void	close_fds(t_shell *st_shell);
 void	close_pipes(t_shell *st_shell);
+void	cmd_error(t_shell	*st_shell, char	***paths);
+void	file_dir_error(t_shell *st_shell);
+void	free_args_error(t_shell *st_shell, char *message);
 
 #endif

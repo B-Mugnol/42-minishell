@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 19:36:47 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:47:54 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,32 @@
 
 static char	**get_environment(void);
 
+t_bool	is_dir(t_type *token_lst)
+{
+	DIR		*dir;
+	char	**cmds;
+
+	cmds = ft_word_split(token_lst->str, ft_isspace);
+	dir = opendir(cmds[0]);
+	if (dir != NULL)
+	{
+		ft_putstr_fd("luluShell: ", 2);
+		ft_putstr_fd(cmds[0], 2);
+		ft_putendl_fd(": Is a directory", 2);
+		ft_free_char_matrix(&cmds);
+		return (TRUE);
+	}
+	ft_free_char_matrix(&cmds);
+	return (FALSE);
+}
+
 void	fork_exec(t_shell *st_shell, t_type *token_lst)
 {
 	int		pid;
 	char	**envp;
 
+	if (is_dir(token_lst) == TRUE)
+		return ;
 	envp = get_environment();
 	if (recognizer_cmd(token_lst, st_shell) == FALSE)
 		return (set_exit_status(127));
