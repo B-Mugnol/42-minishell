@@ -6,37 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 22:46:05 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:36:47 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	**get_environment(void);
-
-t_var	**set_node(void)
-{
-	t_var	**env_lst;
-	char	*env;
-	char	*name;
-	char	*value;
-	int		fd;
-
-	fd = open("/etc/environment", O_RDONLY);
-	env = get_next_line(fd);
-	env_lst = malloc(sizeof(t_var *));
-	*env_lst = NULL;
-	while (env)
-	{
-		name = ft_substr(env, 0, ft_strnchr(env, '='));
-		value = ft_substr(env, ft_strnchr(env, '=') + 2,
-				ft_strlen(env) - (ft_strnchr(env, '=') + 2) - 2);
-		var_lst_add_back(env_lst, var_lst_new(name, value));
-		free(env);
-		env = get_next_line(fd);
-	}
-	return (env_lst);
-}
 
 void	fork_exec(t_shell *st_shell, t_type *token_lst)
 {
