@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 20:22:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:39:09 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static t_bool	is_valid_input(char **words)
 		return (FALSE);
 	if (words[1] && words[2])
 	{
-		ft_putendl_fd("cd: too many arguments", 1);
+		ft_putendl_fd("cd: too many arguments", 2);
 		return (FALSE);
 	}
 	return (TRUE);
