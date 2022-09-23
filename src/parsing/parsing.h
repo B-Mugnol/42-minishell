@@ -6,12 +6,17 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/20 23:37:33 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:44:25 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+# define SYNTAX_ERROR "syntax error near unexpected token `newline'"
+# define LULUSHELL_ERROR "luluShell: "
+# define ERROR_FILE_DIR ": No such file or directory"
+# define ERROR_PERMI ": Permission denied"
 
 # include "minishell.h"
 # include <sys/wait.h>
