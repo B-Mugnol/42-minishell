@@ -26,6 +26,8 @@ void	set_in_out(t_shell *st_shell)
 		else if (st_shell->lst_inx != st_shell->lst_size)
 		{
 			st_shell->infile = st_shell->pipe[STDIN_FILENO];
+			close(st_shell->pipe[STDOUT_FILENO]);
+			pipe(st_shell->pipe);
 			st_shell->outfile = st_shell->pipe[STDOUT_FILENO];
 		}
 		else
