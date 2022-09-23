@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 18:53:21 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/22 22:30:44 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	find_var_and_expand(char **str, t_bool is_assignment)
 	while ((*str)[inx])
 	{
 		if ((*str)[inx] == '\'')
-			quit_quote(*str + inx, &inx);
+			quit_quote(*str, &inx);
 		if ((*str)[inx] == '~' && !is_within_quotes(*str, inx)
 			&& is_expansible_tilde(*str, inx, is_assignment))
 			*str = expand_tilde(*str, *str + inx);

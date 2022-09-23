@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 23:31:14 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:47:11 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,13 @@ t_var	**g_env;
 
 static int	get_exit_code(void);
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	int		exit_code;
-	char	*std_in;
-	char	*shell_name;
-	t_shell	st_shell;
 
-	shell_name = LULUSHELL;
-	init();
-	while (1)
-	{
-		std_in = readline(shell_name);
-		if (std_in == NULL)
-		{
-			ft_putendl_fd("exit", 1);
-			break ;
-		}
-		add_history(std_in);
-		parsing(std_in, &st_shell);
-		free(std_in);
-	}
-	rl_clear_history();
+	if (!argv || argc != 1)
+		return (EXIT_FAILURE);
+	init(envp);
 	exit_code = get_exit_code();
 	var_lst_clear(g_env);
 	free(g_env);

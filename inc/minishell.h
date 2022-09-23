@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 23:42:03 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:48:10 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 extern t_var	**g_env;
 
-void	init(void);
+void	init(char **envp);
 void	get_comman(char *usr_in, t_shell *comman);
 void	exec(t_shell *st_shell, char **envp);
 void	set_exit_status(int exit_status);
