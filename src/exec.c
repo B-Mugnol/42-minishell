@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 20:48:23 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:59:06 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 		return ;
 	envp = get_environment();
 	if (recognizer_cmd(token_lst, st_shell) == FALSE)
+	{
+		ft_free_char_matrix(&envp);
 		return (set_exit_status(127));
+	}
 	pid = fork();
 	if (pid == 0)
 		exec(st_shell, envp);
