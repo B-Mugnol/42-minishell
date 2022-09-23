@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 23:59:06 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:05:25 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_bool	is_dir(t_type *token_lst)
 		ft_putstr_fd(cmds[0], 2);
 		ft_putendl_fd(": Is a directory", 2);
 		ft_free_char_matrix(&cmds);
+		free(dir);
 		return (TRUE);
 	}
 	ft_free_char_matrix(&cmds);
