@@ -6,11 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 21:42:13 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/23 00:10:53 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+static int	is_digit_str(const char *str);
 
 t_var	*get_var_from_assignment(char *str)
 {
@@ -47,7 +49,7 @@ t_bool	is_valid_varname(char *str)
 {
 	size_t	inx;
 
-	if (!str || !*str)
+	if (!str || !*str || is_digit_str(str))
 		return (FALSE);
 	inx = 0;
 	while (str[inx] && str[inx] != '=')
@@ -69,4 +71,18 @@ t_bool	is_valid_varname_char(char c)
 	if (ft_isalnum(c) || c == '_')
 		return (TRUE);
 	return (FALSE);
+}
+
+static int	is_digit_str(const char *str)
+{
+	if (!str || !*str || !ft_isdigit(*str))
+		return (0);
+	str++;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }
