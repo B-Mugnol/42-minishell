@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/24 00:55:56 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:59:46 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
 	{
 		close_pipes(st_shell);
 		waitpid(pid, &exit_status, 0);
+		set_exit_status(WEXITSTATUS(exit_status));
 	}
-	set_exit_status(WEXITSTATUS(exit_status));
 }
 
 t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
