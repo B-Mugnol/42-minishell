@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 22:31:31 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 23:23:16 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 	{
 		if (access(st_shell->args[0], F_OK) != 0)
 		{
-			free_args_error(st_shell, ": No such file or directory");
+			free_args_error(st_shell, ERROR_FILE_DIR);
 			return (FALSE);
 		}
 		if (access(st_shell->args[0], X_OK) == 0)
@@ -64,30 +64,9 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 		}
 		else
 		{
-			free_args_error(st_shell, ": Permission denied");
+			free_args_error(st_shell, ERROR_PERMI);
 			return (FALSE);
 		}
 	}
 	return (check_paths(st_shell));
-}
-
-void	set_in_out(t_shell *st_shell)
-{
-	st_shell->infile = STDIN_FILENO;
-	st_shell->outfile = STDOUT_FILENO;
-	if (st_shell->lst_size != 1)
-	{
-		if (st_shell->lst_inx == 1)
-		{
-			pipe(st_shell->pipe);
-			st_shell->outfile = st_shell->pipe[STDOUT_FILENO];
-		}
-		else if (st_shell->lst_inx != st_shell->lst_size)
-		{
-			st_shell->infile = st_shell->pipe[STDIN_FILENO];
-			st_shell->outfile = st_shell->pipe[STDOUT_FILENO];
-		}
-		else
-			st_shell->infile = st_shell->pipe[STDIN_FILENO];
-	}
 }

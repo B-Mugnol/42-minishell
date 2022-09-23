@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 23:41:59 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 20:45:42 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ t_bool	is_dir(t_type *token_lst)
 void	fork_exec(t_shell *st_shell, t_type *token_lst)
 {
 	int		pid;
+	int		exit_status;
 	char	**envp;
 
+	exit_status = 0;
 	if (is_dir(token_lst) == TRUE)
 		return ;
 	envp = get_environment();
@@ -72,7 +74,8 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 		exec(st_shell, envp);
 	if (st_shell->lst_inx == st_shell->lst_size)
 		close_pipes(st_shell);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &exit_status, 0);
+	set_exit_status(WEXITSTATUS(exit_status));
 	ft_free_char_matrix(&envp);
 	ft_free_char_matrix(&st_shell->args);
 	free(st_shell->cmd);

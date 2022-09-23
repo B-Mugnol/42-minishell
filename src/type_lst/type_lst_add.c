@@ -6,19 +6,18 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:05:24 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/20 00:22:07 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:05:20 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type_lst.h"
 
-t_type	*type_lst_new(char *str_in, t_token type)
+t_type	*type_lst_new(char *str_in)
 {
 	t_type	*node;
 
 	node = malloc(sizeof(t_type));
 	node->str = str_in;
-	node->type = type;
 	node->next = NULL;
 	return (node);
 }

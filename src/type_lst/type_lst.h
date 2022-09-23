@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:06:46 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/05 19:42:48 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:02:38 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,13 @@
 # include <stdlib.h>
 # include "struct.h"
 
-typedef enum e_token
-{
-	PIPE = -1,
-	LESS = -2,
-	MORE = -3,
-	DOLLAR = -4,
-	PARAM = -5,
-	CMD = -6,
-	WORD = -7,
-	ASSIGN = -8
-}	t_token;
-
 typedef struct s_type
 {
-	t_token			type;
 	char			*str;
 	struct s_type	*next;
 }	t_type;
 
-t_type	*type_lst_new(char *str_in, t_token type);
+t_type	*type_lst_new(char *str_in);
 void	type_lst_add_back(t_type **lst, t_type *new);
 void	type_lst_add_front(t_type **lst, t_type *new);
 void	type_lst_delete_node(t_type *node);
