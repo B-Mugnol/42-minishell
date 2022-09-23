@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/24 00:03:24 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:49:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,14 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 
 	builds = init_builds();
 	build_inx = recognize_builds(token_lst->str, builds);
-	if (build_inx != 7)
+	if (build_inx == 7)
 	{
-		if (valid_hash(build_inx, st_shell->lst_size) == TRUE)
-		{
-			if (st_shell->lst_size == 1)
-				exec_builds(builds, build_inx, token_lst);
-			else
-				fork_exec_builds(builds, build_inx, token_lst, st_shell);
-		}
 		free(builds);
-		return (TRUE);
+		return (FALSE);
 	}
-	free(builds);
-	return (FALSE);
+	if (st_shell->lst_size == 1)
+		exec_builds(builds, build_inx, token_lst);
+	else
+		fork_exec_builds(builds, build_inx, token_lst, st_shell);
+	return (TRUE);
 }
