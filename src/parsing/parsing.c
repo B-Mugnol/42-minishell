@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 20:00:16 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:37:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,10 @@ void	parsing_loop(t_type *token_lst, t_shell *st_shell)
 	{
 		find_var_and_expand(&token_lst->str, FALSE);
 		set_in_out(st_shell);
-		if (is_builds(token_lst, st_shell) == TRUE)
-		{
-			token_lst = token_lst->next;
-			st_shell->lst_inx++;
-		}
-		else
-		{
+		if (is_builds(token_lst, st_shell) == FALSE)
 			fork_exec(st_shell, token_lst);
-			token_lst = token_lst->next;
-			st_shell->lst_inx++;
-		}
+		token_lst = token_lst->next;
+		st_shell->lst_inx++;
 	}
 	st_shell->lst_inx = 0;
 }

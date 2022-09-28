@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees_and_closes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 22:16:51 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/23 20:30:59 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	close_pipes(t_shell *st_shell)
 	}
 }
 
-void	cmd_error(t_shell	*st_shell, char	***paths)
+void	cmd_error(t_shell *st_shell, char ***paths)
 {
 	ft_putstr_fd("luluShell: ", STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);

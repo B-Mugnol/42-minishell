@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:59:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 23:28:22 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:54:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,4 @@ int	hash_search(const char *key, t_builtin *builds)
 		inx++;
 	}
 	return (7);
-}
-
-t_bool	valid_hash(int build_inx, int lst_size)
-{
-	if (lst_size > 1)
-	{
-		if (build_inx <= 2)
-			return (TRUE);
-		else
-			return (FALSE);
-	}
-	else if (lst_size == 1)
-		return (TRUE);
-	return (FALSE);
 }

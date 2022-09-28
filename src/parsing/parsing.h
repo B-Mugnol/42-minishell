@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/22 23:44:25 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:54:49 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void		fork_exec(t_shell *st_shell, t_type *token_lst);
 t_bool		is_builds(t_type *token_lst, t_shell *st_shell);
 t_builtin	*init_builds(void);
 int			hash_search(const char *key, t_builtin *builds);
-t_bool		valid_hash(int build_inx, int lst_size);
 
 // tokenizer.c
 t_type		*tokenizer(char *usr_in, t_shell *s_shell);

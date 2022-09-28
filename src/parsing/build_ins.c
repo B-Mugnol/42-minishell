@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 23:42:18 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/24 00:59:46 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,29 @@ void	exec_builds(t_builtin *builds, int build_inx, t_type *token_lst)
 		builds[build_inx].func(token_lst->str);
 }
 
+void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
+	t_shell *st_shell)
+{
+	int			pid;
+	int			exit_status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(st_shell->infile, STDIN_FILENO);
+		dup2(st_shell->outfile, STDOUT_FILENO);
+		close_fds(st_shell);
+		exec_builds(builds, build_inx, token_lst);
+		ft_exit("exit", token_lst, builds);
+	}
+	if (st_shell->lst_inx == st_shell->lst_size)
+	{
+		close_pipes(st_shell);
+		waitpid(pid, &exit_status, 0);
+		set_exit_status(WEXITSTATUS(exit_status));
+	}
+}
+
 t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 {
 	int			build_inx;
@@ -56,13 +79,14 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 
 	builds = init_builds();
 	build_inx = recognize_builds(token_lst->str, builds);
-	if (build_inx != 7)
+	if (build_inx == 7)
 	{
-		if (valid_hash(build_inx, st_shell->lst_size) == TRUE)
-			exec_builds(builds, build_inx, token_lst);
 		free(builds);
-		return (TRUE);
+		return (FALSE);
 	}
-	free(builds);
-	return (FALSE);
+	if (st_shell->lst_size == 1)
+		exec_builds(builds, build_inx, token_lst);
+	else
+		fork_exec_builds(builds, build_inx, token_lst, st_shell);
+	return (TRUE);
 }
