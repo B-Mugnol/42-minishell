@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 23:37:22 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:03:23 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,9 @@ void	parsing_loop(t_type *token_lst, t_shell *st_shell)
 		st_shell->lst_inx++;
 	}
 	st_shell->lst_inx = 0;
+	while (st_shell->lst_inx < st_shell->lst_size)
+	{
+		waitpid(-1, NULL, 0);
+		st_shell->lst_inx++;
+	}
 }
