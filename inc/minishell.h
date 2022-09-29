@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 20:48:10 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:07:47 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_var	**set_node(void);
 
 // signal.c
 void	sig_setup(void);
+void	child_sig_setup(void);
 
 // frees_and_closes.c
 void	close_fds(t_shell *st_shell);
