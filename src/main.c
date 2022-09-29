@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:49:48 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:53:03 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	main(int argc, char **argv, char **envp)
 	if (!argv || argc != 1)
 		return (EXIT_FAILURE);
 	init(envp);
-	exit_code = get_exit_code();
+	exit_code = get_exit_status();
 	var_lst_clear(g_env);
 	free(g_env);
 	return (exit_code);
 }
 
-int	get_exit_code(void)
+int	get_exit_status(void)
 {
 	t_var	*current_status;
 	int		exit_code;
