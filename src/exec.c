@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/24 00:43:08 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:49:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 	{
 		close_pipes(st_shell);
 		waitpid(pid, &exit_status, 0);
-		set_exit_status(WEXITSTATUS(exit_status));
+		if (get_exit_code() != 130)
+			set_exit_status(WEXITSTATUS(exit_status));
 	}
 	ft_free_char_matrix(&envp);
 	ft_free_char_matrix(&st_shell->args);
