@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 20:43:04 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/29 06:40:28 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,53 @@ void	set_in_out(t_shell *st_shell)
 	}
 }
 
-char	*check_file_name(char *file_name)
+t_bool	check_file_access(char *file_name, char token)
 {
-	int	inx;
-
-	inx = 0;
-	while (ft_isprint(file_name[inx]))
+	if (token == '<')
 	{
-		if (ft_strchr("<>"))
+		if (access(file_name, F_OK) != 0)
+		{
+			error_message(file_name, ERROR_FILE_DIR);
+			return (FALSE);
+		}
+		if (access(file_name, X_OK) != 0)
+		{
+			error_message(file_name, ERROR_PERMI);
+			return (FALSE);
+		}
+		token_lst->infile = open(file_name, O_RDWR);
 	}
+	else if (token == '>')
+		token_lst->outfile = open(file_name, O_TRUNC | O_RDWR | O_CREAT, 0644);
+	return (TRUE);
 }
 
-t_bool	check_file(t_shell *st_shell, t_type *token_lst, int *inx)
+t_bool	check_file_name(char *file, int *str_inx, char token)
 {
-	while (ft_isspace(token_lst->str[*inx]))
-		*inx++;
-	if (token_lst->str[*inx] == '\0')
+	int		file_inx;
+	char	*unquoted;
+
+	file_inx = 0;
+	while (ft_isprint(file_name[file_inx]) && file_name[file_inx] != '\0')
 	{
-		ft_putstr_fd(LULUSHELL_ERROR, 2);
-		ft_putendl_fd(SYNTAX_ERROR, 2);
+		if (file_name[file_inx == '\'' || file_name[file_inx] == '\"'])
+			quit_quote(file_name, &file_inx);
+		if (ft_strchr("<>$ ", file_name[file_inx]))
+			break ;
+		file_inx++;
 	}
-	while (ft_isalnum(token_lst->str[*inx]))
-	{
-		
-	}
+	unquoted = remove_quotes_from_word(file_name, file_inx);
+	*str_inx += file_inx;
+	return (check_file_access(unquote, token));
 }
+
+
 
 t_bool	reconize_redirect(t_type *token_lst, t_shell *st_shell)
 {
 	int		inx;
+	int		inx_start;
+	char	token;
 
 	inx = 0;
 	while (token_lst->str[inx])
@@ -72,9 +90,20 @@ t_bool	reconize_redirect(t_type *token_lst, t_shell *st_shell)
 			quit_quote(token_lst->str, &inx);
 		else if (ft_strchr("<>", token_lst->str[inx]))
 		{
-			inx++;
-			if (check_file == FALSE)
+			inx_start = inx;
+			token = token_lst->str[inx];
+			while (ft_isspace(file_name[inx]))
+				inx++;
+			if (file_name[inx] == '\0')
+			{
+				ft_putstr_fd(LULUSHELL_ERROR, 2);
+				ft_putendl_fd(SYNTAX_ERROR, 2);
 				return (FALSE);
+			}
+			if (check_file(&token_lst->str[inx], &inx, token) == FALSE)
+				return (FALSE);
+			else
+
 		}
 		inx++;
 	}

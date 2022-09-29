@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees_and_closes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 20:30:59 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/29 02:54:01 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	close_pipes(t_shell *st_shell)
 
 void	cmd_error(t_shell *st_shell, char ***paths)
 {
-	ft_putstr_fd("luluShell: ", STDERR_FILENO);
+	ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
@@ -43,8 +43,16 @@ void	cmd_error(t_shell *st_shell, char ***paths)
 
 void	free_args_error(t_shell *st_shell, char *message)
 {
-	ft_putstr_fd("luluShell: ", STDERR_FILENO);
+	ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(message, STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
+}
+
+void	error_message(char *error_type, char *erro_message)
+{
+	ft_putstr_fd(LULUSHELL_ERROR, 2);
+	ft_putstr_fd(error_type, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(error_message, 2);
 }
