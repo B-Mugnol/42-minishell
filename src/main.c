@@ -6,15 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 00:53:02 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 20:47:11 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:49:48 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_var	**g_env;
-
-static int	get_exit_code(void);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	return (exit_code);
 }
 
-static int	get_exit_code(void)
+int	get_exit_code(void)
 {
 	t_var	*current_status;
 	int		exit_code;

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:07:47 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:49:05 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <dirent.h>
 
 extern t_var	**g_env;
+
+int		get_exit_code(void);
 
 void	init(char **envp);
 void	get_comman(char *usr_in, t_shell *comman);
