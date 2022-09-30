@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 20:48:13 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/30 02:35:35 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 {
 	st_shell->args = ft_word_split(token_lst->str, ft_isspace);
 	remove_args_quote(st_shell->args);
-	if (**st_shell->args == '/' || **st_shell->args == '.')
+	if (st_shell->args[0][0] == '/' ||
+		(st_shell->args[0][0] == '.' && st_shell->args[0][1] == '/'))
 	{
 		if (access(st_shell->args[0], F_OK) != 0)
 		{
