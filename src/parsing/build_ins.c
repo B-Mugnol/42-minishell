@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 00:11:04 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 00:58:32 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
 	pid = fork();
 	if (pid == 0)
 	{
+		dup2(st_shell->infile, STDIN_FILENO);
+		dup2(st_shell->outfile, STDOUT_FILENO);
 		close_fds(st_shell);
 		exec_builds(builds, build_inx, token_lst);
-		ft_exit("exit", token_lst, builds);
+		ft_exit(NULL, token_lst, builds);
 	}
 	if (st_shell->lst_inx == st_shell->lst_size)
 	{
@@ -82,8 +84,6 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 		free(builds);
 		return (FALSE);
 	}
-	dup2(st_shell->infile, STDIN_FILENO);
-	dup2(st_shell->outfile, STDOUT_FILENO);
 	if (st_shell->lst_size == 1)
 		exec_builds(builds, build_inx, token_lst);
 	else
