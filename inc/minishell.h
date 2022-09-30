@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 20:48:10 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:02:04 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 extern t_var	**g_env;
 
+t_shell	*global_struct(void);
 void	init(char **envp);
 void	get_comman(char *usr_in, t_shell *comman);
 void	exec(t_shell *st_shell, char **envp);
@@ -44,5 +45,9 @@ void	close_pipes(t_shell *st_shell);
 void	cmd_error(t_shell	*st_shell, char	***paths);
 void	file_dir_error(t_shell *st_shell);
 void	free_args_error(t_shell *st_shell, char *message);
+
+// erro.c
+void	error_message(char *error_type, char *erro_message);
+t_bool	error_syntax(void);
 
 #endif

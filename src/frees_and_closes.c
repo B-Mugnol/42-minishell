@@ -6,7 +6,7 @@
 /*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/29 02:54:01 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:12:37 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,4 @@ void	free_args_error(t_shell *st_shell, char *message)
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(message, STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
-}
-
-void	error_message(char *error_type, char *erro_message)
-{
-	ft_putstr_fd(LULUSHELL_ERROR, 2);
-	ft_putstr_fd(error_type, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(error_message, 2);
 }
