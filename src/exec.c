@@ -45,10 +45,7 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 		return ;
 	envp = get_environment();
 	if (recognizer_cmd(token_lst, st_shell) == FALSE)
-	{
-		ft_free_char_matrix(&envp);
-		return (set_exit_status(127));
-	}
+		return (ft_free_char_matrix(&envp));
 	pid = fork();
 	if (pid == 0)
 		exec(st_shell, envp);
