@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:23:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 05:36:13 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	parsing(char *std_in, t_shell *st_shell)
 	t_type	*token_lst;
 
 	token_lst = tokenizer(std_in, st_shell);
+	if (!token_lst)
+		return ;
 	parsing_loop(token_lst, st_shell);
 	type_lst_clear(&token_lst);
 }
