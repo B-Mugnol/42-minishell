@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/24 00:54:49 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 05:49:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define LULUSHELL_ERROR "luluShell: "
 # define ERROR_FILE_DIR ": No such file or directory"
 # define ERROR_PERMI ": Permission denied"
+
+# define WHITE_SPACE_CHARS " \f\n\r\t\v"
 
 # include "minishell.h"
 # include <sys/wait.h>
