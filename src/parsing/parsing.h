@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/30 03:22:29 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/30 07:19:28 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define LULUSHELL_ERROR "luluShell: "
 # define ERROR_FILE_DIR ": No such file or directory"
 # define ERROR_PERMI ": Permission denied"
+
+# define WHITE_SPACE_CHARS " \f\n\r\t\v"
 
 # include "minishell.h"
 # include <sys/wait.h>

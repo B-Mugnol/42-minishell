@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/24 00:59:46 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 00:43:17 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
 		exec_builds(builds, build_inx, token_lst);
 	else
 		fork_exec_builds(builds, build_inx, token_lst, st_shell);
+	free(builds);
 	return (TRUE);
 }

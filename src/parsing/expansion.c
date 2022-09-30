@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 18:20:52 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/22 22:30:44 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:32:34 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	find_var_and_expand(char **str, t_bool is_assignment)
 	inx = 0;
 	while ((*str)[inx])
 	{
-		if ((*str)[inx] == '\'')
+		if ((*str)[inx] == '\'' && !is_within_quotes(*str, inx))
 			quit_quote(*str, &inx);
 		if ((*str)[inx] == '~' && !is_within_quotes(*str, inx)
 			&& is_expansible_tilde(*str, inx, is_assignment))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:57:23 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/09/30 07:19:06 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_bool	check_paths(t_shell *st_shell)
 		inx++;
 	}
 	cmd_error(st_shell, &cmds_paths);
+	set_exit_status(127);
 	return (FALSE);
 }
 
@@ -53,11 +54,13 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 {
 	st_shell->args = ft_word_split(token_lst->str, ft_isspace);
 	remove_args_quote(st_shell->args);
-	if (**st_shell->args == '/' || **st_shell->args == '.')
+	if (st_shell->args[0][0] == '/' ||
+		(st_shell->args[0][0] == '.' && st_shell->args[0][1] == '/'))
 	{
 		if (access(st_shell->args[0], F_OK) != 0)
 		{
 			free_args_error(st_shell, ERROR_FILE_DIR);
+			set_exit_status(127);
 			return (FALSE);
 		}
 		if (access(st_shell->args[0], X_OK) == 0)
@@ -68,6 +71,7 @@ t_bool	recognizer_cmd(t_type *token_lst, t_shell *st_shell)
 		else
 		{
 			free_args_error(st_shell, ERROR_PERMI);
+			set_exit_status(126);
 			return (FALSE);
 		}
 	}

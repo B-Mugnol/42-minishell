@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/24 00:43:08 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 04:54:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ t_bool	is_dir(t_type *token_lst)
 	dir = opendir(cmds[0]);
 	if (dir != NULL)
 	{
-		ft_putstr_fd("luluShell: ", 2);
-		ft_putstr_fd(cmds[0], 2);
-		ft_putendl_fd(": Is a directory", 2);
-		ft_free_char_matrix(&cmds);
-		free(dir);
+		closedir(dir);
+		if ((ft_strlen(cmds[0]) > 1 && cmds[0][ft_strlen(cmds[0]) - 1] == '/')
+			|| (cmds[0][0] == '.' && cmds[0][1] == '/') || cmds[0][0] == '/')
+		{
+			generic_error(126, cmds[0], "Is a directory");
+			ft_free_char_matrix(&cmds);
+		}
+		else
+		{
+			ft_free_char_matrix(&cmds);
+			return (FALSE);
+		}
 		return (TRUE);
 	}
 	ft_free_char_matrix(&cmds);
@@ -45,10 +52,7 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 		return ;
 	envp = get_environment();
 	if (recognizer_cmd(token_lst, st_shell) == FALSE)
-	{
-		ft_free_char_matrix(&envp);
-		return (set_exit_status(127));
-	}
+		return (ft_free_char_matrix(&envp));
 	pid = fork();
 	if (pid == 0)
 		exec(st_shell, envp);
@@ -56,7 +60,8 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 	{
 		close_pipes(st_shell);
 		waitpid(pid, &exit_status, 0);
-		set_exit_status(WEXITSTATUS(exit_status));
+		if (get_exit_status() != 130)
+			set_exit_status(WEXITSTATUS(exit_status));
 	}
 	ft_free_char_matrix(&envp);
 	ft_free_char_matrix(&st_shell->args);
