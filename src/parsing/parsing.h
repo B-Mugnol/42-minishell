@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/24 00:54:49 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:22:29 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 // commands.c
 t_bool		recognizer_cmd(t_type *token_lst, t_shell *st_shell);
-void		set_in_out(t_shell *st_shell);
 void		fork_exec(t_shell *st_shell, t_type *token_lst);
 
 // build_ins.c
@@ -54,5 +53,14 @@ t_bool		is_valid_varname(char *str);
 t_bool		is_valid_varname_char(char c);
 char		*get_var_name(char *str);
 t_var		*get_var_from_assignment(char *str);
+
+// set_in_outs.c
+void		set_in_out(t_shell *st_shell);
+t_bool		reconize_redirect(t_type *tk_lst, t_shell *shell);
+t_bool		file_name(char *file, size_t *str_inx, char tk, t_shell *shell);
+t_bool	check_file_access(char *file, char token, t_shell *st_shell);
+
+// redirect_utils.c
+t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);
 
 #endif

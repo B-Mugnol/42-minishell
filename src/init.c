@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:25:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/22 20:45:23 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:26:52 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init(char **envp)
 	char	*shell_name;
 	t_shell	st_shell;
 
-	shell_name = "luluShell>";
+	shell_name = "luluShell> ";
 	g_env = get_environment_lst(envp);
 	set_exit_status(EXIT_SUCCESS);
 	sig_setup();
@@ -63,4 +63,27 @@ static t_var	**get_environment_lst(char **envp)
 		inx++;
 	}
 	return (env_lst);
+}
+
+void	set_in_out(t_shell *st_shell)
+{
+	st_shell->infile = STDIN_FILENO;
+	st_shell->outfile = STDOUT_FILENO;
+	if (st_shell->lst_size != 1)
+	{
+		if (st_shell->lst_inx == 1)
+		{
+			pipe(st_shell->pipe);
+			st_shell->outfile = st_shell->pipe[STDOUT_FILENO];
+		}
+		else if (st_shell->lst_inx != st_shell->lst_size)
+		{
+			st_shell->infile = st_shell->pipe[STDIN_FILENO];
+			close(st_shell->pipe[STDOUT_FILENO]);
+			pipe(st_shell->pipe);
+			st_shell->outfile = st_shell->pipe[STDOUT_FILENO];
+		}
+		else
+			st_shell->infile = st_shell->pipe[STDIN_FILENO];
+	}
 }
