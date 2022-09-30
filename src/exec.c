@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:53:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 04:54:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@ t_bool	is_dir(t_type *token_lst)
 	dir = opendir(cmds[0]);
 	if (dir != NULL)
 	{
-		ft_putstr_fd("luluShell: ", 2);
-		ft_putstr_fd(cmds[0], 2);
-		ft_putendl_fd(": Is a directory", 2);
-		ft_free_char_matrix(&cmds);
-		free(dir);
+		closedir(dir);
+		if ((ft_strlen(cmds[0]) > 1 && cmds[0][ft_strlen(cmds[0]) - 1] == '/')
+			|| (cmds[0][0] == '.' && cmds[0][1] == '/') || cmds[0][0] == '/')
+		{
+			generic_error(126, cmds[0], "Is a directory");
+			ft_free_char_matrix(&cmds);
+		}
+		else
+		{
+			ft_free_char_matrix(&cmds);
+			return (FALSE);
+		}
 		return (TRUE);
 	}
 	ft_free_char_matrix(&cmds);
