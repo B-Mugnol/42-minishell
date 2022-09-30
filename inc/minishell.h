@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:53:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:25:30 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	child_sig_setup(void);
 void	close_fds(t_shell *st_shell);
 void	close_pipes(t_shell *st_shell);
 void	cmd_error(t_shell	*st_shell, char	***paths);
-void	file_dir_error(t_shell *st_shell);
 void	free_args_error(t_shell *st_shell, char *message);
+void	generic_error(int exit_status, char *locale, char *message);
 
 #endif
