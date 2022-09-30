@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 00:40:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 01:07:51 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void			exit_handler(char **params, t_type *token_lst,
 						t_builtin *builds);
 static long double	ft_atold(const char *s);
 
-void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds)
+void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds,
+	t_bool print)
 {
 	char	**params;
 	char	*unquoted;
@@ -26,7 +27,8 @@ void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds)
 	params = ft_word_split(usr_in, ft_isspace);
 	if (!params)
 		return (exit(EXIT_FAILURE));
-	ft_putendl_fd("exit", 1);
+	if (print == TRUE)
+		ft_putendl_fd("exit", 2);
 	if (params[1])
 	{
 		unquoted = remove_quotes_from_word(params[1], ft_strlen(params[1]));

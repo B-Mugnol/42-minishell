@@ -6,13 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 21:59:56 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 01:03:08 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
-void	ft_env(void)
+void	ft_env(int write_fd)
 {
 	t_var	*iterator;
 
@@ -26,9 +26,9 @@ void	ft_env(void)
 	{
 		if (ft_strncmp(iterator->name, "?", 2) != 0)
 		{
-			ft_putstr_fd(iterator->name, 1);
-			ft_putstr_fd("=", 1);
-			ft_putendl_fd(iterator->value, 1);
+			ft_putstr_fd(iterator->name, write_fd);
+			ft_putstr_fd("=", write_fd);
+			ft_putendl_fd(iterator->value, write_fd);
 		}
 		iterator = iterator->next;
 	}
