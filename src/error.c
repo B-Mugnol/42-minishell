@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 22:12:18 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 00:58:28 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:46:14 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_bool	error_syntax(void)
 {
 	ft_putstr_fd(LULUSHELL_ERROR, 2);
 	ft_putendl_fd(SYNTAX_ERROR, 2);
+	set_exit_status(2);
 	return (FALSE);
 }
