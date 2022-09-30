@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 03:23:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/09/30 07:19:56 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	close_pipes(t_shell *st_shell)
 
 void	cmd_error(t_shell *st_shell, char ***paths)
 {
-	ft_putstr_fd("luluShell: ", STDERR_FILENO);
+	ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
@@ -43,7 +43,7 @@ void	cmd_error(t_shell *st_shell, char ***paths)
 
 void	free_args_error(t_shell *st_shell, char *message)
 {
-	ft_putstr_fd("luluShell: ", STDERR_FILENO);
+	ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(message, STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
