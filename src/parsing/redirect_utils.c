@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 05:29:12 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:54:59 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_str_size(t_type *token_lst, int start_inx, int end_inx)
+static void	here_doc(char *delimiter, t_shell *shell);
+
+static int	count_str_size(t_type *token_lst, int start_inx, int end_inx)
 {
 	int	inx;
 	int	new_str_size;
@@ -28,7 +30,7 @@ int	count_str_size(t_type *token_lst, int start_inx, int end_inx)
 	return (new_str_size);
 }
 
-static void	cut_str(t_type *token_lst, int start_inx, int end_inx)
+void	cut_str(t_type *token_lst, int start_inx, int end_inx)
 {
 	int		new_str_size;
 	int		new_str_inx;
@@ -68,7 +70,9 @@ t_bool	file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell)
 	}
 	unquoted = remove_quotes_from_word(file, file_inx);
 	*str_inx += file_inx;
-	if (check_file_access(unquoted, tk, shell) == FALSE)
+	if (tk == HEREDOC)
+		here_doc(unquoted, shell);
+	else if (check_file_access(unquoted, tk, shell) == FALSE)
 	{
 		free(unquoted);
 		return (FALSE);
@@ -77,30 +81,46 @@ t_bool	file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell)
 	return (TRUE);
 }
 
-t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
+t_tokens	get_token(char *str, size_t *inx)
 {
-	t_tokens	token;
-	int			start_inx;
-
-	start_inx = inx;
-	if (token_lst->str[inx] == '>' && token_lst->str[inx + 1] == '>')
+	if (str[*inx] == '>' && str[*inx + 1] == '>')
 	{
-		token = APPEND;
-		inx++;
+		(*inx)++;
+		return (APPEND);
 	}
-	else if (token_lst->str[inx] == '<')
-		token = INFILE;
-	else if (token_lst->str[inx] == '>')
-		token = OUTFILE;
-	inx++;
-	while (ft_isspace(token_lst->str[inx]) != 0)
-		inx++;
-	if (token_lst->str[inx] == '\0')
-		return (error_syntax());
-	if (file_name(&token_lst->str[inx], &inx, token, st_shell) == FALSE)
-		return (FALSE);
-	cut_str(token_lst, start_inx, inx);
-	if (*token_lst->str == '\0')
-		return (FALSE);
-	return (TRUE);
+	else if (str[*inx] == '<' && str[*inx + 1] == '<')
+	{
+		(*inx)++;
+		return (HEREDOC);
+	}
+	else if (str[*inx] == '<')
+		return (INFILE);
+	else if (str[*inx] == '>')
+		return (OUTFILE);
+	return (NOT_REDIR);
+}
+
+static void	here_doc(char *delimiter, t_shell *shell)
+{
+	char	*input;
+	int		rw_pipe[2];
+
+	pipe(rw_pipe);
+	input = readline("> ");
+	while (input && ft_strncmp(input, delimiter, ft_strlen(input) + 1) != 0)
+	{
+		ft_putendl_fd(input, rw_pipe[1]);
+		free(input);
+		input = readline("> ");
+	}
+	if (input)
+		free(input);
+	else
+	{
+		ft_putstr_fd("here-document delimited by end-of-file (wanted `", 2);
+		ft_putstr_fd(delimiter, 2);
+		ft_putendl_fd("')", 2);
+	}
+	close(rw_pipe[1]);
+	shell->infile = rw_pipe[0];
 }

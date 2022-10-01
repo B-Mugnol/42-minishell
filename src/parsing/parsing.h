@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/01 02:46:16 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 20:19:51 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef enum e_tokens
 {
 	INFILE,
 	OUTFILE,
-	APPEND
+	APPEND,
+	HEREDOC,
+	NOT_REDIR
 }	t_tokens;
 
 // commands.c
@@ -67,10 +69,11 @@ t_var		*get_var_from_assignment(char *str);
 // set_in_outs.c
 void		set_in_out(t_shell *st_shell);
 t_bool		reconize_redirect(t_type *tk_lst, t_shell *shell);
-t_bool		file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell);
 t_bool		check_file_access(char *file, t_tokens token, t_shell *st_shell);
 
 // redirect_utils.c
-t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);
+void		cut_str(t_type *token_lst, int start_inx, int end_inx);
+t_tokens	get_token(char *str, size_t *inx);
+t_bool		file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell);
 
 #endif

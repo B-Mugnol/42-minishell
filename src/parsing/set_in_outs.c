@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_in_outs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 06:13:10 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 21:02:08 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);
 
 t_bool	check_file_access(char *file, t_tokens token, t_shell *st_shell)
 {
@@ -52,5 +54,25 @@ t_bool	reconize_redirect(t_type *token_lst, t_shell *st_shell)
 		}
 		inx++;
 	}
+	return (TRUE);
+}
+
+static t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
+{
+	t_tokens	token;
+	int			start_inx;
+
+	start_inx = inx;
+	token = get_token(token_lst->str, &inx);
+	inx++;
+	while (ft_isspace(token_lst->str[inx]) != 0)
+		inx++;
+	if (token_lst->str[inx] == '\0')
+		return (error_syntax());
+	if (file_name(&token_lst->str[inx], &inx, token, st_shell) == FALSE)
+		return (FALSE);
+	cut_str(token_lst, start_inx, inx);
+	if (*token_lst->str == '\0')
+		return (FALSE);
 	return (TRUE);
 }
