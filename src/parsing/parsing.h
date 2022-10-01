@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/01 02:44:19 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 05:27:46 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define SYNTAX_ERROR "syntax error near unexpected token `newline'"
 # define LULUSHELL_ERROR "luluShell: "
-# define ERROR_FILE_DIR ": No such file or directory"
-# define ERROR_PERMI ": Permission denied"
+# define ERROR_FILE_DIR "No such file or directory"
+# define ERROR_PERMI "Permission denied"
 
 # define WHITE_SPACE_CHARS " \f\n\r\t\v"
 
@@ -24,6 +24,13 @@
 # include <sys/wait.h>
 # include "var_lst.h"
 # include "type_lst.h"
+
+typedef enum e_tokens
+{
+	INFILE,
+	OUTFILE,
+	APPEND
+}	t_tokens;
 
 // commands.c
 t_bool		recognizer_cmd(t_type *token_lst, t_shell *st_shell);
@@ -59,8 +66,8 @@ t_var		*get_var_from_assignment(char *str);
 // set_in_outs.c
 void		set_in_out(t_shell *st_shell);
 t_bool		reconize_redirect(t_type *tk_lst, t_shell *shell);
-t_bool		file_name(char *file, size_t *str_inx, char tk, t_shell *shell);
-t_bool		check_file_access(char *file, char token, t_shell *st_shell);
+t_bool		file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell);
+t_bool		check_file_access(char *file, t_tokens token, t_shell *st_shell);
 
 // redirect_utils.c
 t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);

@@ -6,36 +6,30 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 03:23:26 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 04:58:56 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	check_file_access(char *file, char token, t_shell *st_shell)
+t_bool	check_file_access(char *file, t_tokens token, t_shell *st_shell)
 {
-	if (token == '<')
+	if (token == INFILE)
 	{
 		if (access(file, F_OK) != 0)
-		{
-			error_message(file, ERROR_FILE_DIR);
-			return (FALSE);
-		}
+			return (generic_error(1, file, ERROR_FILE_DIR));
 		if (access(file, R_OK) != 0)
-		{
-			error_message(file, ERROR_PERMI);
-			return (FALSE);
-		}
+			return (generic_error(1, file, ERROR_PERMI));
 		st_shell->infile = open(file, O_RDWR);
 	}
-	else if (token == '>')
+	else if (token == OUTFILE || token == APPEND)
 	{
-		st_shell->outfile = open(file, O_TRUNC | O_RDWR | O_CREAT, 0644);
+		if (token == APPEND)
+			st_shell->outfile = open(file, O_APPEND | O_RDWR | O_CREAT, 0644);
+		else
+			st_shell->outfile = open(file, O_TRUNC | O_RDWR | O_CREAT, 0644);
 		if (st_shell->outfile == -1)
-		{
-			generic_error(1, file, ERROR_PERMI);
-			return (FALSE);
-		}
+			return (generic_error(1, file, ERROR_PERMI));
 	}
 	return (TRUE);
 }

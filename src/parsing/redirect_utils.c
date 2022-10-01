@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 02:46:06 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 05:29:12 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	cut_str(t_type *token_lst, int start_inx, int end_inx)
 	token_lst->str = new_str;
 }
 
-t_bool	file_name(char *file, size_t *str_inx, char tk, t_shell *shell)
+t_bool	file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell)
 {
 	size_t	file_inx;
 	char	*unquoted;
@@ -70,7 +70,6 @@ t_bool	file_name(char *file, size_t *str_inx, char tk, t_shell *shell)
 	*str_inx += file_inx;
 	if (check_file_access(unquoted, tk, shell) == FALSE)
 	{
-		set_exit_status(1);
 		free(unquoted);
 		return (FALSE);
 	}
@@ -80,11 +79,19 @@ t_bool	file_name(char *file, size_t *str_inx, char tk, t_shell *shell)
 
 t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
 {
-	char	token;
-	int		start_inx;
+	t_tokens	token;
+	int			start_inx;
 
 	start_inx = inx;
-	token = token_lst->str[inx];
+	if (token_lst->str[inx] == '<')
+		token = INFILE;
+	else if (token_lst->str[inx] == '>')
+		token = OUTFILE;
+	else if (token_lst->str[inx] == '>' && token_lst->str[inx + 1] == '>')
+	{
+		token = APPEND;
+		inx++;
+	}
 	inx++;
 	while (ft_isspace(token_lst->str[inx]) != 0)
 		inx++;
