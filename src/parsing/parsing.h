@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/01 02:44:19 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:46:16 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			hash_search(const char *key, t_builtin *builds);
 
 // tokenizer.c
 t_type		*tokenizer(char *usr_in, t_shell *s_shell);
+t_bool		is_empty_str(char *usr_in);
 
 // parsing.c
 void		parsing(char *std_in, t_shell *st_shell);

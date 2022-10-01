@@ -6,14 +6,13 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 01:42:02 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:48:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing.h"
 
-static t_bool	is_empty_str(char *usr_in);
 static t_bool	has_unclosed_quotes(char *str);
 
 t_type	*tokenizer(char *usr_in, t_shell *st_shell)
@@ -43,10 +42,12 @@ t_type	*tokenizer(char *usr_in, t_shell *st_shell)
 	return (lst);
 }
 
-static t_bool	is_empty_str(char *usr_in)
+t_bool	is_empty_str(char *usr_in)
 {
 	char	*aux;
 
+	if (!usr_in || !*usr_in)
+		return (TRUE);
 	aux = ft_strtrim(usr_in, WHITE_SPACE_CHARS);
 	if (!aux)
 		return (TRUE);
