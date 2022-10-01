@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 02:49:31 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:02:27 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,18 @@ void	parsing(char *std_in, t_shell *st_shell)
 	if (!token_lst)
 		return ;
 	parsing_loop(token_lst, st_shell);
-	type_lst_clear(&token_lst);
+	st_shell->lst_inx = 0;
+	while (st_shell->lst_inx < st_shell->lst_size)
+	{
+		waitpid(-1, NULL, 0);
+		st_shell->lst_inx++;
+	}
 }
 
 void	parsing_loop(t_type *token_lst, t_shell *st_shell)
 {
+	t_type	*aux;
+
 	st_shell->lst_inx = 1;
 	while (token_lst)
 	{
@@ -45,13 +52,9 @@ void	parsing_loop(t_type *token_lst, t_shell *st_shell)
 				sig_setup();
 			}
 		}
+		aux = token_lst;
 		token_lst = token_lst->next;
-		st_shell->lst_inx++;
-	}
-	st_shell->lst_inx = 0;
-	while (st_shell->lst_inx < st_shell->lst_size)
-	{
-		waitpid(-1, NULL, 0);
+		type_lst_delete_node(aux);
 		st_shell->lst_inx++;
 	}
 }
