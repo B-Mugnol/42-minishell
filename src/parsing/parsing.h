@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/30 07:19:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:44:19 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_var		*get_var_from_assignment(char *str);
 void		set_in_out(t_shell *st_shell);
 t_bool		reconize_redirect(t_type *tk_lst, t_shell *shell);
 t_bool		file_name(char *file, size_t *str_inx, char tk, t_shell *shell);
-t_bool	check_file_access(char *file, char token, t_shell *st_shell);
+t_bool		check_file_access(char *file, char token, t_shell *st_shell);
 
 // redirect_utils.c
 t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);

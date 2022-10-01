@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/23 00:40:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 03:31:38 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds)
 	params = ft_word_split(usr_in, ft_isspace);
 	if (!params)
 		return (exit(EXIT_FAILURE));
-	ft_putendl_fd("exit", 1);
+	ft_putendl_fd("exit", 2);
 	if (params[1])
 	{
 		unquoted = remove_quotes_from_word(params[1], ft_strlen(params[1]));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_in_outs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 05:10:20 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 03:23:26 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,14 @@ t_bool	check_file_access(char *file, char token, t_shell *st_shell)
 		st_shell->infile = open(file, O_RDWR);
 	}
 	else if (token == '>')
+	{
 		st_shell->outfile = open(file, O_TRUNC | O_RDWR | O_CREAT, 0644);
+		if (st_shell->outfile == -1)
+		{
+			generic_error(1, file, ERROR_PERMI);
+			return (FALSE);
+		}
+	}
 	return (TRUE);
 }
 
