@@ -6,13 +6,14 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 21:02:08 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 00:31:33 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);
+static void		get_here_doc(t_type *token_lst, t_shell *st_shell, size_t inx);
 
 t_bool	check_file_access(char *file, t_tokens token, t_shell *st_shell)
 {
@@ -41,6 +42,7 @@ t_bool	reconize_redirect(t_type *token_lst, t_shell *st_shell)
 	size_t	inx;
 
 	inx = 0;
+	get_here_doc(token_lst, st_shell, inx);
 	while (token_lst->str[inx])
 	{
 		if (token_lst->str[inx] == '\'' || token_lst->str[inx] == '\"')
@@ -75,4 +77,21 @@ static t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
 	if (*token_lst->str == '\0')
 		return (FALSE);
 	return (TRUE);
+}
+
+static void	get_here_doc(t_type *token_lst, t_shell *st_shell, size_t inx)
+{
+	char	*tk;
+
+	if (inx >= ft_strlen(token_lst->str))
+		return ;
+	tk = ft_strnstr(token_lst->str + inx, "<<",
+			ft_strlen(token_lst->str + inx));
+	if (!tk)
+		return ;
+	inx = tk - token_lst->str;
+	if (!is_within_quotes(token_lst->str, inx))
+		set_redirect(token_lst, st_shell, inx);
+	else
+		get_here_doc(token_lst, st_shell, inx + 1);
 }
