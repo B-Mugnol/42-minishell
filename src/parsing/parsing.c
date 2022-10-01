@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 01:09:59 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:49:31 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	parsing_loop(t_type *token_lst, t_shell *st_shell)
 	{
 		find_var_and_expand(&token_lst->str, FALSE);
 		set_in_out(st_shell);
-		if (reconize_redirect(token_lst, st_shell) == TRUE)
+		if (is_empty_str(token_lst->str))
+			set_exit_status(EXIT_SUCCESS);
+		else if (reconize_redirect(token_lst, st_shell) == TRUE)
 		{
 			if (is_builds(token_lst, st_shell) == FALSE)
 			{

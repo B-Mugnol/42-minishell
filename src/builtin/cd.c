@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:35 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/23 00:12:12 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:34:58 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_cd(char *usr_in)
 {
 	char	**words;
 	char	*unquoted_path;
+	char	*old_pwd;
 
 	set_exit_status(EXIT_SUCCESS);
 	words = ft_word_split(usr_in, ft_isspace);
@@ -30,6 +31,8 @@ void	ft_cd(char *usr_in)
 	unquoted_path = NULL;
 	if (words[1])
 		unquoted_path = remove_quotes_from_word(words[1], ft_strlen(words[1]));
+	old_pwd = getcwd(NULL, 0);
+	var_lst_add_var(g_env, var_lst_new(ft_strdup("OLDPWD"), old_pwd));
 	change_directory(unquoted_path);
 	free(unquoted_path);
 	ft_free_char_matrix(&words);

@@ -83,15 +83,15 @@ t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
 	int			start_inx;
 
 	start_inx = inx;
-	if (token_lst->str[inx] == '<')
-		token = INFILE;
-	else if (token_lst->str[inx] == '>')
-		token = OUTFILE;
-	else if (token_lst->str[inx] == '>' && token_lst->str[inx + 1] == '>')
+	if (token_lst->str[inx] == '>' && token_lst->str[inx + 1] == '>')
 	{
 		token = APPEND;
 		inx++;
 	}
+	else if (token_lst->str[inx] == '<')
+		token = INFILE;
+	else if (token_lst->str[inx] == '>')
+		token = OUTFILE;
 	inx++;
 	while (ft_isspace(token_lst->str[inx]) != 0)
 		inx++;
