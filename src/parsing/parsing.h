@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/30 07:19:28 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:46:16 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			hash_search(const char *key, t_builtin *builds);
 
 // tokenizer.c
 t_type		*tokenizer(char *usr_in, t_shell *s_shell);
+t_bool		is_empty_str(char *usr_in);
 
 // parsing.c
 void		parsing(char *std_in, t_shell *st_shell);
@@ -60,7 +61,7 @@ t_var		*get_var_from_assignment(char *str);
 void		set_in_out(t_shell *st_shell);
 t_bool		reconize_redirect(t_type *tk_lst, t_shell *shell);
 t_bool		file_name(char *file, size_t *str_inx, char tk, t_shell *shell);
-t_bool	check_file_access(char *file, char token, t_shell *st_shell);
+t_bool		check_file_access(char *file, char token, t_shell *st_shell);
 
 // redirect_utils.c
 t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);

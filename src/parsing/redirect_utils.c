@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 04:45:25 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/01 02:46:06 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_bool	file_name(char *file, size_t *str_inx, char tk, t_shell *shell)
 	*str_inx += file_inx;
 	if (check_file_access(unquoted, tk, shell) == FALSE)
 	{
+		set_exit_status(1);
 		free(unquoted);
 		return (FALSE);
 	}

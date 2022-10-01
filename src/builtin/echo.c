@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:43:21 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/22 23:37:25 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 01:02:52 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	has_n_flag(char **words);
 
-void	ft_echo(char *usr_in)
+void	ft_echo(char *usr_in, int write_fd)
 {
 	char	**words;
 	char	*unquoted;
@@ -32,14 +32,14 @@ void	ft_echo(char *usr_in)
 	while (words[inx])
 	{
 		unquoted = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
-		ft_putstr_fd(unquoted, 1);
+		ft_putstr_fd(unquoted, write_fd);
 		if (words[inx + 1])
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', write_fd);
 		free(unquoted);
 		inx++;
 	}
 	if (!n_flagged)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', write_fd);
 	ft_free_char_matrix(&words);
 }
 
