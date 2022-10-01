@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 20:54:59 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/01 21:48:26 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ static void	here_doc(char *delimiter, t_shell *shell)
 	input = readline("> ");
 	while (input && ft_strncmp(input, delimiter, ft_strlen(input) + 1) != 0)
 	{
+		find_var_and_expand(&input, FALSE);
 		ft_putendl_fd(input, rw_pipe[1]);
 		free(input);
 		input = readline("> ");
