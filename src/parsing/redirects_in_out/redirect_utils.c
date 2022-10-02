@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 06:21:39 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 22:02:33 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_str_size(t_type *token_lst, int start_inx, int end_inx)
+static int	count_str_size(t_pipe *pipe_lst, int start_inx, int end_inx)
 {
 	int	inx;
 	int	new_str_size;
 
 	inx = 0;
 	new_str_size = 0;
-	while (token_lst->str[inx])
+	while (pipe_lst->str[inx])
 	{
 		if (inx < start_inx || inx > end_inx)
 			new_str_size++;
@@ -28,28 +28,28 @@ static int	count_str_size(t_type *token_lst, int start_inx, int end_inx)
 	return (new_str_size);
 }
 
-void	cut_str(t_type *token_lst, int start_inx, int end_inx)
+void	cut_str(t_pipe *pipe_lst, int start_inx, int end_inx)
 {
 	int		new_str_size;
 	int		new_str_inx;
 	int		inx;
 	char	*new_str;
 
-	new_str_size = count_str_size(token_lst, start_inx, end_inx);
+	new_str_size = count_str_size(pipe_lst, start_inx, end_inx);
 	new_str = ft_calloc(sizeof(char), new_str_size + 1);
 	inx = 0;
 	new_str_inx = 0;
-	while (token_lst->str[inx] != 0 && new_str_size != 0)
+	while (pipe_lst->str[inx] != 0 && new_str_size != 0)
 	{
 		if (inx < start_inx || inx > end_inx)
 		{
-			new_str[new_str_inx] = token_lst->str[inx];
+			new_str[new_str_inx] = pipe_lst->str[inx];
 			new_str_inx++;
 		}
 		inx++;
 	}
-	free(token_lst->str);
-	token_lst->str = new_str;
+	free(pipe_lst->str);
+	pipe_lst->str = new_str;
 }
 
 t_bool	file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell)

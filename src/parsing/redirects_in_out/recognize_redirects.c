@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_in_outs.c                                      :+:      :+:    :+:   */
+/*   recognize_redirects.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/22 21:34:01 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 06:54:25 by bmugnol-         ###   ########.fr       */
+/*   Created: 2022/10/02 20:34:50 by llopes-n          #+#    #+#             */
+/*   Updated: 2022/10/02 22:23:18 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,25 @@ t_bool	check_file_access(char **file, t_tokens token, t_shell *st_shell)
 	return (TRUE);
 }
 
-int	recognize_redirect(t_type *token_lst, t_shell *st_shell)
+int	recognize_redirect(t_pipe *pipe_lst, t_shell *st_shell)
 {
 	size_t	inx;
 
 	inx = 0;
 	heredoc_sig_setup();
-	if (has_here_doc(token_lst, st_shell, inx) == FALSE)
+	if (has_here_doc(pipe_lst, st_shell, inx) == FALSE)
 	{
 		sig_setup();
 		return (-1);
 	}
 	sig_setup();
-	while (token_lst->str[inx])
+	while (pipe_lst->str[inx])
 	{
-		if (token_lst->str[inx] == '\'' || token_lst->str[inx] == '\"')
-			quit_quote(token_lst->str, &inx);
-		else if (ft_strchr("<>", token_lst->str[inx]))
+		if (pipe_lst->str[inx] == '\'' || pipe_lst->str[inx] == '\"')
+			quit_quote(pipe_lst->str, &inx);
+		else if (ft_strchr("<>", pipe_lst->str[inx]))
 		{
-			if (set_redirect(token_lst, st_shell, inx) == FALSE)
+			if (set_redirect(pipe_lst, st_shell, inx) == FALSE)
 				return (EXIT_FAILURE);
 			else
 				inx = 0;
@@ -79,22 +79,23 @@ int	recognize_redirect(t_type *token_lst, t_shell *st_shell)
 	return (EXIT_SUCCESS);
 }
 
-t_bool	set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx)
+t_bool	set_redirect(t_pipe *pipe_lst, t_shell *st_shell, size_t inx)
 {
 	t_tokens	token;
 	int			start_inx;
 
 	start_inx = inx;
-	token = get_token(token_lst->str, &inx);
+	token = get_token(pipe_lst->str, &inx);
 	inx++;
-	while (ft_isspace(token_lst->str[inx]) != 0)
-		inx++;
-	if (token_lst->str[inx] == '\0')
-		return (error_syntax());
-	if (file_name(&token_lst->str[inx], &inx, token, st_shell) == FALSE)
+	if (ft_isspace(pipe_lst->str[inx]) != 0)
+		while (ft_isspace(pipe_lst->str[inx]) != 0)
+			inx++;
+	if (error_syntax(&pipe_lst->str[inx]) == FALSE)
 		return (FALSE);
-	cut_str(token_lst, start_inx, inx);
-	if (*token_lst->str == '\0')
+	if (file_name(&pipe_lst->str[inx], &inx, token, st_shell) == FALSE)
+		return (FALSE);
+	cut_str(pipe_lst, start_inx, inx);
+	if (*pipe_lst->str == '\0')
 		return (FALSE);
 	return (TRUE);
 }

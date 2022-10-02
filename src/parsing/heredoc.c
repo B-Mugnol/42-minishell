@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 04:36:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 05:40:34 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:03:15 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 static char	*get_clean_line(int fd, char *old_input);
 
-t_bool	has_here_doc(t_type *token_lst, t_shell *st_shell, size_t inx)
+t_bool	has_here_doc(t_pipe *pipe_lst, t_shell *st_shell, size_t inx)
 {
 	char	*tk;
 
-	if (inx >= ft_strlen(token_lst->str))
+	if (inx >= ft_strlen(pipe_lst->str))
 		return (FALSE);
-	tk = ft_strnstr(token_lst->str + inx, "<<",
-			ft_strlen(token_lst->str + inx));
+	tk = ft_strnstr(pipe_lst->str + inx, "<<",
+			ft_strlen(pipe_lst->str + inx));
 	if (!tk)
 		return (TRUE);
-	inx = tk - token_lst->str;
-	if (!is_within_quotes(token_lst->str, inx))
+	inx = tk - pipe_lst->str;
+	if (!is_within_quotes(pipe_lst->str, inx))
 	{
-		if (set_redirect(token_lst, st_shell, inx) == FALSE)
+		if (set_redirect(pipe_lst, st_shell, inx) == FALSE)
 			return (FALSE);
 		return (TRUE);
 	}
-	return (has_here_doc(token_lst, st_shell, inx + 1));
+	return (has_here_doc(pipe_lst, st_shell, inx + 1));
 }
 
 t_bool	here_doc(char *delimiter, t_shell *shell)

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 06:22:47 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 21:56:07 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# define SYNTAX_ERROR "syntax error near unexpected token `newline'"
+# define SYNTAX_ERROR "syntax error near unexpected token "
 # define LULUSHELL_ERROR "luluShell: "
 # define ERROR_FILE_DIR "No such file or directory"
 # define ERROR_PERMI "Permission denied"
@@ -23,7 +23,7 @@
 # include "minishell.h"
 # include <sys/wait.h>
 # include "var_lst.h"
-# include "type_lst.h"
+# include "pipe_lst.h"
 
 typedef enum e_tokens
 {
@@ -35,16 +35,16 @@ typedef enum e_tokens
 }	t_tokens;
 
 // commands.c
-t_bool		recognizer_cmd(t_type *token_lst, t_shell *st_shell);
-void		fork_exec(t_shell *st_shell, t_type *token_lst);
+t_bool		recognizer_cmd(t_pipe *pipe_lst, t_shell *st_shell);
+void		fork_exec(t_shell *st_shell, t_pipe *pipe_lst);
 
 // build_ins.c
-t_bool		is_builds(t_type *token_lst, t_shell *st_shell);
+t_bool		is_builds(t_pipe *pipe_lst, t_shell *st_shell);
 t_builtin	*init_builds(void);
 int			hash_search(const char *key, t_builtin *builds);
 
-// tokenizer.c
-t_type		*tokenizer(char *usr_in, t_shell *s_shell);
+// parsing_parse.c
+t_pipe		*pipe_parse(char *usr_in, t_shell *s_shell);
 t_bool		is_empty_str(char *usr_in);
 
 // parsing.c
@@ -68,17 +68,17 @@ t_var		*get_var_from_assignment(char *str);
 
 // set_in_outs.c
 void		set_in_out(t_shell *st_shell);
-t_bool		set_redirect(t_type *token_lst, t_shell *st_shell, size_t inx);
-int			recognize_redirect(t_type *tk_lst, t_shell *shell);
+t_bool		set_redirect(t_pipe *pipe_lst, t_shell *st_shell, size_t inx);
+int			recognize_redirect(t_pipe *tk_lst, t_shell *shell);
 t_bool		check_file_access(char **file, t_tokens token, t_shell *st_shell);
 
 // redirect_utils.c
-void		cut_str(t_type *token_lst, int start_inx, int end_inx);
+void		cut_str(t_pipe *pipe_lst, int start_inx, int end_inx);
 t_tokens	get_token(char *str, size_t *inx);
 t_bool		file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell);
 
 // heredoc.c
-t_bool		has_here_doc(t_type *token_lst, t_shell *st_shell, size_t inx);
+t_bool		has_here_doc(t_pipe *pipe_lst, t_shell *st_shell, size_t inx);
 t_bool		here_doc(char *delimiter, t_shell *shell);
 
 #endif

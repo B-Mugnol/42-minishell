@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 01:48:08 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 21:58:03 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "struct.h"
 # include "var_lst.h"
-# include "type_lst.h"
+# include "pipe_lst.h"
 # include "parsing.h"
 # include "builtin.h"
 # include "libft.h"
@@ -55,6 +55,6 @@ void	free_args_error(t_shell *st_shell, char *message);
 
 // erro.c
 t_bool	generic_error(int exit_status, char *locale, char *message);
-t_bool	error_syntax(void);
+t_bool	error_syntax(char *str);
 
 #endif

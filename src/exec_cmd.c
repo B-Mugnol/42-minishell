@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 06:51:48 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:35:49 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static char	**get_environment(void);
 
-static t_bool	is_dir(t_type *token_lst)
+static t_bool	is_dir(t_pipe *pipe_lst)
 {
 	DIR		*dir;
 	char	**cmds;
 
-	cmds = ft_word_split(token_lst->str, ft_isspace);
+	cmds = ft_word_split(pipe_lst->str, ft_isspace);
 	dir = opendir(cmds[0]);
 	if (dir != NULL)
 	{
@@ -41,7 +41,7 @@ static t_bool	is_dir(t_type *token_lst)
 	return (FALSE);
 }
 
-void	fork_exec(t_shell *st_shell, t_type *token_lst)
+void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 {
 	int		pid;
 	int		exit_status;
@@ -49,10 +49,10 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 
 	child_sig_setup();
 	exit_status = 0;
-	if (is_dir(token_lst) == TRUE)
+	if (is_dir(pipe_lst) == TRUE)
 		return ;
 	envp = get_environment();
-	if (recognizer_cmd(token_lst, st_shell) == FALSE)
+	if (recognizer_cmd(pipe_lst, st_shell) == FALSE)
 		return (ft_free_char_matrix(&envp));
 	pid = fork();
 	if (pid == 0)

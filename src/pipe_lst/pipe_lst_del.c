@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_lst_del.c                                     :+:      :+:    :+:   */
+/*   pipe_lst_del.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 00:23:28 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/08/12 20:09:29 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:36:21 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "type_lst.h"
+#include "pipe_lst.h"
 
-void	type_lst_delete_node(t_type *node)
+void	pipe_lst_delete_node(t_pipe *node)
 {
 	if (!node)
 		return ;
@@ -20,16 +20,16 @@ void	type_lst_delete_node(t_type *node)
 	free(node);
 }
 
-void	type_lst_clear(t_type **lst)
+void	pipe_lst_clear(t_pipe **lst)
 {
-	t_type	*acc;
+	t_pipe	*acc;
 
 	if (!lst || !*lst)
 		return ;
 	while (*lst)
 	{
 		acc = (*lst)->next;
-		type_lst_delete_node(*lst);
+		pipe_lst_delete_node(*lst);
 		*lst = acc;
 	}
 	*lst = NULL;

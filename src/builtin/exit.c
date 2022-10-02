@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:34:05 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 01:09:51 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:05:10 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static t_bool		is_considered_digit_str(const char *str);
 static void			exit_error(char *arg, char *err_msg);
-static void			exit_handler(char **params, t_type *token_lst,
+static void			exit_handler(char **params, t_pipe *pipe_lst,
 						t_builtin *builds);
 static long double	ft_atold(const char *s);
 
-void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds,
+void	ft_exit(char *usr_in, t_pipe *pipe_lst, t_builtin *builds,
 	t_bool print)
 {
 	char	**params;
@@ -35,10 +35,10 @@ void	ft_exit(char *usr_in, t_type *token_lst, t_builtin *builds,
 		free(params[1]);
 		params[1] = unquoted;
 	}
-	exit_handler(params, token_lst, builds);
+	exit_handler(params, pipe_lst, builds);
 }
 
-static void	exit_handler(char **params, t_type *token_lst, t_builtin *builds)
+static void	exit_handler(char **params, t_pipe *pipe_lst, t_builtin *builds)
 {
 	int		exit_status;
 
@@ -59,7 +59,7 @@ static void	exit_handler(char **params, t_type *token_lst, t_builtin *builds)
 		exit_status = ft_atoi(params[1]);
 	ft_free_char_matrix(&params);
 	rl_clear_history();
-	type_lst_clear(&token_lst);
+	pipe_lst_clear(&pipe_lst);
 	free(builds);
 	var_lst_clear(g_env);
 	free(g_env);
