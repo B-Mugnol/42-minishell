@@ -20,9 +20,10 @@ H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
 SRC_DIR		:=	src src/builtin src/parsing src/type_lst src/var_lst
-SRC			:=	main.c exec.c signal.c hash_builds.c init.c error.c
+SRC			:=	main.c exec.c signal_setup.c hash_builds.c init.c error.c
+SRC			+=	signal_handler.c
 SRC			+=	expansion.c tokenizer.c parsing.c parsing_utils.c var_utils.c
-SRC			+=	redirect_utils.c frees_and_closes.c
+SRC			+=	redirect_utils.c frees_and_closes.c heredoc.c
 SRC 		+=	build_ins.c commands.c set_in_outs.c
 SRC			+=	var_lst_add.c var_lst_del.c var_lst_get.c
 SRC			+=	type_lst_add.c type_lst_del.c
