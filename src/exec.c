@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 04:54:27 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 06:51:48 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**get_environment(void);
 
-t_bool	is_dir(t_type *token_lst)
+static t_bool	is_dir(t_type *token_lst)
 {
 	DIR		*dir;
 	char	**cmds;
@@ -47,6 +47,7 @@ void	fork_exec(t_shell *st_shell, t_type *token_lst)
 	int		exit_status;
 	char	**envp;
 
+	child_sig_setup();
 	exit_status = 0;
 	if (is_dir(token_lst) == TRUE)
 		return ;

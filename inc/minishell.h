@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 05:01:22 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:48:08 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ void	exec(t_shell *st_shell, char **envp);
 void	set_exit_status(int exit_status);
 t_var	**set_node(void);
 
-// signal.c
+// signal_setup.c
 void	sig_setup(void);
 void	child_sig_setup(void);
+void	heredoc_sig_setup(void);
+
+// signal_handler.c
+void	signal_handler(int signal);
+void	child_signal_handler(int signal);
+void	heredoc_signal_handler(int signal);
 
 // frees_and_closes.c
 void	close_fds(t_shell *st_shell);
