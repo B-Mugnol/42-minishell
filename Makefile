@@ -13,19 +13,22 @@ RM		:=	rm -rf
 # PROGRAM
 # Headers
 HEADER_DIR	:=	inc
-HEADER_DIR	+=	src/builtin src/parsing src/type_lst src/var_lst
+HEADER_DIR	+=	src/builtin src/parsing src/pipe_lst src/var_lst
 HEADER		:=	minishell.h struct.h
-HEADER		+=	builtin.h parsing.h type_lst.h var_lst.h
+HEADER		+=	builtin.h parsing.h pipe_lst.h var_lst.h
 H_INCLUDE	:=	$(addprefix -I, $(HEADER_DIR))
 
 # Source
-SRC_DIR		:=	src src/builtin src/parsing src/type_lst src/var_lst
-SRC			:=	main.c exec.c signal.c hash_builds.c init.c error.c
-SRC			+=	expansion.c tokenizer.c parsing.c parsing_utils.c var_utils.c
-SRC			+=	redirect_utils.c frees_and_closes.c
-SRC 		+=	build_ins.c commands.c set_in_outs.c
+SRC_DIR		:=	src src/builtin src/parsing src/pipe_lst src/var_lst src/signals
+SRC_DIR 	+=	src/parsing/redirects_in_out src/parsing/builds src/errors_frees
+SRC_DIR 	+=	src/parsing/expansion
+SRC			:=	main.c exec_cmd.c signal_setup.c hash_builds.c init.c error.c
+SRC			+=	signal_handler.c expansion_utils.c
+SRC			+=	expansion.c parsing_pipe.c parsing.c parsing_utils.c 
+SRC			+=	redirect_utils.c frees_and_closes.c heredoc.c
+SRC 		+=	build_ins.c commands.c recognize_redirects.c
 SRC			+=	var_lst_add.c var_lst_del.c var_lst_get.c
-SRC			+=	type_lst_add.c type_lst_del.c
+SRC			+=	pipe_lst_add.c pipe_lst_del.c
 SRC			+=	cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 # Object

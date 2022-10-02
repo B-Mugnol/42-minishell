@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 01:08:06 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:03:12 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,20 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 	return (build_inx);
 }
 
-void	exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
+void	exec_builds(t_builtin *builds, int build_inx, t_pipe *pipe_lst,
 	t_shell *st_shell)
 {
 	if (build_inx == 1 || build_inx == 2)
 		builds[build_inx].func(st_shell->outfile);
 	else if (build_inx == 4)
-		builds[build_inx].func(token_lst->str, token_lst, builds);
+		builds[build_inx].func(pipe_lst->str, pipe_lst, builds);
 	else if (build_inx == 0)
-		builds[build_inx].func(token_lst->str, st_shell->outfile);
+		builds[build_inx].func(pipe_lst->str, st_shell->outfile);
 	else
-		builds[build_inx].func(token_lst->str);
+		builds[build_inx].func(pipe_lst->str);
 }
 
-void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
+void	fork_exec_builds(t_builtin *builds, int build_inx, t_pipe *pipe_lst,
 	t_shell *st_shell)
 {
 	int			pid;
@@ -64,8 +64,8 @@ void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
 		dup2(st_shell->infile, STDIN_FILENO);
 		dup2(st_shell->outfile, STDOUT_FILENO);
 		close_fds(st_shell);
-		exec_builds(builds, build_inx, token_lst, st_shell);
-		ft_exit("exit", token_lst, builds, FALSE);
+		exec_builds(builds, build_inx, pipe_lst, st_shell);
+		ft_exit("exit", pipe_lst, builds, FALSE);
 	}
 	if (st_shell->lst_inx == st_shell->lst_size)
 	{
@@ -75,22 +75,22 @@ void	fork_exec_builds(t_builtin *builds, int build_inx, t_type *token_lst,
 	}
 }
 
-t_bool	is_builds(t_type *token_lst, t_shell *st_shell)
+t_bool	is_builds(t_pipe *pipe_lst, t_shell *st_shell)
 {
 	int			build_inx;
 	t_builtin	*builds;
 
 	builds = init_builds();
-	build_inx = recognize_builds(token_lst->str, builds);
+	build_inx = recognize_builds(pipe_lst->str, builds);
 	if (build_inx == 7)
 	{
 		free(builds);
 		return (FALSE);
 	}
 	if (st_shell->lst_size == 1)
-		exec_builds(builds, build_inx, token_lst, st_shell);
+		exec_builds(builds, build_inx, pipe_lst, st_shell);
 	else
-		fork_exec_builds(builds, build_inx, token_lst, st_shell);
+		fork_exec_builds(builds, build_inx, pipe_lst, st_shell);
 	free(builds);
 	return (TRUE);
 }

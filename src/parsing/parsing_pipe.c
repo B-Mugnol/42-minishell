@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 02:48:21 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:36:04 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static t_bool	has_unclosed_quotes(char *str);
 
-t_type	*tokenizer(char *usr_in, t_shell *st_shell)
+t_pipe	*pipe_parse(char *usr_in, t_shell *st_shell)
 {
-	t_type	*lst;
+	t_pipe	*lst;
 	size_t	inx;
 
 	if (is_empty_str(usr_in) || has_unclosed_quotes(usr_in))
@@ -30,15 +30,15 @@ t_type	*tokenizer(char *usr_in, t_shell *st_shell)
 			quit_quote(usr_in, &inx);
 		if (usr_in[inx] == '|')
 		{
-			type_lst_add_back(&lst,
-				type_lst_new(ft_substr(usr_in, 0, inx)));
+			pipe_lst_add_back(&lst,
+				pipe_lst_new(ft_substr(usr_in, 0, inx)));
 			usr_in += inx + 1;
 			inx = 0;
 		}
 		inx++;
 	}
-	type_lst_add_back(&lst, type_lst_new(ft_substr(usr_in, 0, inx)));
-	st_shell->lst_size = type_lst_size(lst);
+	pipe_lst_add_back(&lst, pipe_lst_new(ft_substr(usr_in, 0, inx)));
+	st_shell->lst_size = pipe_lst_size(lst);
 	return (lst);
 }
 

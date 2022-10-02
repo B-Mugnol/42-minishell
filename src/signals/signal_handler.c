@@ -1,42 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 04:00:30 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 02:47:21 by llopes-n         ###   ########.fr       */
+/*   Created: 2022/10/02 01:28:36 by bmugnol-          #+#    #+#             */
+/*   Updated: 2022/10/02 19:53:12 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <signal.h>
 
-static void	signal_handler(int signal);
-static void	child_signal_handler(int signal);
-
-void	sig_setup(void)
-{
-	struct sigaction	action;
-
-	ft_bzero(&action, sizeof(struct sigaction));
-	sigemptyset(&action.sa_mask);
-	action.sa_handler = signal_handler;
-	sigaction(SIGINT, &action, NULL);
-}
-
-void	child_sig_setup(void)
-{
-	struct sigaction	action;
-
-	ft_bzero(&action, sizeof(struct sigaction));
-	sigemptyset(&action.sa_mask);
-	action.sa_handler = child_signal_handler;
-	sigaction(SIGINT, &action, NULL);
-}
-
-static void	signal_handler(int signal)
+void	signal_handler(int signal)
 {
 	if (signal != SIGINT)
 		return ;
@@ -47,10 +24,20 @@ static void	signal_handler(int signal)
 	rl_redisplay();
 }
 
-static void	child_signal_handler(int signal)
+void	child_signal_handler(int signal)
 {
+	if (signal == SIGQUIT)
+		return (ft_putendl_fd("Quit (core dumped)", 1));
 	if (signal != SIGINT)
 		return ;
 	set_exit_status(130);
 	ft_putchar_fd('\n', 1);
+}
+
+void	heredoc_signal_handler(int signal)
+{
+	if (signal != SIGINT)
+		return ;
+	set_exit_status(130);
+	ft_putstr_fd("\1\n", STDIN_FILENO);
 }
