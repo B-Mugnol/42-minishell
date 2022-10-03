@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 21:56:07 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 04:10:56 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_var		*get_var_from_assignment(char *str);
 void		set_in_out(t_shell *st_shell);
 t_bool		set_redirect(t_pipe *pipe_lst, t_shell *st_shell, size_t inx);
 int			recognize_redirect(t_pipe *tk_lst, t_shell *shell);
-t_bool		check_file_access(char **file, t_tokens token, t_shell *st_shell);
+t_error		check_file_access(char **file, t_tokens token, t_shell *st_shell);
 
 // redirect_utils.c
 void		cut_str(t_pipe *pipe_lst, int start_inx, int end_inx);

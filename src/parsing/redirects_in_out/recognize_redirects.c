@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 20:34:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 22:23:18 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:29:00 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static t_bool	is_dir(char *file)
 	if (dir)
 	{
 		closedir(dir);
-		generic_error(1, "-", "Is a directory");
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-t_bool	check_file_access(char **file, t_tokens token, t_shell *st_shell)
+t_error	check_file_access(char **file, t_tokens token, t_shell *st_shell)
 {
 	find_var_and_expand(file, FALSE);
+	st_shell->error_locale = ft_strdup(*file);
 	if (is_dir(*file))
-		return (FALSE);
+		return (IS_DIR);
 	if (token == INFILE)
 	{
 		if (access(*file, F_OK) != 0)
-			return (generic_error(1, *file, ERROR_FILE_DIR));
+			return (NO_DIR);
 		if (access(*file, R_OK) != 0)
-			return (generic_error(1, *file, ERROR_PERMI));
-		st_shell->infile = open(*file, O_RDWR);
+			return (DENI_PERMI);
+		st_shell->infile = open(*file, O_RDONLY);
 	}
 	else if (token == OUTFILE || token == APPEND)
 	{
@@ -46,37 +46,21 @@ t_bool	check_file_access(char **file, t_tokens token, t_shell *st_shell)
 		else
 			st_shell->outfile = open(*file, O_TRUNC | O_RDWR | O_CREAT, 0644);
 		if (st_shell->outfile == -1)
-			return (generic_error(1, *file, ERROR_PERMI));
+			return (DENI_PERMI);
 	}
-	return (TRUE);
+	free(st_shell->error_locale);
+	return (SUCCESS);
 }
 
-int	recognize_redirect(t_pipe *pipe_lst, t_shell *st_shell)
+void	check_status(t_shell *st_shell)
 {
-	size_t	inx;
-
-	inx = 0;
-	heredoc_sig_setup();
-	if (has_here_doc(pipe_lst, st_shell, inx) == FALSE)
-	{
-		sig_setup();
-		return (-1);
-	}
-	sig_setup();
-	while (pipe_lst->str[inx])
-	{
-		if (pipe_lst->str[inx] == '\'' || pipe_lst->str[inx] == '\"')
-			quit_quote(pipe_lst->str, &inx);
-		else if (ft_strchr("<>", pipe_lst->str[inx]))
-		{
-			if (set_redirect(pipe_lst, st_shell, inx) == FALSE)
-				return (EXIT_FAILURE);
-			else
-				inx = 0;
-		}
-		inx++;
-	}
-	return (EXIT_SUCCESS);
+	if (st_shell->file_stat == NO_DIR)
+		generic_error(1, st_shell->error_locale, ERROR_FILE_DIR);
+	else if (st_shell->file_stat == DENI_PERMI)
+		generic_error(1, st_shell->error_locale, ERROR_PERMI);
+	else if (st_shell->file_stat == IS_DIR)
+		generic_error(1, "-", "Is a directory");
+	free(st_shell->error_locale);
 }
 
 t_bool	set_redirect(t_pipe *pipe_lst, t_shell *st_shell, size_t inx)
@@ -95,7 +79,31 @@ t_bool	set_redirect(t_pipe *pipe_lst, t_shell *st_shell, size_t inx)
 	if (file_name(&pipe_lst->str[inx], &inx, token, st_shell) == FALSE)
 		return (FALSE);
 	cut_str(pipe_lst, start_inx, inx);
-	if (*pipe_lst->str == '\0')
-		return (FALSE);
 	return (TRUE);
+}
+
+int	recognize_redirect(t_pipe *pipe_lst, t_shell *st_shell)
+{
+	size_t	inx;
+
+	inx = 0;
+	while (pipe_lst->str[inx])
+	{
+		if (pipe_lst->str[inx] == '\'' || pipe_lst->str[inx] == '\"')
+			quit_quote(pipe_lst->str, &inx);
+		else if (ft_strchr("<>", pipe_lst->str[inx]))
+		{
+			if (set_redirect(pipe_lst, st_shell, inx) == FALSE)
+				return (-1);
+			else
+				inx = -1;
+		}
+		inx++;
+	}
+	if (st_shell->file_stat != SUCCESS)
+	{
+		check_status(st_shell);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

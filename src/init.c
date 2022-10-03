@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n < llopes-n@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:25:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/30 03:26:52 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 04:11:27 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static t_var	**get_environment_lst(char **envp)
 
 void	set_in_out(t_shell *st_shell)
 {
+	st_shell->error_locale = NULL;
+	st_shell->file_stat = 0;
 	st_shell->infile = STDIN_FILENO;
 	st_shell->outfile = STDOUT_FILENO;
 	if (st_shell->lst_size != 1)

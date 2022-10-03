@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees_and_closes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/01 21:04:31 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/03 03:49:34 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void	free_args_error(t_shell *st_shell, char *message)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(message, STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
+}
+
+t_bool	free_return(char *str_free)
+{
+	free(str_free);
+	sig_setup();
+	return (FALSE);
 }
