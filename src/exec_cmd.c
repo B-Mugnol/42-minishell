@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 22:03:50 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:33:18 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	wait_for_child(int pid, t_shell *st_shell)
 
 	exit_status = 0;
 	waitpid(pid, &exit_status, 0);
-	if (get_exit_status() != 130 && get_exit_status() != 131)
+	waitpid(pid, &exit_status, 0);
+	if (!WIFSIGNALED(exit_status))
 	{
 		st_shell->exit_status = WEXITSTATUS(exit_status);
 		set_exit_status(WEXITSTATUS(exit_status));
