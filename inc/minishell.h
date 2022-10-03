@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 21:58:03 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 04:12:19 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ void	close_fds(t_shell *st_shell);
 void	close_pipes(t_shell *st_shell);
 void	cmd_error(t_shell	*st_shell, char	***paths);
 void	free_args_error(t_shell *st_shell, char *message);
+t_bool	free_return(char *str_free);
 
 // erro.c
 t_bool	generic_error(int exit_status, char *locale, char *message);
-t_bool	error_syntax(char *str);
+int		error_syntax(char *str);
 
 #endif

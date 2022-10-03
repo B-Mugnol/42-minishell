@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 01:05:57 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 22:02:33 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:15:07 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,15 @@ t_bool	file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell)
 	}
 	unquoted = remove_quotes_from_word(file, file_inx);
 	*str_inx += file_inx;
-	if ((tk == HEREDOC && here_doc(unquoted, shell) == FALSE)
-		|| check_file_access(&unquoted, tk, shell) == FALSE)
+	if (tk == HEREDOC)
 	{
-		free(unquoted);
-		return (FALSE);
+		heredoc_sig_setup();
+		if (here_doc(unquoted, shell) == FALSE)
+			return (free_return(unquoted));
+		sig_setup();
 	}
+	else if (tk != HEREDOC && shell->file_stat == 0)
+		shell->file_stat = check_file_access(&unquoted, tk, shell);
 	free(unquoted);
 	return (TRUE);
 }

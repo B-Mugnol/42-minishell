@@ -6,7 +6,7 @@
 /*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 04:36:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 20:03:15 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:54:49 by llopes-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_bool	here_doc(char *delimiter, t_shell *shell)
 	input = NULL;
 	if (get_exit_status() == 130)
 		set_exit_status(EXIT_SUCCESS);
+	printf("%s\n", delimiter);
 	while (!input || ft_strncmp(input, delimiter, ft_strlen(input) + 1) != 0)
 	{
 		if (input)
