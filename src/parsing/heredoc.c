@@ -3,36 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 04:36:29 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/03 05:54:49 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:20:20 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char	*get_clean_line(int fd, char *old_input);
-
-t_bool	has_here_doc(t_pipe *pipe_lst, t_shell *st_shell, size_t inx)
-{
-	char	*tk;
-
-	if (inx >= ft_strlen(pipe_lst->str))
-		return (FALSE);
-	tk = ft_strnstr(pipe_lst->str + inx, "<<",
-			ft_strlen(pipe_lst->str + inx));
-	if (!tk)
-		return (TRUE);
-	inx = tk - pipe_lst->str;
-	if (!is_within_quotes(pipe_lst->str, inx))
-	{
-		if (set_redirect(pipe_lst, st_shell, inx) == FALSE)
-			return (FALSE);
-		return (TRUE);
-	}
-	return (has_here_doc(pipe_lst, st_shell, inx + 1));
-}
+static t_bool	here_doc_loop(int w_fd, char *input, char *delimiter);
+static int		is_valid_input(char *input, char *old_input, char *delimiter);
+static void		write_to_file(int w_fd, char **input, char **old);
 
 t_bool	here_doc(char *delimiter, t_shell *shell)
 {
@@ -43,43 +25,68 @@ t_bool	here_doc(char *delimiter, t_shell *shell)
 	input = NULL;
 	if (get_exit_status() == 130)
 		set_exit_status(EXIT_SUCCESS);
-	printf("%s\n", delimiter);
-	while (!input || ft_strncmp(input, delimiter, ft_strlen(input) + 1) != 0)
+	if (here_doc_loop(rw_pipe[1], input, delimiter) == FALSE)
 	{
-		if (input)
-			ft_putendl_fd(input, rw_pipe[1]);
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		input = get_clean_line(STDIN_FILENO, input);
-		if (!input && get_exit_status() == 130)
-			return (FALSE);
-		else if (!input)
-		{
-			ft_putstr_fd("\n", STDOUT_FILENO);
-			break ;
-		}
+		close(rw_pipe[0]);
+		close(rw_pipe[1]);
+		return (FALSE);
 	}
-	free(input);
 	close(rw_pipe[1]);
 	shell->infile = rw_pipe[0];
 	return (TRUE);
 }
 
-static char	*get_clean_line(int fd, char *old_input)
+static t_bool	here_doc_loop(int w_fd, char *input, char *delimiter)
 {
-	char	*temp;
-	char	*aux;
+	char	*old;
+	int		status;
 
-	free(old_input);
-	temp = get_next_line(fd);
-	if (!temp)
-		return (NULL);
-	if (*temp == 1)
+	old = ft_strdup("\n");
+	while (!input || ft_strlen(input) != ft_strlen(delimiter) + 1
+		|| ft_strncmp(input, delimiter, ft_strlen(input) - 1) != 0
+		|| input[ft_strlen(input) - 1] != '\n')
 	{
-		free(temp);
-		return (NULL);
+		if (input)
+			write_to_file(w_fd, &input, &old);
+		if (old && *old && old[ft_strlen(old) - 1] == '\n')
+			ft_putstr_fd("> ", STDOUT_FILENO);
+		input = get_next_line(STDIN_FILENO);
+		status = is_valid_input(input, old, delimiter);
+		if (status == EXIT_FAILURE)
+			break ;
+		else if (status == -1)
+			return (FALSE);
 	}
-	aux = ft_substr(temp, 0, ft_strlen(temp) - 1);
-	free(temp);
-	find_var_and_expand(&aux, FALSE);
-	return (aux);
+	free(old);
+	free(input);
+	return (TRUE);
+}
+
+static int	is_valid_input(char *input, char *old_input, char *delimiter)
+{
+	if (!input && get_exit_status() == 130)
+	{
+		free(old_input);
+		return (-1);
+	}
+	else if (!input && old_input && *old_input
+		&& old_input[ft_strlen(old_input) - 1] == '\n')
+	{
+		ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
+		ft_putstr_fd(EOF_ERROR, STDERR_FILENO);
+		ft_putstr_fd(delimiter, STDERR_FILENO);
+		ft_putstr_fd("')", STDERR_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static void	write_to_file(int w_fd, char **input, char **old)
+{
+	find_var_and_expand(input, FALSE);
+	ft_putstr_fd(*input, w_fd);
+	free(*old);
+	*old = ft_strdup(*input);
+	ft_null_free((void *)(input));
 }

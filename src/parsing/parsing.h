@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:09:54 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/03 04:10:56 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:20:37 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # define SYNTAX_ERROR "syntax error near unexpected token "
+# define EOF_ERROR "warning: here-document delimited by end-of-file (wanted `"
 # define LULUSHELL_ERROR "luluShell: "
 # define ERROR_FILE_DIR "No such file or directory"
 # define ERROR_PERMI "Permission denied"
@@ -78,7 +79,6 @@ t_tokens	get_token(char *str, size_t *inx);
 t_bool		file_name(char *file, size_t *str_inx, t_tokens tk, t_shell *shell);
 
 // heredoc.c
-t_bool		has_here_doc(t_pipe *pipe_lst, t_shell *st_shell, size_t inx);
 t_bool		here_doc(char *delimiter, t_shell *shell);
 
 #endif
