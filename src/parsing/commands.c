@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 20:03:13 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:21:21 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**set_cmds_paths(void)
 	char	*paths;
 
 	path = var_lst_find_var("PATH", *g_env);
+	if (!path)
+		return (NULL);
 	paths = path->value;
 	return (ft_split(paths, ':'));
 }
@@ -32,7 +34,7 @@ t_bool	check_paths(t_shell *st_shell)
 
 	cmds_paths = set_cmds_paths();
 	inx = 0;
-	while (cmds_paths[inx])
+	while (cmds_paths && cmds_paths[inx])
 	{
 		tmp = ft_strjoin(cmds_paths[inx], "/");
 		st_shell->cmd = ft_strjoin(tmp, st_shell->args[0]);
@@ -45,7 +47,7 @@ t_bool	check_paths(t_shell *st_shell)
 		free(st_shell->cmd);
 		inx++;
 	}
-	cmd_error(st_shell, &cmds_paths);
+	cmd_error(st_shell, cmds_paths);
 	set_exit_status(127);
 	return (FALSE);
 }

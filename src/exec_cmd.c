@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 20:35:49 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:03:50 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	**get_environment(void);
+
+static void	wait_for_child(int pid, t_shell *st_shell)
+{
+	int		exit_status;
+
+	exit_status = 0;
+	waitpid(pid, &exit_status, 0);
+	if (get_exit_status() != 130 && get_exit_status() != 131)
+	{
+		st_shell->exit_status = WEXITSTATUS(exit_status);
+		set_exit_status(WEXITSTATUS(exit_status));
+	}
+}
 
 static t_bool	is_dir(t_pipe *pipe_lst)
 {
@@ -44,11 +57,9 @@ static t_bool	is_dir(t_pipe *pipe_lst)
 void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 {
 	int		pid;
-	int		exit_status;
 	char	**envp;
 
 	child_sig_setup();
-	exit_status = 0;
 	if (is_dir(pipe_lst) == TRUE)
 		return ;
 	envp = get_environment();
@@ -60,9 +71,7 @@ void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 	if (st_shell->lst_inx == st_shell->lst_size)
 	{
 		close_pipes(st_shell);
-		waitpid(pid, &exit_status, 0);
-		if (get_exit_status() != 130)
-			set_exit_status(WEXITSTATUS(exit_status));
+		wait_for_child(pid, st_shell);
 	}
 	ft_free_char_matrix(&envp);
 	ft_free_char_matrix(&st_shell->args);

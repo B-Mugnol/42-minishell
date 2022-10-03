@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 20:03:12 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:08:59 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	fork_exec_builds(t_builtin *builds, int build_inx, t_pipe *pipe_lst,
 	{
 		close_pipes(st_shell);
 		waitpid(pid, &exit_status, 0);
+		st_shell->exit_status = WEXITSTATUS(exit_status);
 		set_exit_status(WEXITSTATUS(exit_status));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 22:43:21 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/01 01:02:52 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:16:50 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_bool	has_n_flag(char **words)
 	if (!words || !words[1])
 		return (FALSE);
 	unquoted = remove_quotes_from_word(words[1], ft_strlen(words[1]));
-	if (strncmp(unquoted, "-n", 3) == 0)
+	if (ft_strncmp(unquoted, "-n", 3) == 0)
 		n_flagged = TRUE;
 	else
 		n_flagged = FALSE;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees_and_closes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:45:37 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 03:49:34 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:21:31 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ void	close_pipes(t_shell *st_shell)
 	}
 }
 
-void	cmd_error(t_shell *st_shell, char ***paths)
+void	cmd_error(t_shell *st_shell, char **paths)
 {
 	ft_putstr_fd(LULUSHELL_ERROR, STDERR_FILENO);
 	ft_putstr_fd(st_shell->args[0], STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	ft_free_char_matrix(&st_shell->args);
-	ft_free_char_matrix(paths);
+	if (paths)
+		ft_free_char_matrix(&paths);
 }
 
 void	free_args_error(t_shell *st_shell, char *message)

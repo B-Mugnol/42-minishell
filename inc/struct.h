@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:31:25 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/03 04:11:04 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:58:58 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_shell
 	int			infile;
 	int			outfile;
 	int			lst_size;
+	int			exit_status;
 	char		*error_locale;
 	t_error		file_stat;
 }	t_shell;
