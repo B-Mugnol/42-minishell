@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/04 23:53:18 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 00:07:48 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static t_bool	has_pipe_syntax_error(char *usr_in)
 	{
 		pipe_location = get_unquoted_pipe(words[inx]);
 		if ((pipe_location && pipe_location == words[0])
+			|| (pipe_location && pipe_location[1] == '|')
 			|| (pipe_location && pipe_location[1] == '\0'
 				&& get_unquoted_pipe(words[inx + 1])
 				&& get_unquoted_pipe(words[inx + 1]) == words[inx + 1]))
