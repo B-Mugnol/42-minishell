@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:46 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 22:02:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/04 05:36:15 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,4 @@ static void	invalid_name_error(char *var_name)
 	ft_putstr_fd("unset: `", 2);
 	ft_putstr_fd(var_name, 2);
 	ft_putendl_fd("': not a valid identifier", 2);
-	free(var_name);
 }
