@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/05 00:48:04 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:13:51 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static t_var	*get_export_var(char **export_words);
 static void		update_environment(t_var *export);
 static void		invalid_name_error(char *var_name);
-static void		print_declarations(void);
+static void		print_declarations(int write_fd);
 
-void	ft_export(char *usr_in)
+void	ft_export(char *usr_in, int write_fd)
 {
 	char	**words;
 	t_var	*vars;
@@ -28,7 +28,7 @@ void	ft_export(char *usr_in)
 		return (set_exit_status(EXIT_FAILURE));
 	vars = NULL;
 	if (words[0] && words[1] == NULL)
-		print_declarations();
+		print_declarations(write_fd);
 	else
 		vars = get_export_var(words);
 	ft_free_char_matrix(&words);
@@ -97,7 +97,7 @@ static void	invalid_name_error(char *var_name)
 	free(unquoted);
 }
 
-static void	print_declarations(void)
+static void	print_declarations(int write_fd)
 {
 	t_var	*iterator;
 
@@ -106,15 +106,15 @@ static void	print_declarations(void)
 	{
 		if (ft_strncmp(iterator->name, "?", 2) != 0)
 		{
-			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(iterator->name, 1);
+			ft_putstr_fd("declare -x ", write_fd);
+			ft_putstr_fd(iterator->name, write_fd);
 			if (iterator->value != NULL)
 			{
-				ft_putstr_fd("=\"", 1);
-				ft_putstr_fd(iterator->value, 1);
-				ft_putstr_fd("\"", 1);
+				ft_putstr_fd("=\"", write_fd);
+				ft_putstr_fd(iterator->value, write_fd);
+				ft_putstr_fd("\"", write_fd);
 			}
-			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', write_fd);
 		}
 		iterator = iterator->next;
 	}

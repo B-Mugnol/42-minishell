@@ -46,7 +46,7 @@ void	exec_builds(t_builtin *builds, int build_inx, t_pipe *pipe_lst,
 		builds[build_inx].func(st_shell->outfile);
 	else if (build_inx == 4)
 		builds[build_inx].func(pipe_lst->str, pipe_lst, builds);
-	else if (build_inx == 0)
+	else if (build_inx == 0 || build_inx == 5)
 		builds[build_inx].func(pipe_lst->str, st_shell->outfile);
 	else
 		builds[build_inx].func(pipe_lst->str);

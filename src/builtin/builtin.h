@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:32:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/02 20:03:11 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:10:40 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_pwd(int write_fd);
 void	ft_cd(char *usr_in);
 void	ft_exit(char *usr_in, t_pipe *pipe_lst, t_builtin *builds,
 			t_bool print);
-void	ft_export(char *usr_in);
+void	ft_export(char *usr_in, int write_fd);
 void	ft_unset(char *usr_in);
 
 #endif
