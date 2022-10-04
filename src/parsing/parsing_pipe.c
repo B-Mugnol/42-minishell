@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/05 00:17:03 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:24:31 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,8 @@ static t_bool	has_pipe_syntax_error(char *usr_in)
 	size_t	inx;
 
 	words = ft_word_split(usr_in, ft_isspace);
-	if (!words)
-		return (TRUE);
 	inx = 0;
-	while (words[inx])
+	while (words && words[inx])
 	{
 		pipe_location = get_unquoted_pipe(words[inx]);
 		if ((pipe_location && pipe_location == words[0])
@@ -111,7 +109,8 @@ static t_bool	has_pipe_syntax_error(char *usr_in)
 		}
 		inx++;
 	}
-	ft_free_char_matrix(&words);
+	if (!words)
+		ft_free_char_matrix(&words);
 	return (FALSE);
 }
 
