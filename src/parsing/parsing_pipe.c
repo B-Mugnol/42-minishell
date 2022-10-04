@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/02 20:36:04 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/04 23:53:18 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 #include "parsing.h"
 
 static t_bool	has_unclosed_quotes(char *str);
+static char		*get_unquoted_pipe(char *str);
+static t_bool	has_pipe_syntax_error(char *usr_in);
 
 t_pipe	*pipe_parse(char *usr_in, t_shell *st_shell)
 {
 	t_pipe	*lst;
 	size_t	inx;
 
-	if (is_empty_str(usr_in) || has_unclosed_quotes(usr_in))
+	if (is_empty_str(usr_in) || has_unclosed_quotes(usr_in)
+		|| has_pipe_syntax_error(usr_in))
 		return (NULL);
 	lst = NULL;
 	inx = 0;
@@ -30,9 +33,9 @@ t_pipe	*pipe_parse(char *usr_in, t_shell *st_shell)
 			quit_quote(usr_in, &inx);
 		if (usr_in[inx] == '|')
 		{
-			pipe_lst_add_back(&lst,
-				pipe_lst_new(ft_substr(usr_in, 0, inx)));
-			usr_in += inx + 1;
+			pipe_lst_add_back(&lst, pipe_lst_new(ft_substr(usr_in, 0, inx)));
+			if (usr_in[inx + 1] != '\0')
+				usr_in += inx + 1;
 			inx = 0;
 		}
 		inx++;
@@ -80,4 +83,48 @@ static t_bool	has_unclosed_quotes(char *str)
 	if (simple_quote_count % 2 == 1 || double_quote_count % 2 == 1)
 		return (TRUE);
 	return (FALSE);
+}
+
+static t_bool	has_pipe_syntax_error(char *usr_in)
+{
+	char	**words;
+	char	*pipe_location;
+	size_t	inx;
+
+	words = ft_word_split(usr_in, ft_isspace);
+	if (!words)
+		return (TRUE);
+	inx = 0;
+	while (words[inx])
+	{
+		pipe_location = get_unquoted_pipe(words[inx]);
+		if ((pipe_location && pipe_location == words[0])
+			|| (pipe_location && pipe_location[1] == '\0'
+				&& get_unquoted_pipe(words[inx + 1])
+				&& get_unquoted_pipe(words[inx + 1]) == words[inx + 1]))
+		{
+			pipe_syntax_error();
+			ft_free_char_matrix(&words);
+			return (TRUE);
+		}
+		inx++;
+	}
+	ft_free_char_matrix(&words);
+	return (FALSE);
+}
+
+static char	*get_unquoted_pipe(char *str)
+{
+	size_t	inx;
+
+	inx = 0;
+	while (str && str[inx])
+	{
+		if (str[inx] == '\"' || str[inx] == '\'')
+			quit_quote(str, &inx);
+		if (str[inx] == '|')
+			return (str + inx);
+		inx++;
+	}
+	return (NULL);
 }
