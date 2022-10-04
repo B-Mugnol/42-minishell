@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_utils.c                                        :+:      :+:    :+:   */
+/*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 16:14:51 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/23 00:10:53 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/04 22:44:17 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_var	*get_var_from_assignment(char *str)
 	unquoted = remove_quotes_from_word(str, ft_strlen(str));
 	value = ft_strchr(unquoted, '=');
 	if (!value)
-		return (var_lst_new(ft_strdup(unquoted), NULL));
+		return (var_lst_new(unquoted, NULL));
 	name = ft_substr(unquoted, 0, value - unquoted);
 	value = ft_substr(value, 1, ft_strlen(value + 1));
 	find_var_and_expand(&value, TRUE);
