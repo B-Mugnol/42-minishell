@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 21:22:01 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/04 23:42:52 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	cmd_error(t_shell *st_shell, char **paths);
 void	free_args_error(t_shell *st_shell, char *message);
 t_bool	free_return(char *str_free);
 
-// erro.c
+// error.c
 t_bool	generic_error(int exit_status, char *locale, char *message);
+void	pipe_syntax_error(void);
 int		error_syntax(char *str);
 
 #endif
