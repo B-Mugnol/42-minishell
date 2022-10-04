@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:47:39 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 21:21:21 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/04 06:23:40 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_bool	check_paths(t_shell *st_shell)
 	}
 	cmd_error(st_shell, cmds_paths);
 	set_exit_status(127);
+	st_shell->exit_status = 127;
 	return (FALSE);
 }
 
@@ -62,7 +63,7 @@ t_bool	recognizer_cmd(t_pipe *pipe_lst, t_shell *st_shell)
 		if (access(st_shell->args[0], F_OK) != 0)
 		{
 			free_args_error(st_shell, ERROR_FILE_DIR);
-			set_exit_status(127);
+			st_shell->exit_status = 127;
 			return (FALSE);
 		}
 		if (access(st_shell->args[0], X_OK) == 0)
@@ -73,7 +74,7 @@ t_bool	recognizer_cmd(t_pipe *pipe_lst, t_shell *st_shell)
 		else
 		{
 			free_args_error(st_shell, ERROR_PERMI);
-			set_exit_status(126);
+			st_shell->exit_status = 126;
 			return (FALSE);
 		}
 	}
