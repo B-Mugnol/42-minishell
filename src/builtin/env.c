@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:49:39 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/01 01:03:08 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 00:44:08 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_env(int write_fd)
 	}
 	while (iterator)
 	{
-		if (ft_strncmp(iterator->name, "?", 2) != 0)
+		if (ft_strncmp(iterator->name, "?", 2) != 0 && iterator->value != NULL)
 		{
 			ft_putstr_fd(iterator->name, write_fd);
 			ft_putstr_fd("=", write_fd);

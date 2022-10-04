@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 22:33:18 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/05 00:45:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static char	**get_environment(void)
 	envp = malloc(var_lst_size(*g_env) * sizeof(char *));
 	while (iterator)
 	{
-		if (ft_strncmp(iterator->name, "?", 2) != 0)
+		if (ft_strncmp(iterator->name, "?", 2) != 0 && iterator->value != NULL)
 		{
 			aux = ft_strjoin(iterator->name, "=");
 			envp[inx] = ft_strjoin(aux, iterator->value);

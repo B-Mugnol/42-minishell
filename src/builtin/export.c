@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/09/21 22:04:22 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 00:48:04 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ static void	update_environment(t_var *export)
 			var_lst_add_var(g_env,
 				var_lst_new(ft_strdup(var->name), ft_strdup(var->value)));
 		}
+		else
+			var_lst_add_var(g_env,
+				var_lst_new(ft_strdup(export->name), NULL));
 		export = export->next;
 	}
 }
@@ -105,9 +108,13 @@ static void	print_declarations(void)
 		{
 			ft_putstr_fd("declare -x ", 1);
 			ft_putstr_fd(iterator->name, 1);
-			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd(iterator->value, 1);
-			ft_putendl_fd("\"", 1);
+			if (iterator->value != NULL)
+			{
+				ft_putstr_fd("=\"", 1);
+				ft_putstr_fd(iterator->value, 1);
+				ft_putstr_fd("\"", 1);
+			}
+			ft_putchar_fd('\n', 1);
 		}
 		iterator = iterator->next;
 	}
