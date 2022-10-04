@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 21:48:36 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/05 01:24:31 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:32:22 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static t_bool	has_pipe_syntax_error(char *usr_in)
 		}
 		inx++;
 	}
-	if (!words)
+	if (words)
 		ft_free_char_matrix(&words);
 	return (FALSE);
 }
