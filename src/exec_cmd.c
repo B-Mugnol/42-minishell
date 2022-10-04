@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/05 00:45:45 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:46:07 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 		return (ft_free_char_matrix(&envp));
 	pid = fork();
 	if (pid == 0)
-		exec(st_shell, envp);
+		exec(st_shell, envp, pipe_lst);
 	if (st_shell->lst_inx == st_shell->lst_size)
 	{
 		close_pipes(st_shell);
@@ -79,12 +79,17 @@ void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 	free(st_shell->cmd);
 }
 
-void	exec(t_shell *st_shell, char **envp)
+void	exec(t_shell *st_shell, char **envp, t_pipe *pipe_lst)
 {
 	dup2(st_shell->infile, STDIN_FILENO);
 	dup2(st_shell->outfile, STDOUT_FILENO);
 	close_fds(st_shell);
 	execve(st_shell->cmd, st_shell->args, envp);
+	perror(st_shell->cmd);
+	free(st_shell->cmd);
+	ft_free_char_matrix(&envp);
+	ft_free_char_matrix(&st_shell->args);
+	ft_exit("exit", pipe_lst, NULL, FALSE);
 }
 
 static char	**get_environment(void)

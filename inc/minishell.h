@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 19:40:30 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/04 23:42:52 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:44:32 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_exit_status(void);
 
 void	init(char **envp);
 void	get_comman(char *usr_in, t_shell *comman);
-void	exec(t_shell *st_shell, char **envp);
+void	exec(t_shell *st_shell, char **envp, t_pipe *pipe_lst);
 void	set_exit_status(int exit_status);
 t_var	**set_node(void);
 
