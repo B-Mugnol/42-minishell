@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:23:34 by bmugnol-          #+#    #+#             */
-/*   Updated: 2022/10/05 01:13:51 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:50:04 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,13 @@ static void	update_environment(t_var *export)
 		else if (export->value != NULL)
 			var_lst_add_var(g_env, var_lst_new(ft_strdup(export->name),
 					ft_strdup(export->value)));
-		else if (var != NULL)
-		{
+		else if (var != NULL && var->value != NULL)
 			var_lst_add_var(g_env,
 				var_lst_new(ft_strdup(var->name), ft_strdup(var->value)));
-		}
+		else if (var != NULL)
+			var_lst_add_var(g_env, var_lst_new(ft_strdup(var->name), NULL));
 		else
-			var_lst_add_var(g_env,
-				var_lst_new(ft_strdup(export->name), NULL));
+			var_lst_add_var(g_env, var_lst_new(ft_strdup(export->name), NULL));
 		export = export->next;
 	}
 }

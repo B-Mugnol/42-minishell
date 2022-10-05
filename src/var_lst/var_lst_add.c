@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 01:01:12 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/09/21 22:17:37 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:46:45 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	var_lst_add_var(t_var **lst, t_var *new)
 	if (old)
 	{
 		free(old->value);
-		old->value = ft_strdup(new->value);
+		if (new->value)
+			old->value = ft_strdup(new->value);
+		else
+			old->value = NULL;
 		var_lst_delete_node(new);
 		return ;
 	}
