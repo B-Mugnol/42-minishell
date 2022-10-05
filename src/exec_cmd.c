@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/05 01:46:07 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:26:32 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	exec(t_shell *st_shell, char **envp, t_pipe *pipe_lst)
 	dup2(st_shell->outfile, STDOUT_FILENO);
 	close_fds(st_shell);
 	execve(st_shell->cmd, st_shell->args, envp);
-	perror(st_shell->cmd);
 	free(st_shell->cmd);
 	ft_free_char_matrix(&envp);
 	ft_free_char_matrix(&st_shell->args);
