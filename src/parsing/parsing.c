@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 23:34:17 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 22:00:35 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/04 19:50:54 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void	parsing_loop(t_pipe *pipe_lst, t_shell *st_shell)
 	{
 		set_in_out(st_shell);
 		if (is_empty_str(pipe_lst->str))
-			set_exit_status(EXIT_SUCCESS);
+			st_shell->exit_status = EXIT_SUCCESS;
 		else
 		{
 			stat = recognize_redirect(pipe_lst, st_shell);
 			find_var_and_expand(&pipe_lst->str, FALSE);
-			if (!is_empty_str(pipe_lst->str) && stat == EXIT_SUCCESS
+			if (is_empty_str(pipe_lst->str))
+				st_shell->exit_status = EXIT_SUCCESS;
+			else if (stat == EXIT_SUCCESS
 				&& is_builds(pipe_lst, st_shell) == FALSE)
 				fork_exec(st_shell, pipe_lst);
 			else if (stat == -1)

@@ -6,7 +6,7 @@
 /*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:05:56 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 22:08:59 by bmugnol-         ###   ########.fr       */
+/*   Updated: 2022/10/05 01:12:44 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,13 @@ int	recognize_builds(char *usr_in, t_builtin *builds)
 	words = ft_word_split(usr_in, ft_isspace);
 	if (!words)
 		return (7);
-	while (words[inx])
+	temp = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
+	build_inx = hash_search(temp, builds);
+	free(temp);
+	if (build_inx != 7)
 	{
-		temp = remove_quotes_from_word(words[inx], ft_strlen(words[inx]));
-		build_inx = hash_search(temp, builds);
-		free(temp);
-		if (build_inx != 7)
-		{
-			ft_free_char_matrix(&words);
-			return (build_inx);
-		}
-		inx++;
+		ft_free_char_matrix(&words);
+		return (build_inx);
 	}
 	ft_free_char_matrix(&words);
 	return (build_inx);
@@ -46,7 +42,7 @@ void	exec_builds(t_builtin *builds, int build_inx, t_pipe *pipe_lst,
 		builds[build_inx].func(st_shell->outfile);
 	else if (build_inx == 4)
 		builds[build_inx].func(pipe_lst->str, pipe_lst, builds);
-	else if (build_inx == 0)
+	else if (build_inx == 0 || build_inx == 5)
 		builds[build_inx].func(pipe_lst->str, st_shell->outfile);
 	else
 		builds[build_inx].func(pipe_lst->str);

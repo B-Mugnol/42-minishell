@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llopes-n <llopes-n@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: bmugnol- <bmugnol-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:29:50 by llopes-n          #+#    #+#             */
-/*   Updated: 2022/10/03 22:33:18 by llopes-n         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:26:32 by bmugnol-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 		return (ft_free_char_matrix(&envp));
 	pid = fork();
 	if (pid == 0)
-		exec(st_shell, envp);
+		exec(st_shell, envp, pipe_lst);
 	if (st_shell->lst_inx == st_shell->lst_size)
 	{
 		close_pipes(st_shell);
@@ -79,12 +79,16 @@ void	fork_exec(t_shell *st_shell, t_pipe *pipe_lst)
 	free(st_shell->cmd);
 }
 
-void	exec(t_shell *st_shell, char **envp)
+void	exec(t_shell *st_shell, char **envp, t_pipe *pipe_lst)
 {
 	dup2(st_shell->infile, STDIN_FILENO);
 	dup2(st_shell->outfile, STDOUT_FILENO);
 	close_fds(st_shell);
 	execve(st_shell->cmd, st_shell->args, envp);
+	free(st_shell->cmd);
+	ft_free_char_matrix(&envp);
+	ft_free_char_matrix(&st_shell->args);
+	ft_exit("exit", pipe_lst, NULL, FALSE);
 }
 
 static char	**get_environment(void)
@@ -99,7 +103,7 @@ static char	**get_environment(void)
 	envp = malloc(var_lst_size(*g_env) * sizeof(char *));
 	while (iterator)
 	{
-		if (ft_strncmp(iterator->name, "?", 2) != 0)
+		if (ft_strncmp(iterator->name, "?", 2) != 0 && iterator->value != NULL)
 		{
 			aux = ft_strjoin(iterator->name, "=");
 			envp[inx] = ft_strjoin(aux, iterator->value);
