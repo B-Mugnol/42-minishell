@@ -1,4 +1,4 @@
-<h1 align="center"> 
+ <h1 align="center"> 
 	MiniShell
 </h1>
 
@@ -26,7 +26,7 @@ Indice
   funcionlidades do shell sem que uma coisa atrapalhe a outra.
 
 ## Instalação
-  - Basta ter o clang instalado na sua maquina que tudo deve rodar bem.
+  - Basta ter o clang, libreadline8 e o libreadline-dev instalado na sua maquina que tudo deve rodar bem.
 
 ## Como Usar
   - Baixe o repositório com Git clone, depois só rodar 'make' no terminal na pasta raiz do projeto e depois './minishell' e pronto só usar como um shell normal
